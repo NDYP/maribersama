@@ -15,6 +15,7 @@ class Akun extends CI_Controller
     function profil()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Informasi Akun";
         $id_pengguna = $this->session->userdata('id_pengguna');
         $data['akun'] = $this->db->get_where('pengguna', array('id_pengguna' => $id_pengguna))->row_array();

@@ -103,7 +103,18 @@
 <script src="<?= base_url('assets/depan/') ?>assets/js/jquery-ui.min.js"></script>
 <!-- main js link -->
 <script src="<?= base_url('assets/depan/') ?>assets/js/main.js"></script>
+<!-- DataTables -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
@@ -117,6 +128,19 @@ toastr.warning("<?php echo $this->session->flashdata('warning'); ?>");
 <?php } else if ($this->session->flashdata('info')) {  ?>
 toastr.info("<?php echo $this->session->flashdata('info'); ?>");
 <?php } ?>
+</script>
+<script>
+$(function() {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+        'paging': true,
+        'lengthChange': true,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': true
+    })
+})
 </script>
 </body>
 

@@ -39,7 +39,7 @@ class Login extends CI_Controller
         if ($data = $cek_admin->row_array()) {
             if (($password == $data['password'])) {
                 $all = [
-                    'id_admin' => $data['id_pengguna'],
+                    //'id_admin' => $data['id_pengguna'],
                     'id_pengguna' => $data['id_pengguna'],
                     'nama_lengkap' => $data['nama_lengkap'],
                     'nik' => $data['nik'],

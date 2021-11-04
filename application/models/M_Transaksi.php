@@ -14,6 +14,18 @@ class M_Transaksi extends CI_Model
             ->result_array();
         return $query;
     }
+    public function gettransaksi($id_transaksi)
+    {
+        $query = $this->db->select('*, transaksi.status as status_transaksi, transaksi.alamat as transaksi_alamat')
+            ->from('transaksi')
+            ->join('mobil', 'transaksi.id_mobil=mobil.id_mobil', 'left')
+            ->join('pengguna', 'transaksi.id_penyewa=pengguna.id_pengguna', 'left')
+            ->where('id_transaksi', $id_transaksi)
+            ->order_by('id_transaksi', 'DESC')
+            ->get()
+            ->result_array();
+        return $query;
+    }
     public function hari_ini()
     {
         $date = date('Y-m-d');

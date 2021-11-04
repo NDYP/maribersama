@@ -13,13 +13,34 @@ class M_Mobil extends CI_Model
             ->result_array(); //ditampilkan dalam bentuk array
         return $query;
     }
-    public function pengajuan()
+    public function katalog()
     {
         $query = $this->db->select('*')
             ->from('mobil')
             ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
-            ->where('mobil.status', 'pengajuan')
+            ->where('mobil.status', 'tersedia')
             ->order_by('id_mobil', 'DESC') //urut berdasarkan id
+            ->get()
+            ->result_array(); //ditampilkan dalam bentuk array
+        return $query;
+    }
+    public function pengunjung($limit, $start)
+    {
+        $query = $this->db->select('*')
+
+            ->where('mobil.status', 'tersedia')
+            ->order_by('id_mobil', 'DESC') //urut berdasarkan id
+            ->get('mobil', $limit, $start)
+            ->result_array(); //ditampilkan dalam bentuk array
+        return $query;
+    }
+    public function pengajuan()
+    {
+        $query = $this->db->select('*, mobil.id_mobil')
+            ->from('mobil')
+            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->where('mobil.status', 'pengajuan')
+            ->order_by('mobil.id_mobil', 'DESC') //urut berdasarkan id
             ->get()
             ->result_array(); //ditampilkan dalam bentuk array
         return $query;

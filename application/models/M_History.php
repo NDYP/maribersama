@@ -15,4 +15,34 @@ class M_History extends CI_Model
             ->result_array();
         return $query;
     }
+    public function customer()
+    {
+        $query = $this->db->select('*, transaksi.status as status_transaksi, transaksi.alamat as transaksi_alamat')
+            ->from('transaksi')
+            ->join('mobil', 'transaksi.id_mobil=mobil.id_mobil', 'left')
+            ->join('pengguna', 'transaksi.id_penyewa=pengguna.id_pengguna', 'left')
+            ->where('transaksi.id_penyewa', $this->session->userdata('id_pengguna'))
+            ->order_by('id_transaksi', 'DESC')
+            ->get()
+            ->result_array();
+        return $query;
+    }
+    public function hapus($id_transaksi)
+    {
+        $this->db->where('id_transaksi', $id_transaksi);
+        $this->db->delete('transaksi');
+    }
+    public function laporan($tanggal1, $tanggal2)
+    {
+        $query = $this->db->select('*, transaksi.status as status_transaksi, transaksi.alamat as transaksi_alamat')
+            ->from('transaksi')
+            ->join('mobil', 'transaksi.id_mobil=mobil.id_mobil', 'left')
+            ->join('pengguna', 'transaksi.id_penyewa=pengguna.id_pengguna', 'left')
+            ->where('mobil.id_pemilik', $this->session->userdata('id_pengguna'))
+            ->where("tanggal_transaksi BETWEEN '$tanggal1' AND '$tanggal2'")
+            ->order_by('id_transaksi', 'DESC')
+            ->get()
+            ->result_array();
+        return $query;
+    }
 }

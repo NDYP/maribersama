@@ -78,19 +78,17 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
+                            <?php if ($this->session->userdata('username_admin')) : ?>
                             <li class="<?= $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>"><a
                                     href="<?= base_url('admin/dashboard/index'); ?>">Dashboard <span
                                         class="sr-only"></span></a></li>
 
                             <li class="<?= $this->uri->segment(2) == 'transaksi' ? 'active' : ''; ?>"><a
                                     href="<?= base_url('admin/transaksi/index'); ?>">Transaksi</a></li>
-                            <li class="<?= $this->uri->segment(2) == 'transaksi' ? 'active' : ''; ?>"><a
-                                    href="<?= base_url('admin/pengajuan/index'); ?>">Pengajuan</a></li>
-                            <li class="<?= $this->uri->segment(2) == 'history' ? 'active' : ''; ?>"><a
-                                    href="<?= base_url('admin/history/index'); ?>">History</a></liclass=>
+
                             <li
                                 class="dropdown <?= $this->uri->segment(2) == 'partner' && $this->uri->segment(3) == 'pengajuan'
-                                                    || $this->uri->segment(2) == 'mobil' && $this->uri->segment(3) == 'pengajuan' ? 'active' : ''; ?>">
+                                                        || $this->uri->segment(2) == 'mobil' && $this->uri->segment(3) == 'pengajuan' ? 'active' : ''; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pengajuan <span
                                         class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -100,10 +98,10 @@
                             </li>
                             <li
                                 class="dropdown <?= $this->uri->segment(2) == 'partner' && $this->uri->segment(3) == 'index'
-                                                    || $this->uri->segment(2) == 'mobil' && $this->uri->segment(3) == 'index'
-                                                    || $this->uri->segment(2) == 'customer' && $this->uri->segment(3) == 'index'
-                                                    || $this->uri->segment(2) == 'karyawan' && $this->uri->segment(3) == 'index'
-                                                    || $this->uri->segment(2) == 'admin' && $this->uri->segment(3) == 'index' ? 'active' : ''; ?>">
+                                                        || $this->uri->segment(2) == 'mobil' && $this->uri->segment(3) == 'index'
+                                                        || $this->uri->segment(2) == 'customer' && $this->uri->segment(3) == 'index'
+                                                        || $this->uri->segment(2) == 'karyawan' && $this->uri->segment(3) == 'index'
+                                                        || $this->uri->segment(2) == 'admin' && $this->uri->segment(3) == 'index' ? 'active' : ''; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master <span
                                         class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -115,7 +113,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown <?= $this->uri->segment(2) == 'profil'
-                                                    || $this->uri->segment(2) == 'layanan' ? 'active' : ''; ?>">
+                                                        || $this->uri->segment(2) == 'layanan' ? 'active' : ''; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setting <span
                                         class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -130,12 +128,19 @@
                             <li class="<?= $this->uri->segment(2) == 'berita' ? 'active' : ''; ?>">
                                 <a href="<?= base_url('admin/berita/index'); ?>">Berita</a>
                             </li>
+                            <?php else : ?>
+                            <li class="<?= $this->uri->segment(2) == 'pengajuan' ? 'active' : ''; ?>"><a
+                                    href="<?= base_url('admin/pengajuan/index'); ?>">Pengajuan</a></li>
+                            <li class="<?= $this->uri->segment(2) == 'history' ? 'active' : ''; ?>"><a
+                                    href="<?= base_url('admin/history/index'); ?>">History</a></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
+                            <?php if ($this->session->userdata('username_admin')) : ?>
                             <!-- Messages: style can be found in dropdown.less-->
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->
@@ -185,28 +190,36 @@
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning"><?= $pengajuan_partner; ?></span>
+                                    <span class="label label-warning">
+                                        <?= $pengajuan_partner + $pengajuan_mobil; ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">Anda memiliki <?= $pengajuan_partner; ?> pengajuan partner</li>
+                                    <li class="header">Anda memiliki <?= $pengajuan_partner + $pengajuan_mobil; ?></li>
                                     <li>
                                         <!-- Inner Menu: contains the notifications -->
                                         <ul class="menu">
                                             <li>
                                                 <!-- start notification -->
-                                                <a>
+                                                <a href="<?= base_url('admin/partner/pengajuan') ?>">
                                                     <i class="fa fa-users text-aqua"></i> <?= $pengajuan_partner; ?>
                                                     pengajuan partner baru
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <!-- start notification -->
+                                                <a href="<?= base_url('admin/mobil/pengajuan') ?>">
+                                                    <i class="fa fa-users text-aqua"></i>
+                                                    <?= $pengajuan_mobil; ?>
+                                                    pengajuan mobil baru
                                                 </a>
                                             </li>
                                             <!-- end notification -->
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="<?= base_url('admin/partner/pengajuan') ?>">Lihat</a>
-                                    </li>
+
                                 </ul>
                             </li>
-
+                            <?php endif; ?>
                             <!-- User Account Menu -->
                             <li class="dropdown user user-menu">
                                 <!-- Menu Toggle Button -->

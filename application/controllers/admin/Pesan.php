@@ -13,6 +13,7 @@ class pesan extends CI_Controller
     {
         $data['title'] = 'Kelola pesan';
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->M_Kontak->index();
         $this->load->view('admin/template/header', $data);

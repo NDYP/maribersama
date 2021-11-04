@@ -52,7 +52,7 @@
                                                 <td class="sorting_1"><?= $no++; ?></td>
                                                 <td>
                                                     <img class="img center-block img-responsive img-thumnail"
-                                                        style="width: 30%;"
+                                                        style="width: 5cm;"
                                                         src="<?= base_url('assets/foto/pengguna/' . $x['foto']); ?>"
                                                         alt="">
                                                 </td>
@@ -64,10 +64,10 @@
                                                 <td>
                                                     <a class="btn btn-xs bg-blue" type="button"
                                                         href="<?= base_url('admin/partner/aktif/' . $x['id_pengguna']); ?>"><span
-                                                            class="fa fa-check"></span> Terima</a>
+                                                            class="fa fa-check"></span></a>
                                                     <a class="btn btn-xs bg-yellow" type="button"
                                                         href="<?= base_url('admin/partner/tolak/' . $x['id_pengguna']); ?>"><span
-                                                            class="fa fa-close"></span> Tolak</a>
+                                                            class="fa fa-close"></span></a>
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>

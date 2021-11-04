@@ -7,17 +7,17 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?= base_url('admin/dashboard/index'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="<?= base_url('admin/transaksi/katalog'); ?>">Katalog</a></li>
+            <li><a href="<?= base_url('admin/history/katalog'); ?>">Katalog</a></li>
             <li class="active"><?= $title; ?></li>
         </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-        <?= form_open_multipart('admin/transaksi/ubah') ?>
+        <?= form_open_multipart('admin/history/ubah') ?>
         <div class="box box-default">
             <div class="box-header with-border">
-                <a type="button" href="<?= base_url('admin/transaksi/index') ?>" class="btn bg-green btn-xs"><span
+                <a type="button" href="<?= base_url('admin/history/index') ?>" class="btn bg-green btn-xs"><span
                         class="fa fa-arrow-left"></span> Kembali</a>
             </div>
             <!-- /.box-header -->
@@ -27,7 +27,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Penyewa</label>
-                                <select name="id_penyewa" class="form-control select2" style="width: 100%;">
+                                <select name="id_penyewa" class="form-control select2" style="width: 100%;" disabled>
 
                                     <?php foreach ($penyewa as $x) : ?>
                                     <?php if ($transaksi['id_penyewa'] == $x['id_pengguna']) : ?>
@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <input type="text" class="form-control" name="alamat"
-                                    value="<?= $transaksi['alamat']; ?>" id="password">
+                                    value="<?= $transaksi['alamat']; ?>" id="password" disabled>
                                 <input type="hidden" class="form-control" name="id_transaksi"
                                     value="<?= $transaksi['id_transaksi']; ?>">
                             </div>
@@ -55,7 +55,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Mobil</label>
-                                <select name="id_mobil" class="form-control select2" style="width: 100%;">
+                                <select name="id_mobil" class="form-control select2" style="width: 100%;" disabled>
 
                                     <?php foreach ($mobil as $x) : ?>
                                     <?php if ($transaksi['id_mobil'] == $x['id_mobil']) : ?>
@@ -76,13 +76,11 @@
                                     <label>Opsi</label>
                                     <br>
                                     <label>
-                                        <input type="radio" name="opsi" value="ambil" class="minimal-red"
-                                            <?php if ($transaksi['opsi'] === 'ambil') echo 'checked'; ?>>
+                                        <input type="radio" name="opsi" value="ambil" class="minimal-red" checked>
                                         Ambil
                                     </label>
                                     <label>
-                                        <input type="radio" name="opsi" value="antar" class="minimal-red"
-                                            <?php if ($transaksi['opsi'] === 'antar') echo 'checked'; ?>>
+                                        <input type="radio" name="opsi" value="antar" class="minimal-red" disabled>
                                         Antar
                                     </label>
                                 </div>
@@ -96,30 +94,28 @@
                             <div class="form-group">
                                 <label>Tanggal Sewa</label>
                                 <input type="text" class="form-control" id="datepicker" name="tanggal_pinjam"
-                                    value="<?= $transaksi['tanggal_pinjam']; ?>">
+                                    value="<?= $transaksi['tanggal_pinjam']; ?>" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Tanggal Kembali</label>
                                 <input type="text" class="form-control" id="datepicker1" name="tanggal_kembali"
-                                    value="<?= $transaksi['tanggal_kembali']; ?>">
+                                    value="<?= $transaksi['tanggal_kembali']; ?>" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>DP</label>
-                                <input type="text" class="form-control" name="dp" value="<?= $transaksi['dp']; ?>">
+                                <input type="text" class="form-control" name="dp" value="<?= $transaksi['dp']; ?>"
+                                    disabled>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- /.col -->
             </div>
-            <div class="box-footer">
-                <button type="submit" class="btn bg-green btn-xs" title="simpan"><span class="fa fa-save"></span>
-                    Simpan</button>
-            </div>
+
             <!-- /.row -->
         </div>
         <?= form_close(); ?>

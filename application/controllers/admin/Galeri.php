@@ -13,6 +13,7 @@ class Galeri extends CI_Controller
     function index()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = 'Kelola Album';
         $data['album'] = $this->M_Galeri->index();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -27,6 +28,7 @@ class Galeri extends CI_Controller
         $data['album'] = $this->M_Galeri->get($id_album);
         $data['galeri'] = $this->db->get_where('galeri', array('id_album' => $id_album))->result_array();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         $this->load->view('admin/template/header', $data);
@@ -105,6 +107,7 @@ class Galeri extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Album Baru';
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $this->load->view('admin/template/header', $data);
@@ -188,6 +191,7 @@ class Galeri extends CI_Controller
             $data['title'] = 'Galeri Baru';
             $data['album'] = $this->M_Galeri->index();
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $this->load->view('admin/template/header', $data);

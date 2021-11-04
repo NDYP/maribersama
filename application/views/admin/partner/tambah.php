@@ -17,7 +17,7 @@
         <?= form_open_multipart('admin/partner/tambah') ?>
         <div class="box box-default">
             <div class="box-header with-border">
-                <a type="button" href="<?= base_url('admin/partner/index') ?>" class="btn bg-green btn-sm"><span
+                <a type="button" href="<?= base_url('admin/partner/index') ?>" class="btn bg-green btn-xs"><span
                         class="fa fa-arrow-left"></span> Kembali</a>
             </div>
             <!-- /.box-header -->

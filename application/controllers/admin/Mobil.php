@@ -14,6 +14,7 @@ class Mobil extends CI_Controller
     function index()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         $data['title'] = "Index Mobil";
@@ -57,6 +58,7 @@ class Mobil extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Tambah data mobil";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $data['pemilik'] = $this->M_Partner->index();
@@ -160,6 +162,7 @@ class Mobil extends CI_Controller
         if ($data) {
             $data['title'] = "Edit data mobil";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/mobil/lihat', $data);
             $this->load->view('admin/template/footer', $data);
@@ -398,8 +401,10 @@ class Mobil extends CI_Controller
     function pengajuan()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
+
         $data['title'] = "Pengajuan Mobil";
         $data['index'] = $this->M_Mobil->pengajuan();
         $data['pemilik'] = $this->M_Partner->index();
@@ -411,7 +416,7 @@ class Mobil extends CI_Controller
     {
         $data = array('status' => 'tersedia');
         $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
-        $this->_sendmail();
+        $this->_sendmail($id_mobil);
         $this->session->set_flashdata('success', 'Pengajuan mobil disetujui');
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -420,13 +425,13 @@ class Mobil extends CI_Controller
         $data = array('status' => 'ditolak');
         $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
         $this->session->set_flashdata('success', 'Pengguna belum memenuhi kriteria');
-        $this->_sendmail1();
+        $this->_sendmail1($id_mobil);
         redirect($_SERVER['HTTP_REFERER']);
     }
-    private function _sendmail()
+    private function _sendmail($id_mobil)
     {
-        $customer = $this->session->userdata('id_mobil');
-        $user = $this->db->get_where('pengguna', ['id_mobil' => $customer])->row_array();
+        $customer = $this->session->userdata('id_pengguna');
+        $user = $this->M_Mobil->get($id_mobil);
 
         $config = array(
             'protocol' => 'smtp',
@@ -442,7 +447,7 @@ class Mobil extends CI_Controller
         $this->email->from('rental_maribersaudara@gmail.com');
         $this->email->to($user['email']);
         $this->email->subject('Pengajuan Partner | Rental Mari Bersaudara');
-        $this->email->message('Selamat anda telah diterima menjadi martner dari Mari Bersaudara Rent, segera ajukan mobil yang ingin disewakan.');
+        $this->email->message('Selamat mobil yang ada ajukan telah diterima oleh pihak Rental Mari Bersaudara, partner dapat datang ke lokasi rental untuk administrasi lanjutan.');
 
         if ($this->email->send()) {
             return true;
@@ -451,10 +456,10 @@ class Mobil extends CI_Controller
             die;
         }
     }
-    private function _sendmail1()
+    private function _sendmail1($id_mobil)
     {
-        $customer = $this->session->userdata('id_mobil');
-        $user = $this->db->get_where('pengguna', ['id_mobil' => $customer])->row_array();
+        $customer = $this->session->userdata('id_pengguna');
+        $user = $this->M_Mobil->get($id_mobil);
 
         $config = array(
             'protocol' => 'smtp',

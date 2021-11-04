@@ -1,19 +1,21 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Berita extends CI_Controller
+class Galeri extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Berita');
+        $this->load->model('M_Galeri');
+        $this->load->model('M_Kontak');
+
         $this->load->model('M_Profil');
     }
     function index()
     {
-        $config['base_url'] = site_url('berita/index'); //site url
-        $config['total_rows'] = $this->db->count_all('berita'); //total row
-        $config['per_page'] = 5;  //show record per halaman
+        $config['base_url'] = site_url('galeri/index'); //site url
+        $config['total_rows'] = $this->db->count_all('album'); //total row
+        $config['per_page'] = 9;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -36,37 +38,46 @@ class Berita extends CI_Controller
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
-
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-        $this->pagination->initialize($config);
-        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-        //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model. 
         $data['pagination'] = $this->pagination->create_links();
 
-        $data['title'] = 'Berita';
-        $data['berita'] = $this->M_Berita->pengunjung($config["per_page"], $data['page']);
+
+        $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
+        $data['title'] = 'Album';
         $data['kontak'] = $this->M_Profil->index();
+        $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
+        $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
+
+
+
+        $data['album'] = $this->M_Galeri->pengunjung($config["per_page"], $data['page']);
+
         $this->load->view('pengunjung/template/header', $data);
-        $this->load->view('pengunjung/berita/index', $data);
+        $this->load->view('pengunjung/galeri/index', $data);
         $this->load->view('pengunjung/template/footer', $data);
     }
-    function get($id_berita)
+    function get($id_album)
     {
-        $data['id_berita'] = $this->M_Berita->get($id_berita);
-        $url = $data['id_berita']['judul'];
+        $data['id_album'] = $this->M_Galeri->get($id_album);
+        $url = $data['id_album']['nama_album'];
         $url_slug = url_title($url, 'dash', TRUE);
-        redirect(base_url('berita/baca/' . $id_berita . '/' . $url_slug));
+        redirect(base_url('galeri/album/' . $id_album . '/' . $url_slug));
     }
-    function baca($id_berita)
+    function album($id_album)
     {
-        $data['title'] = 'Berita';
-        $data['title1'] = 'Baca Berita';
-        $data['berita'] = $this->M_Berita->get($id_berita);
+        $data['title'] = 'Galeri Album';
+        $data['album'] = $this->M_Galeri->get($id_album);
+        $data['galeri'] = $this->db->get_where('galeri', array('id_album' => $id_album))->result_array();
+        $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
+        $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
+        $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         $data['kontak'] = $this->M_Profil->index();
+
         $this->load->view('pengunjung/template/header', $data);
-        $this->load->view('pengunjung/berita/detail', $data);
+        $this->load->view('pengunjung/galeri/galeri', $data);
         $this->load->view('pengunjung/template/footer', $data);
     }
 }

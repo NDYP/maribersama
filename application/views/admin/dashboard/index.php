@@ -84,24 +84,30 @@
                         <h3 class="box-title">Transaksi hari ini</h3>
 
                         <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
                             </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
                         </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                            aria-describedby="example1_info">
                             <thead>
                                 <tr role="row">
-                                    <th style="width: 2%" class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 177.281px;">No</th>
+                                    <th style="width: 2%" class="sorting_asc" tabindex="0" aria-controls="example1"
+                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                        aria-label="Rendering engine: activate to sort column descending"
+                                        style="width: 177.281px;">No</th>
 
                                     <th style="width: 224.844px;">Penyewa</th>
                                     <th style="width: 224.844px;">Mobil</th>
 
                                     <th style="width: 206.484px;">Pinjam - Kembali</th>
 
-                                    <th style="width: 111.703px;">Sewa - Diskon (%)</th>
+                                    <th style="width: 111.703px;">Tarif/hari - Diskon (%)</th>
                                     <th style="width: 111.703px;">DP <br> Denda <br> Bayar</th>
                                     <th style="width: 111.703px;">Status</th>
                                     <th style="width: 111.703px;">Opsi</th>
@@ -110,33 +116,42 @@
                             <tbody>
                                 <?php $no = 1;
                                 foreach ($index as $x) : ?>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1"><?= $no++; ?></td>
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1"><?= $no++; ?></td>
 
-                                        <td>NIK : <?= $x['nik'] ?> <br>
-                                            Nama : <?= $x['nama_lengkap'] ?> <br>
-                                            alamat : <?= $x['transaksi_alamat'] ?> <br>
-                                            Email : <?= $x['email'] ?> <br>
-                                            Telepon :<?= $x['no_hp'] ?> <br>
-                                        </td>
-                                        <td>Tipe :<?= $x['tipe'] ?> <br>
-                                            Jenis :<?= $x['jenis'] ?>
-                                        </td>
-                                        <td><?= date('d/m/Y', strtotime($x['tanggal_pinjam']))  ?> - <?= date('d/m/Y', strtotime($x['tanggal_kembali']))  ?></td>
-                                        <td><?= $x['sewa'] ?> - <?= $x['diskon'] ?>%</td>
-                                        <td><span class="badge bg-red"><?= $x['dp'] ?> <br> <?= $x['denda'] ?> <br> <?= $x['bayar'] ?></span></td>
-                                        <td><span class="badge bg-red"><?= $x['status_transaksi'] ?></span> - <span class="badge bg-red"><?= $x['opsi'] ?></span>
+                                    <td>NIK : <?= $x['nik'] ?> <br>
+                                        Nama : <?= $x['nama_lengkap'] ?> <br>
+                                        alamat : <?= $x['transaksi_alamat'] ?> <br>
+                                        Email : <?= $x['email'] ?> <br>
+                                        Telepon :<?= $x['no_hp'] ?> <br>
+                                    </td>
+                                    <td>Tipe :<?= $x['tipe'] ?> <br>
+                                        Jenis :<?= $x['jenis'] ?>
+                                    </td>
+                                    <td><?= date('d/m/Y', strtotime($x['tanggal_pinjam']))  ?> -
+                                        <?= date('d/m/Y', strtotime($x['tanggal_kembali']))  ?></td>
+                                    <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?> - <?= $x['diskon'] ?>%
+                                    </td>
+                                    <td><span class="badge bg-red"><?= "Rp." . number_format($x['dp'], 2, ',', '.') ?>
+                                            <br> <?= "Rp." . number_format($x['denda'], 2, ',', '.') ?> <br>
+                                            <?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?></span></td>
+                                    <td><span class="badge bg-red"><?= $x['status_transaksi'] ?></span> - <span
+                                            class="badge bg-red"><?= $x['opsi'] ?></span>
 
-                                        </td>
+                                    </td>
 
-                                        <td>
-                                            <?php if ($x['status_transaksi'] == 'pengajuan') : ?>
-                                                <a class="btn bg-blue btn-xs" href="<?= base_url('admin/dashboard/terima/' . $x['id_transaksi']) ?>"> Terima <span class="fa fa-check"></a>
-                                            <?php elseif ($x['status_transaksi'] == 'disewa') : ?>
-                                                <a class="btn bg-blue btn-xs" href="<?= base_url('admin/dashboard/selesai/' . $x['id_transaksi']) ?>"> Selesai <span class="fa fa-check"></a>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
+                                    <td>
+                                        <?php if ($x['status_transaksi'] == 'pengajuan') : ?>
+                                        <a class="btn bg-blue btn-xs"
+                                            href="<?= base_url('admin/dashboard/terima/' . $x['id_transaksi']) ?>">
+                                            Terima <span class="fa fa-check"></a>
+                                        <?php elseif ($x['status_transaksi'] == 'disewa') : ?>
+                                        <a class="btn bg-blue btn-xs"
+                                            href="<?= base_url('admin/dashboard/selesai/' . $x['id_transaksi']) ?>">
+                                            Selesai <span class="fa fa-check"></a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

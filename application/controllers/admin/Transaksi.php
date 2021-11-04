@@ -16,6 +16,7 @@ class Transaksi extends CI_Controller
     function index()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         $data['title'] = "Index Transaksi Rental";
@@ -27,8 +28,9 @@ class Transaksi extends CI_Controller
     function katalog()
     {
         $data['title'] = "Katalog Rental";
-        $data['index'] = $this->M_Mobil->index();
+        $data['index'] = $this->M_Mobil->katalog();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         $this->load->view('admin/template/header', $data);
@@ -56,6 +58,7 @@ class Transaksi extends CI_Controller
             $data['mobil'] = $this->M_Mobil->index();
             $data['penyewa'] = $this->M_Customer->index();
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $this->load->view('admin/template/header', $data);
@@ -65,6 +68,8 @@ class Transaksi extends CI_Controller
             $id_mobil = $this->input->post('id_mobil');
             $x = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
             $tarif = $x['tarif'];
+            $sewa = $x['sewa'];
+
             $diskon = $x['diskon'];
 
             $id_penyewa = $this->input->post('id_penyewa');
@@ -93,8 +98,7 @@ class Transaksi extends CI_Controller
             // 1 day = 24 hours 
             // 24 * 60 * 60 = 86400 seconds
             $jml_hari_lewat = ceil(abs($hari / 86400));
-            $jl_denda = $tarif - (($tarif * $diskon) / 100);
-            $denda = $jml_hari_lewat * $jl_denda;
+            $denda = $jml_hari_lewat * $sewa;
 
 
             $data = array(
@@ -108,7 +112,7 @@ class Transaksi extends CI_Controller
                 'tanggal_transaksi' => $tanggal_transaksi,
                 'dp' => $dp,
                 'denda' => $denda,
-                'bayar' => ($jl_tarif * $berapa_hari  + $denda) - $dp,
+                'bayar' => ($jl_tarif * $berapa_hari) - $dp,
             );
             $this->M_Transaksi->tambah('transaksi', $data);
             $this->session->set_flashdata('success', 'Transaksi Baru Ditambahkan');
@@ -123,6 +127,7 @@ class Transaksi extends CI_Controller
             $data['penyewa'] = $this->M_Customer->index();
             $data['mobil'] = $this->M_Mobil->index();
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $this->load->view('admin/template/header', $data);

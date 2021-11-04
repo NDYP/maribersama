@@ -14,12 +14,11 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <!-- Profile Image -->
                 <div class="box box-danger">
                     <div class="box-body box-danger">
-                        <img style="width: 3cm; width:4cm;" class="img center-block img-responsive img-rounded"
+                        <img class="img center-block img-responsive img-rounded"
                             src="<?= base_url('assets/foto/mobil/' . $index2['thumbnail']) ?>"
                             alt="User profile picture">
                     </div>
@@ -28,7 +27,7 @@
                 <!-- /.box -->
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#activity" data-toggle="tab">Data</a></li>

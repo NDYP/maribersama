@@ -15,6 +15,7 @@ class Customer extends CI_Controller
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Index Customer";
         $data['index'] = $this->M_Customer->index();
         $this->load->view('admin/template/header', $data);
@@ -56,6 +57,7 @@ class Customer extends CI_Controller
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $data['title'] = "Tambah data customer";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/customer/tambah', $data);
             $this->load->view('admin/template/footer', $data);
@@ -157,6 +159,7 @@ class Customer extends CI_Controller
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $data['title'] = "Edit data admin";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/customer/detail', $data);
             $this->load->view('admin/template/footer', $data);

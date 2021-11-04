@@ -44,7 +44,7 @@
                                                 <th style="width: 224.844px;">Alamat</th>
                                                 <th style="width: 206.484px;">Pinjam - Kembali</th>
 
-                                                <th style="width: 111.703px;">Sewa - Diskon (%)</th>
+                                                <th style="width: 111.703px;">Tarif/hari - Diskon (%)</th>
                                                 <th style="width: 111.703px;">DP</th>
                                                 <th style="width: 111.703px;">Denda</th>
                                                 <th style="width: 111.703px;">Bayar</th>
@@ -65,18 +65,25 @@
                                                 </td>
                                                 <td><?= $x['transaksi_alamat'] ?></td>
                                                 <td><?= $x['tanggal_pinjam'] ?> - <?= $x['tanggal_kembali'] ?></td>
-                                                <td><?= $x['sewa'] ?> - <?= $x['diskon'] ?>%</td>
-                                                <td><span class="badge bg-red"><?= $x['dp'] ?></span></td>
-                                                <td><span class="badge bg-red"><?= $x['denda'] ?></span></td>
-                                                <td><span class="badge bg-red"><?= $x['bayar'] ?></span></td>
+                                                <td><?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?> -
+                                                    <?= $x['diskon'] ?>%</td>
+                                                <td><span
+                                                        class="badge bg-red"><?= "Rp." . number_format($x['dp'], 2, ',', '.') ?></span>
+                                                </td>
+                                                <td><span
+                                                        class="badge bg-red"><?= "Rp." . number_format($x['denda'], 2, ',', '.') ?></span>
+                                                </td>
+                                                <td><span
+                                                        class="badge bg-red"><?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?></span>
+                                                </td>
                                                 <td>
                                                     <center>
                                                         <a class="btn btn-xs bg-blue" type="button"
                                                             href="<?= base_url('admin/transaksi/edit/' . $x['id_transaksi']); ?>"><span
-                                                                class="fa fa-2x fa-eye"></span></a>
+                                                                class="fa fa-eye"></span></a>
                                                         <a class="btn btn-xs bg-yellow" type="button"
                                                             href="<?= base_url('admin/transaksi/hapus/' . $x['id_transaksi']); ?>"><span
-                                                                class="fa fa-2x fa-trash"></span></a>
+                                                                class="fa fa-trash"></span></a>
                                                     </center>
                                                 </td>
                                             </tr>

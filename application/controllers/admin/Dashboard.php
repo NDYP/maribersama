@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller
         $data['title'] = "Dashboard Admin";
         $data['index'] = $this->M_Transaksi->index();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['jumlah_partner'] = $this->db->get_where('pengguna', array('id_akses' => 4))->num_rows();
         $data['jumlah_customer'] = $this->db->get_where('pengguna', array('id_akses' => 3))->num_rows();
         $data['jumlah_mobil'] = $this->db->get_where('mobil', array('status' => 'tersedia'))->num_rows();
@@ -31,6 +32,8 @@ class Dashboard extends CI_Controller
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
 
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
+
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/dashboard/index', $data);
         $this->load->view('admin/template/footer', $data);
@@ -39,7 +42,7 @@ class Dashboard extends CI_Controller
     {
         $data = array('status' => 'disewa');
         $this->M_Transaksi->update('transaksi', $data, array('id_transaksi' => $id_transaksi));
-        $this->_sendmail1();
+        $this->_sendmail1($id_transaksi);
         $this->session->set_flashdata('success', 'Segera Hubungi Customer');
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -47,14 +50,14 @@ class Dashboard extends CI_Controller
     {
         $data = array('status' => 'selesai');
         $this->M_Transaksi->update('transaksi', $data, array('id_transaksi' => $id_transaksi));
-        $this->_sendmail2();
+        $this->_sendmail2($id_transaksi);
         $this->session->set_flashdata('success', 'Transaksi Selesai');
         redirect($_SERVER['HTTP_REFERER']);
     }
-    private function _sendmail1()
+    private function _sendmail1($id_transaksi)
     {
-        $customer = $this->session->userdata('id_pengguna');
-        $user = $this->db->get_where('pengguna', ['id_pengguna' => $customer])->row_array();
+        //$customer = $this->session->userdata('id_pengguna');
+        $user = $this->M_Transaksi->gettransaksi($id_transaksi);
 
         $config = array(
             'protocol' => 'smtp',
@@ -79,10 +82,10 @@ class Dashboard extends CI_Controller
             die;
         }
     }
-    private function _sendmail2()
+    private function _sendmail2($id_transaksi)
     {
         $customer = $this->session->userdata('id_pengguna');
-        $user = $this->db->get_where('pengguna', ['id_pengguna' => $customer])->row_array();
+        $user = $this->M_Transaksi->gettransaksi($id_transaksi);
 
         $config = array(
             'protocol' => 'smtp',

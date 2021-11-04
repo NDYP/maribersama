@@ -60,9 +60,9 @@
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-xs bg-yellow" type="button"
+                                                    <a class="btn btn-xs bg-blue" type="button"
                                                         href="<?= base_url('admin/layanan/edit/' . $x['id_layanan']); ?>"><span
-                                                            class="fa fa-edit"></span> Lihat & Edit</a>
+                                                            class="fa fa-edit"></span> Lihat</a>
                                                     <a class="btn btn-xs bg-yellow" type="button"
                                                         href="<?= base_url('admin/layanan/hapus/' . $x['id_layanan']); ?>"><span
                                                             class="fa fa-trash"></span> Hapus</a>

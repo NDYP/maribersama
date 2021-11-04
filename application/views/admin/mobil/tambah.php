@@ -16,7 +16,8 @@
         <?= form_open_multipart('admin/mobil/tambah') ?>
         <div class="box box-default">
             <div class="box-header with-border">
-                <a type="button" href="<?= base_url('admin/mobil/index') ?>" class="btn bg-green btn-sm"><span class="fa fa-arrow-left"></span> Kembali</a>
+                <a type="button" href="<?= base_url('admin/mobil/index') ?>" class="btn bg-green btn-xs"><span
+                        class="fa fa-arrow-left"></span> Kembali</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -28,7 +29,7 @@
                                 <select name="id_pemilik" class="form-control select2" style="width: 100%;">
                                     <option selected="selected" value="">Pilih</option>
                                     <?php foreach ($pemilik as $x) : ?>
-                                        <option value="<?= $x['id_pengguna'] ?>"><?= $x['nama_lengkap'] ?></option>
+                                    <option value="<?= $x['id_pengguna'] ?>"><?= $x['nama_lengkap'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -127,7 +128,8 @@
                 <!-- /.col -->
             </div>
             <div class="box-footer">
-                <button type="submit" class="btn bg-green btn-sm" title="simpan"><span class="fa fa-save"></span> Simpan</button>
+                <button type="submit" class="btn bg-green btn-sm" title="simpan"><span class="fa fa-save"></span>
+                    Simpan</button>
             </div>
             <!-- /.row -->
         </div>

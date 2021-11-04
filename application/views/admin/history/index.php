@@ -17,9 +17,26 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a class="btn btn-xs bg-green" type="button"
-                            href="<?= base_url('admin/history/laporan'); ?>"><span class="fa fa-print"></span>
-                            Laporan</a>
+                        <!-- Date range -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>laporan:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input name="" type="text" class="form-control pull-right" id="reservation">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                        <!-- /.form group -->
+                        <div class="col-md-12">
+                            <a class="btn btn-xs bg-green" type="button"
+                                href="<?= base_url('admin/history/laporan'); ?>"><span class="fa fa-print"></span>
+                                Pdf</a>
+                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -62,18 +79,25 @@
                                                 </td>
                                                 <td><?= $x['transaksi_alamat'] ?></td>
                                                 <td><?= $x['tanggal_pinjam'] ?> - <?= $x['tanggal_kembali'] ?></td>
-                                                <td><?= $x['sewa'] ?> - <?= $x['diskon'] ?>%</td>
-                                                <td><span class="badge bg-red"><?= $x['dp'] ?></span></td>
-                                                <td><span class="badge bg-red"><?= $x['denda'] ?></span></td>
-                                                <td><span class="badge bg-red"><?= $x['bayar'] ?></span></td>
+                                                <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?> -
+                                                    <?= $x['diskon'] ?>%</td>
+                                                <td><span
+                                                        class="badge bg-red"><?= "Rp." . number_format($x['dp'], 2, ',', '.') ?></span>
+                                                </td>
+                                                <td><span
+                                                        class="badge bg-red"><?= "Rp." . number_format($x['denda'], 2, ',', '.') ?></span>
+                                                </td>
+                                                <td><span
+                                                        class="badge bg-red"><?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?></span>
+                                                </td>
                                                 <td>
                                                     <center>
                                                         <a class="btn btn-xs bg-blue" type="button"
-                                                            href="<?= base_url('admin/transaksi/edit/' . $x['id_transaksi']); ?>"><span
-                                                                class="fa fa-2x fa-eye"></span></a>
+                                                            href="<?= base_url('admin/history/lihat/' . $x['id_transaksi']); ?>"><span
+                                                                class="fa fa-eye"></span></a>
                                                         <a class="btn btn-xs bg-yellow" type="button"
-                                                            href="<?= base_url('admin/transaksi/hapus/' . $x['id_transaksi']); ?>"><span
-                                                                class="fa fa-2x fa-trash"></span></a>
+                                                            href="<?= base_url('admin/history/hapus/' . $x['id_transaksi']); ?>"><span
+                                                                class="fa fa-trash"></span></a>
                                                     </center>
                                                 </td>
                                             </tr>

@@ -13,6 +13,15 @@ class M_Berita extends CI_Model
             ->result_array();
         return $query;
     }
+
+    public function pengunjung($limit, $start)
+    {
+        $query = $this->db->select('*')
+            ->order_by('id_berita', 'DESC')
+            ->get('berita', $limit, $start)
+            ->result_array();
+        return $query;
+    }
     public function get($id_berita)
     {
         $query = $this->db->select('*')

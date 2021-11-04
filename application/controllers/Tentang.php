@@ -11,9 +11,13 @@ class Tentang extends CI_Controller
         $this->load->model('M_Pengguna');
         $this->load->model('M_Layanan');
         $this->load->model('M_Customer');
+        $this->load->model('M_Berita');
+        $this->load->model('M_Profil');
     }
     function index()
     {
+        $data['berita'] = $this->M_Berita->index();
+        $data['kontak'] = $this->M_Profil->index();
         $data['title'] = "Tentang Kami";
         $data['index'] = $this->M_Profil->index();
         $data['karyawan'] = $this->M_Pengguna->indexkaryawan();

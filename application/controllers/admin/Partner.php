@@ -14,6 +14,7 @@ class Partner extends CI_Controller
     function index()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Index Partner";
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
@@ -56,6 +57,7 @@ class Partner extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Tambah data partner";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $this->load->view('admin/template/header', $data);
@@ -157,6 +159,7 @@ class Partner extends CI_Controller
         if ($data) {
             $data['title'] = "Edit data partner";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $this->load->view('admin/template/header', $data);
@@ -346,6 +349,7 @@ class Partner extends CI_Controller
     function pengajuan()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Pengajuan Partner";
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -359,7 +363,7 @@ class Partner extends CI_Controller
     {
         $data = array('id_akses' => 4);
         $this->M_Partner->update('pengguna', $data, array('id_pengguna' => $id_pengguna));
-        $this->_sendmail();
+        $this->_sendmail($id_pengguna);
         $this->session->set_flashdata('success', 'Pengguna telah menjadi partner');
         redirect($_SERVER['HTTP_REFERER']);
     }
@@ -368,13 +372,13 @@ class Partner extends CI_Controller
         $data = array('id_akses' => 3);
         $this->M_Partner->update('pengguna', $data, array('id_pengguna' => $id_pengguna));
         $this->session->set_flashdata('success', 'Pengguna belum memenuhi kriteria');
-        $this->_sendmail1();
+        $this->_sendmail1($id_pengguna);
         redirect($_SERVER['HTTP_REFERER']);
     }
-    private function _sendmail()
+    private function _sendmail($id_pengguna)
     {
         $customer = $this->session->userdata('id_pengguna');
-        $user = $this->db->get_where('pengguna', ['id_pengguna' => $customer])->row_array();
+        $user = $this->db->get_where('pengguna', ['id_pengguna' => $id_pengguna])->row_array();
 
         $config = array(
             'protocol' => 'smtp',
@@ -399,10 +403,10 @@ class Partner extends CI_Controller
             die;
         }
     }
-    private function _sendmail1()
+    private function _sendmail1($id_pengguna)
     {
         $customer = $this->session->userdata('id_pengguna');
-        $user = $this->db->get_where('pengguna', ['id_pengguna' => $customer])->row_array();
+        $user = $this->db->get_where('pengguna', ['id_pengguna' => $id_pengguna])->row_array();
 
         $config = array(
             'protocol' => 'smtp',

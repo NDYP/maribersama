@@ -60,9 +60,9 @@
                                                 <td><?= $x['email'] ?></td>
                                                 <td><?= $x['daftar'] ?></td>
                                                 <td>
-                                                    <a class="btn btn-xs bg-yellow" type="button"
+                                                    <a class="btn btn-xs bg-blue" type="button"
                                                         href="<?= base_url('admin/partner/edit/' . $x['id_pengguna']); ?>"><span
-                                                            class="fa fa-edit"></span> Edit</a>
+                                                            class="fa fa-eye"></span> Lihat</a>
                                                     <a class="btn btn-xs bg-yellow" type="button"
                                                         href="<?= base_url('admin/partner/hapus/' . $x['id_pengguna']); ?>"><span
                                                             class="fa fa-trash"></span> Hapus</a>

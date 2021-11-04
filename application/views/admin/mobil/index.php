@@ -17,7 +17,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a class="btn btn-sm bg-green" type="button" href="<?= base_url('admin/mobil/tambah'); ?>"><span
+                        <a class="btn btn-xs bg-green" type="button" href="<?= base_url('admin/mobil/tambah'); ?>"><span
                                 class="fa fa-plus"></span> Tambah</a>
                     </div>
                     <!-- /.box-header -->
@@ -65,12 +65,13 @@
                                                 </td>
                                                 <td><?= $x['transmisi'] ?><br>
                                                     <?= $x['jumlah_kursi'] ?></td>
-                                                <td><?= $x['sewa'] ?> <br> <?= $x['diskon'] ?></td>
+                                                <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?> <br>
+                                                    <?= $x['diskon'] ?></td>
                                                 <td><span class="badge bg-red"><?= $x['status'] ?></span></td>
                                                 <td>
-                                                    <a class="btn btn-xs bg-yellow" type="button"
+                                                    <a class="btn btn-xs bg-blue" type="button"
                                                         href="<?= base_url('admin/mobil/edit/' . $x['id_mobil']); ?>"><span
-                                                            class="fa fa-edit"></span> Lihat & Edit</a>
+                                                            class="fa fa-eye"></span> Lihat</a>
                                                     <a class="btn btn-xs bg-yellow" type="button"
                                                         href="<?= base_url('admin/mobil/hapus/' . $x['id_mobil']); ?>"><span
                                                             class="fa fa-trash"></span> Hapus</a>

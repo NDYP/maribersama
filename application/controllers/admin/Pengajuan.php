@@ -14,6 +14,7 @@ class Pengajuan extends CI_Controller
     function index()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         $data['title'] = "Index Mobil";
@@ -51,6 +52,7 @@ class Pengajuan extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Tambah data mobil";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
 
@@ -128,6 +130,7 @@ class Pengajuan extends CI_Controller
         if ($data) {
             $data['title'] = "Edit data mobil";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/pengajuan/lihat', $data);
             $this->load->view('admin/template/footer', $data);

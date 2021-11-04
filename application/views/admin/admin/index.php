@@ -17,7 +17,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a class="btn btn-sm bg-green" type="button" data-toggle="modal"
+                        <a class="btn btn-xs bg-green" type="button" data-toggle="modal"
                             data-target="#modal-tambah"><span class="fa fa-plus"></span> Tambah</a>
                     </div>
                     <!-- /.box-header -->
@@ -49,7 +49,7 @@
                                                 <td class="sorting_1"><?= $no++; ?></td>
                                                 <td>
                                                     <img class="img center-block img-responsive img-thumnail"
-                                                        style="width: 30%;"
+                                                        style="width: 5cm;"
                                                         src="<?= base_url('assets/foto/pengguna/' . $x['foto']); ?>"
                                                         alt="">
                                                 </td>
@@ -58,7 +58,7 @@
                                                 <td><?= $x['jabatan'] ?></td>
                                                 <td><span class="badge bg-red"><?= $x['salary'] ?></span></td>
                                                 <td>
-                                                    <a class="btn btn-xs bg-yellow" type="button"
+                                                    <a class="btn btn-xs bg-blue" type="button"
                                                         data-id_admin="<?= $x['id_admin']; ?>" data-toggle="modal"
                                                         data-target="#modal-edit<?= $x['id_admin']; ?>"><span
                                                             class="fa fa-edit"></span> Edit</a>

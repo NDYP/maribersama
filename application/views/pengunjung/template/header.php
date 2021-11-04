@@ -29,6 +29,12 @@
     <link rel="stylesheet" href="<?= base_url('assets/depan/') ?>assets/css/owl.carousel.min.css">
     <!-- main style css link -->
     <link rel="stylesheet" href="<?= base_url('assets/depan/') ?>assets/css/main.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
 </head>
 
 <body>
@@ -98,12 +104,14 @@
                             <li><a href="<?= base_url('katalog') ?>">Katalog</a>
 
                             <li><a href="<?= base_url('berita') ?>">Berita</a>
-                            <li><a href="<?= base_url('katalog') ?>">Galeri</a>
+                            <li><a href="<?= base_url('galeri') ?>">Galeri</a>
                                 <?php if ($this->session->userdata('id_pengguna')) : ?>
                             <li class="menu_has_children"><a href="#0">Akun</a>
                                 <ul class="sub-menu">
-                                    <li><a href="<?= base_url('akun/riwayat') ?>">riwayat sewa</a></li>
+                                    <li><a href="<?= base_url('akun/history') ?>">riwayat sewa</a></li>
+                                    <?php if ($this->session->userdata('id_akses') == 4) : ?>
                                     <li><a href="<?= base_url('akun/pengajuan') ?>">pengajuan partner</a></li>
+                                    <?php endif; ?>
                                     <li><a href="<?= base_url('login/logout') ?>">logout</a></li>
                                 </ul>
                             </li>

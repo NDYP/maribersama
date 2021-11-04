@@ -13,6 +13,7 @@ class Karyawan extends CI_Controller
     function index()
     {
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+        $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Index Karyawan";
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -55,6 +56,7 @@ class Karyawan extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
 
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $data['title'] = "Tambah data karyawan";
@@ -158,6 +160,7 @@ class Karyawan extends CI_Controller
         if ($data) {
             $data['title'] = "Edit data karyawan";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/karyawan/detail', $data);
             $this->load->view('admin/template/footer', $data);
