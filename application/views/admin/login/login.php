@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="<?= base_url('assets/'); ?>login/css/style.css">
-
+    <!-- add icon link -->
+    <?php foreach ($profil as $x) : ?>
+    <link rel="icon" href="<?= base_url('assets/foto/profil/' . $x['logo']) ?>" type="image/x-icon">
+    <?php endforeach; ?>
 </head>
 
 <body class="img js-fullheight" style="background-image: url(<?= base_url('assets/'); ?>login/images/x.png);">
@@ -31,8 +34,10 @@
                                 <input type="text" class="form-control" placeholder="Username" name="username" required>
                             </div>
                             <div class="form-group">
-                                <input id="password-field" type="password" class="form-control" placeholder="Password" name="password" required>
-                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                <input id="password-field" type="password" class="form-control" placeholder="Password"
+                                    name="password" required>
+                                <span toggle="#password-field"
+                                    class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
@@ -60,17 +65,18 @@
     <script src="<?= base_url('assets/'); ?>login/js/bootstrap.min.js"></script>
     <script src="<?= base_url('assets/'); ?>login/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script type="text/javascript">
-        <?php if ($this->session->flashdata('success')) { ?>
-            toastr.success("<?php echo $this->session->flashdata('success'); ?>");
-        <?php } else if ($this->session->flashdata('error')) {  ?>
-            toastr.error("<?php echo $this->session->flashdata('error'); ?>");
-        <?php } else if ($this->session->flashdata('warning')) {  ?>
-            toastr.warning("<?php echo $this->session->flashdata('warning'); ?>");
-        <?php } else if ($this->session->flashdata('info')) {  ?>
-            toastr.info("<?php echo $this->session->flashdata('info'); ?>");
-        <?php } ?>
+    <?php if ($this->session->flashdata('success')) { ?>
+    toastr.success("<?php echo $this->session->flashdata('success'); ?>");
+    <?php } else if ($this->session->flashdata('error')) {  ?>
+    toastr.error("<?php echo $this->session->flashdata('error'); ?>");
+    <?php } else if ($this->session->flashdata('warning')) {  ?>
+    toastr.warning("<?php echo $this->session->flashdata('warning'); ?>");
+    <?php } else if ($this->session->flashdata('info')) {  ?>
+    toastr.info("<?php echo $this->session->flashdata('info'); ?>");
+    <?php } ?>
     </script>
 </body>
 

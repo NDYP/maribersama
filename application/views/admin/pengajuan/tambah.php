@@ -75,6 +75,7 @@
                                 <div>
                                     <?= form_upload('thumbnail'); ?>
                                 </div>
+                                <?= form_error('thumbnail', '<small class="text-danger pl-1">', '</small>'); ?>
                             </div>
                         </div>
                         <!-- /.form-group -->

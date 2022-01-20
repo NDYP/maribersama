@@ -34,6 +34,6 @@ class Akun extends CI_Controller
     {
         $this->M_History->hapus($id_transaksi);
         $this->session->set_flashdata('success', 'Berhasil Hapus Data');
-        redirect('admin/history/index', 'refresh');
+        redirect('Akun/history', 'refresh');
     }
 }

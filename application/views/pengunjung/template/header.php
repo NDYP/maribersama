@@ -109,8 +109,8 @@
                             <li class="menu_has_children"><a href="#0">Akun</a>
                                 <ul class="sub-menu">
                                     <li><a href="<?= base_url('akun/history') ?>">riwayat sewa</a></li>
-                                    <?php if ($this->session->userdata('id_akses') == 4) : ?>
-                                    <li><a href="<?= base_url('akun/pengajuan') ?>">pengajuan partner</a></li>
+                                    <?php if ($this->session->userdata('id_akses') == 3) : ?>
+                                    <li><a href="<?= base_url('pengajuan/index') ?>">pengajuan partner</a></li>
                                     <?php endif; ?>
                                     <li><a href="<?= base_url('login/logout') ?>">logout</a></li>
                                 </ul>

@@ -7,11 +7,14 @@ class Layanan extends CI_Controller
     {
         parent::__construct();
         login();
+        akses();
         $this->load->model('M_Layanan');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
     }
     function index()
     {
+        $data['profil'] = $this->M_Profil->index();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Index layanan rental";
@@ -35,6 +38,7 @@ class Layanan extends CI_Controller
         ]);
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Tambah layanan rental";
+            $data['profil'] = $this->M_Profil->index();
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -98,8 +102,11 @@ class Layanan extends CI_Controller
         $data['index'] = $this->M_Layanan->index();
         $data['index2'] = $this->M_Layanan->get($id_layanan);
         $data['layanan'] = $this->db->get_where('layanan', array('id_layanan' => $id_layanan))->row_array();
+        $data['profil'] = $this->M_Profil->index();
 
         if ($data) {
+            $data['profil'] = $this->M_Profil->index();
+
             $data['title'] = "Edit data layanan";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();

@@ -7,6 +7,7 @@ class Profil extends CI_Controller
     {
         parent::__construct();
         login();
+        akses();
         $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
     }
@@ -15,6 +16,7 @@ class Profil extends CI_Controller
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Index Profil";
+        $data['profil'] = $this->M_Profil->index();
         $data['index'] = $this->M_Profil->index();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
@@ -25,7 +27,8 @@ class Profil extends CI_Controller
     public function edit()
     {
         $id_profil = $this->uri->segment(4, 0);
-        $data['profil'] = $this->db->get_where('profil', array('id_profil' => $id_profil))->row_array();
+        $data['profil'] = $this->M_Profil->index();
+        $data['index'] = $this->db->get_where('profil', array('id_profil' => $id_profil))->row_array();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -43,7 +46,8 @@ class Profil extends CI_Controller
     public function editvisi()
     {
         $id_profil = $this->uri->segment(4, 0);
-        $data['profil'] = $this->db->get_where('profil', array('id_profil' => $id_profil))->row_array();
+        $data['profil'] = $this->M_Profil->index();
+        $data['index'] = $this->db->get_where('profil', array('id_profil' => $id_profil))->row_array();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -61,7 +65,8 @@ class Profil extends CI_Controller
     public function editmisi()
     {
         $id_profil = $this->uri->segment(4, 0);
-        $data['profil'] = $this->db->get_where('profil', array('id_profil' => $id_profil))->row_array();
+        $data['profil'] = $this->M_Profil->index();
+        $data['index'] = $this->db->get_where('profil', array('id_profil' => $id_profil))->row_array();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -101,7 +106,6 @@ class Profil extends CI_Controller
                 $email = $this->input->post('email');
                 $alamat = $this->input->post('alamat');
                 $lokasi = $this->input->post('lokasi');
-
                 $sejarah = $this->input->post('sejarah');
 
                 $data = array(
@@ -111,7 +115,6 @@ class Profil extends CI_Controller
                     'alamat' => $alamat,
                     'lokasi' => $lokasi,
                     'email' => $email,
-
                     'sejarah' => $sejarah,
                 );
                 $this->M_Profil->update('profil', $data, array('id_profil' => $id_profil));
@@ -128,7 +131,6 @@ class Profil extends CI_Controller
             $email = $this->input->post('email');
             $alamat = $this->input->post('alamat');
             $lokasi = $this->input->post('lokasi');
-
             $sejarah = $this->input->post('sejarah');
 
             $data = array(
@@ -137,7 +139,6 @@ class Profil extends CI_Controller
                 'alamat' => $alamat,
                 'lokasi' => $lokasi,
                 'email' => $email,
-
                 'sejarah' => $sejarah,
             );
             $this->M_Profil->update('Profil', $data, array('id_profil' => $id_profil));
@@ -148,14 +149,10 @@ class Profil extends CI_Controller
 
     function visi()
     {
-
         $visi = $this->input->post('visi');
-
         $id_profil = $this->input->post('id_profil');
         $data = array(
-
             'visi' => $visi,
-
         );
         $this->M_Profil->update('profil', $data, array('id_profil' => $id_profil));
         $this->session->set_flashdata('success', 'Berhasil ubah data');
@@ -164,12 +161,9 @@ class Profil extends CI_Controller
     function misi()
     {
         $misi = $this->input->post('misi');
-
         $id_profil = $this->input->post('id_profil');
         $data = array(
-
             'misi' => $misi,
-
         );
         $this->M_Profil->update('profil', $data, array('id_profil' => $id_profil));
         $this->session->set_flashdata('success', 'Berhasil ubah data');

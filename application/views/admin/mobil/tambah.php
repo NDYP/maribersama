@@ -1,140 +1,159 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            <?= $title; ?>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="<?= base_url('admin/dashboard/index'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="<?= base_url('admin/mobil/index'); ?>">Karyawan</a></li>
-            <li class="active"><?= $title; ?></li>
-        </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <?= form_open_multipart('admin/mobil/tambah') ?>
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <a type="button" href="<?= base_url('admin/mobil/index') ?>" class="btn bg-green btn-xs"><span
-                        class="fa fa-arrow-left"></span> Kembali</a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Pemilik</label>
-                                <select name="id_pemilik" class="form-control select2" style="width: 100%;">
-                                    <option selected="selected" value="">Pilih</option>
-                                    <?php foreach ($pemilik as $x) : ?>
-                                    <option value="<?= $x['id_pengguna'] ?>"><?= $x['nama_lengkap'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+    <div class="container">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <?= $title; ?>
+                <small><?= $title2; ?></small>
+
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="<?= base_url('admin/dashboard/index'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="<?= base_url('admin/mobil/index'); ?>">Karyawan</a></li>
+                <li class="active"><?= $title; ?></li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <a class="btn btn-xs bg-blue" href="<?= base_url('admin/mobil/index') ?>"><span
+                            class="fa fa-arrow-left"></span>
+                        Kembali</a>
+                </div>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputName" class="control-label">Pemilik</label>
+                                    <select name="id_pemilik" class="form-control select2" style="width: 100%;">
+                                        <option selected="selected" value="<?= set_value('id_fat'); ?>">Pilih</option>
+                                        <?php foreach ($pemilik as $x) : ?>
+                                        <option
+                                            value=<?= $x['id_pengguna'] ?><?= set_select('id_pemilik', $x['id_pengguna']); ?>>
+                                            <?= $x['nama_lengkap'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <?= form_error('id_pemilik', '<small class="text-danger pl-1">', '</small>'); ?>
+
+                                </div>
                             </div>
-                            <?= form_error('id_pemilik', '<small class="text-danger pl-1">', '</small>'); ?>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Tipe</label>
-                                <input type="text" class="form-control" name="tipe" id="tipe">
-                                <?= form_error('tipe', '<small class="text-danger pl-1">', '</small>'); ?>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Tipe</label>
+                                    <input type="text" class="form-control" placeholder="Tipe" name="tipe"
+                                        value="<?= set_value('tipe'); ?>">
+                                    <?= form_error('tipe', '<small class="text-danger pl-1">', '</small>'); ?>
+
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Jenis</label>
-                                <input type="text" class="form-control" name="jenis" id="password">
-                                <?= form_error('jenis', '<small class="text-danger pl-1">', '</small>'); ?>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Warna</label>
-                                <input type="text" class="form-control" name="warna" id="password">
-                                <?= form_error('warna', '<small class="text-danger pl-1">', '</small>'); ?>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Jumlah Kursi</label>
-                                <input type="text" class="form-control" name="jumlah_kursi" id="password">
-                                <?= form_error('jumlah_kursi', '<small class="text-danger pl-1">', '</small>'); ?>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Transmisi</label>
-                                <select name="transmisi" class="form-control select2" style="width: 100%;">
-                                    <option selected="selected" value="">Pilih</option>
-                                    <option value="Manual">Manual</option>
-                                    <option value="Matic">Matic</option>
-                                </select>
-                                <?= form_error('tansmisi', '<small class="text-danger pl-1">', '</small>'); ?>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Info Tambahan</label>
-                                <textarea type="text" class="form-control" name="info" id="password"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Foto</label>
-                                <div>
-                                    <?= form_upload('thumbnail'); ?>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Jenis</label>
+                                    <input type="text" class="form-control" placeholder="Jenis" name="jenis"
+                                        value="<?= set_value('jenis'); ?>">
+                                    <?= form_error('jenis', '<small class="text-danger pl-1">', '</small>'); ?>
+
                                 </div>
                             </div>
                         </div>
-                        <!-- /.form-group -->
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Sewa (Rp)</label>
-                                <input type="text" class="form-control" name="sewa">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Warna</label>
+                                    <input type="text" class="form-control" placeholder="Warna" name="warna"
+                                        value="<?= set_value('warna'); ?>">
+                                    <?= form_error('warna', '<small class="text-danger pl-1">', '</small>'); ?>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Jumlah Kursi</label>
+                                    <input type="text" class="form-control" placeholder="Jumlah Kursi"
+                                        name="jumlah_kursi" value="<?= set_value('jumlah_kursi'); ?>">
+                                    <?= form_error('jumlah_kursi', '<small class="text-danger pl-1">', '</small>'); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Transmisi</label>
+                                    <select name="transmisi" class="form-control select2" style="width: 100%;">
+                                        <option selected="selected" value="<?= set_value('transmisi'); ?>">Pilih
+                                        </option>
+                                        <option value="Manual" <?= set_select('transmisi', 'Manual'); ?>>Manual
+                                        </option>
+                                        <option value="Matic" <?= set_select('transmisi', 'Matic'); ?>>Matic</option>
+                                    </select>
+                                    <?= form_error('transmisi', '<small class="text-danger pl-1">', '</small>'); ?>
+                                </div>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Sewa</label>
+                                    <input type="text" class="form-control" placeholder="Sewa/Bulan Ke Pemilik"
+                                        name="sewa" value="<?= set_value('sewa'); ?>">
+                                </div>
                                 <?= form_error('sewa', '<small class="text-danger pl-1">', '</small>'); ?>
+
                             </div>
-                        </div>
-                        <!-- /.form-group -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Tarif (Rp)</label>
-                                <input type="text" class="form-control" name="tarif">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Tarif</label>
+                                    <input type="text" class="form-control" placeholder="Taris Sewa/hari" name="tarif"
+                                        value="<?= set_value('tarif'); ?>">
+                                </div>
                                 <?= form_error('tarif', '<small class="text-danger pl-1">', '</small>'); ?>
+
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Diskon (%)</label>
-                                <input type="text" class="form-control" name="diskon">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Diskon</label>
+                                    <input type="text" class="form-control" placeholder="Tanpa tanda baca" name="diskon"
+                                        value="<?= set_value('diskon'); ?>">
+                                </div>
                                 <?= form_error('diskon', '<small class="text-danger pl-1">', '</small>'); ?>
+
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select name="status" class="form-control select2" style="width: 100%;">
-                                    <option selected="selected" name="status" value="">Pilih</option>
-                                    <option value="tersedia" name="status">Tersedia</option>
-                                </select>
-                                <?= form_error('status', '<small class="text-danger pl-1">', '</small>'); ?>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Info Tambahan</label>
+                                    <textarea type="text" class="form-control" name="info" id="password">
+
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="inputExperience" class="control-label" name="">Foto</label>
+                                    <input accept=".jpg, .jpeg, .png" title="Hanya tipe Foto" type="file"
+                                        name="thumbnail"></input>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- /.col -->
+                    <div class="box-footer">
+                        <button class="btn btn-xs bg-blue"><span class="fa fa-save"></span> Simpan</button>
+                    </div>
+                </form>
+                <!-- /.box -->
             </div>
-            <div class="box-footer">
-                <button type="submit" class="btn bg-green btn-sm" title="simpan"><span class="fa fa-save"></span>
-                    Simpan</button>
-            </div>
-            <!-- /.row -->
-        </div>
-        <?= form_close(); ?>
-    </section>
-    <!-- /.content -->
+        </section>
+        <!-- /.content -->
+        <!-- /.content -->
+    </div>
 </div>
+
 <!-- /.content-wrapper -->

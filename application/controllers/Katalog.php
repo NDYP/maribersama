@@ -118,11 +118,11 @@ class Katalog extends CI_Controller
                 'tanggal_transaksi' => $tanggal_transaksi,
                 'dp' => $dp,
                 'denda' => $denda,
-                'bayar' => $jl_tarif * $berapa_hari  + $denda - $dp,
+                'bayar' => ($jl_tarif * $berapa_hari) - $dp,
             );
             $this->M_Transaksi->tambah('transaksi', $data);
             $this->_sendmail();
-            $this->session->set_flashdata('success', 'Tunggu konfirmasi pihak rental dan cek email');
+            $this->session->set_flashdata('success', 'Tunggu konfirmasi pihak rental dan cek email');;
             redirect('katalog/index');
         }
     }

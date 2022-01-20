@@ -63,4 +63,26 @@ class M_Pengguna extends CI_Model
         $this->db->where('id_berkas', $id_berkas);
         $this->db->delete('berkas');
     }
+    function cetak($bulan1, $bulan2)
+    {
+        $tanggal = date('Y-m-d');
+        $query = $this->db->select('*')
+            ->from('pengguna')
+            ->where('id_akses', 5)
+            ->where("'$tanggal' BETWEEN '$bulan1' AND '$bulan2'")
+            ->order_by('id_pengguna', 'ASC')
+            ->get();
+        return $query;
+    }
+    function total_keluar($bulan1, $bulan2)
+    {
+        $tanggal = date('Y-m-d');
+        $query = $this->db->select('SUM(salary) as x')
+            ->from('pengguna')
+            ->where('id_akses', 5)
+            ->where("'$tanggal' BETWEEN '$bulan1' AND '$bulan2'")
+            ->order_by('id_pengguna', 'ASC')
+            ->get();
+        return $query;
+    }
 }

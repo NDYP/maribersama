@@ -9,10 +9,13 @@ class Pengajuan extends CI_Controller
         login();
         $this->load->model('M_Mobil');
         $this->load->model('M_Akun');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
     }
     function index()
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -45,12 +48,15 @@ class Pengajuan extends CI_Controller
         $this->form_validation->set_rules('sewa', 'sewa', 'required|trim', [
             'required' => 'Biaya Sewa Tidak Boleh Kosong!'
         ]);
-        $this->form_validation->set_rules('tarif', 'tarif', 'required|trim', [
-            'required' => 'Tarif Sewa Tidak Boleh Kosong!'
-        ]);
-
+        if (empty($_FILES['thumbnail']['name'])) {
+            $this->form_validation->set_rules('thumbnail', 'thumbnail', 'required|trim', [
+                'required' => 'Foto Mobil Tidak Boleh Kosong!'
+            ]);
+        }
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Tambah data mobil";
+            $data['profil'] = $this->M_Profil->index();
+
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -120,6 +126,8 @@ class Pengajuan extends CI_Controller
     }
     public function edit()
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $id_mobil = $this->uri->segment(4, 0);
         $data['index'] = $this->M_Mobil->index();
         $data['index2'] = $this->M_Mobil->get($id_mobil);

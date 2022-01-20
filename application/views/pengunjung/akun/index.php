@@ -38,7 +38,7 @@
                                 <th style="width: 224.844px;">Mobil</th>
                                 <th style="width: 224.844px;">Alamat</th>
                                 <th style="width: 206.484px;">Pinjam - Kembali</th>
-                                <th style="width: 111.703px;">Sewa - Diskon (%)</th>
+                                <th style="width: 111.703px;">Tarif/hari - Diskon (%)</th>
                                 <th style="width: 111.703px;">DP</th>
                                 <th style="width: 111.703px;">Denda</th>
                                 <th style="width: 111.703px;">Bayar</th>
@@ -59,7 +59,7 @@
                                 <td><?= $x['transaksi_alamat'] ?></td>
                                 <td><?= $x['tanggal_pinjam'] ?> -
                                     <?= $x['tanggal_kembali'] ?></td>
-                                <td><?= $x['sewa'] ?> - <?= $x['diskon'] ?>%</td>
+                                <td><?= $x['tarif'] ?> - <?= $x['diskon'] ?>%</td>
                                 <td><span class="badge bg-red"><?= $x['dp'] ?></span>
                                 </td>
                                 <td><span class="badge bg-red"><?= $x['denda'] ?></span>

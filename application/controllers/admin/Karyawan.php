@@ -7,11 +7,14 @@ class Karyawan extends CI_Controller
     {
         parent::__construct();
         login();
+        akses();
         $this->load->model('M_Pengguna');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
     }
     function index()
     {
+        $data['profil'] = $this->M_Profil->index();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Index Karyawan";
@@ -54,6 +57,7 @@ class Karyawan extends CI_Controller
             'required' => 'Salary/Gaji Tidak Boleh Kosong!'
         ]);
         if ($this->form_validation->run() == FALSE) {
+            $data['profil'] = $this->M_Profil->index();
 
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
@@ -153,6 +157,8 @@ class Karyawan extends CI_Controller
     {
         $id_pengguna = $this->uri->segment(4, 0);
         $data['index'] = $this->M_Pengguna->index();
+        $data['profil'] = $this->M_Profil->index();
+
         $data['index2'] = $this->db->get_where('pengguna', array('id_pengguna' => $id_pengguna))->row_array();
         $data['berkas'] = $this->db->get_where('berkas', array('id_pemilik' => $id_pengguna))->result_array();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();

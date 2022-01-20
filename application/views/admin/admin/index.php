@@ -17,8 +17,9 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a class="btn btn-xs bg-green" type="button" data-toggle="modal"
-                            data-target="#modal-tambah"><span class="fa fa-plus"></span> Tambah</a>
+                        <a class="btn bg-green-gradient btn-social btn-flat btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                            type="button" data-toggle="modal" data-target="#modal-tambah"><span
+                                class="fa fa-plus"></span> Tambah</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -49,20 +50,24 @@
                                                 <td class="sorting_1"><?= $no++; ?></td>
                                                 <td>
                                                     <img class="img center-block img-responsive img-thumnail"
-                                                        style="width: 5cm;"
                                                         src="<?= base_url('assets/foto/pengguna/' . $x['foto']); ?>"
                                                         alt="">
                                                 </td>
                                                 <td><?= $x['nik'] ?></td>
                                                 <td><?= $x['nama_lengkap'] ?></td>
                                                 <td><?= $x['jabatan'] ?></td>
-                                                <td><span class="badge bg-red"><?= $x['salary'] ?></span></td>
                                                 <td>
-                                                    <a class="btn btn-xs bg-blue" type="button"
-                                                        data-id_admin="<?= $x['id_admin']; ?>" data-toggle="modal"
+                                                    <span
+                                                        class="badge bg-red"><?= "Rp." . number_format($x['salary'], 2, ',', '.') ?></span>
+                                                </td>
+                                                <td>
+                                                    <a class="btn bg-blue-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                                                        type="button" data-id_admin="<?= $x['id_admin']; ?>"
+                                                        data-toggle="modal"
                                                         data-target="#modal-edit<?= $x['id_admin']; ?>"><span
                                                             class="fa fa-edit"></span> Edit</a>
-                                                    <a class="btn btn-xs bg-yellow" type="button"
+                                                    <a class="btn bg-yellow-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                                                        type="button"
                                                         href="<?= base_url('admin/admin/hapus/' . $x['id_admin']); ?>"><span
                                                             class="fa fa-trash"></span> Hapus</a>
                                                 </td>
@@ -116,7 +121,8 @@
                         </div>
                         <div class="modal-footer">
 
-                            <button type="submit" class="btn btn-primary pull-left">Simpan</button>
+                            <button type="submit"
+                                class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">Simpan</button>
                         </div>
                     </div>
                 </form>

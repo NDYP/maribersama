@@ -17,6 +17,7 @@ class M_Berita extends CI_Model
     public function pengunjung($limit, $start)
     {
         $query = $this->db->select('*')
+            ->where('berita.status', 'Aktif')
             ->order_by('id_berita', 'DESC')
             ->get('berita', $limit, $start)
             ->result_array();

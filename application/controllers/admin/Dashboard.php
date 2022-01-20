@@ -8,14 +8,21 @@ class Dashboard extends CI_Controller
 
         parent::__construct();
         login();
+        akses();
         $this->load->model('M_Transaksi');
         $this->load->model('M_Dashboard');
         $this->load->model('M_Kontak');
+        $this->load->model('M_Profil');
+        $this->load->model('M_Profil');
     }
     function index()
     {
-        $data['title'] = "Dashboard Admin";
+        $data['profil'] = $this->M_Profil->index();
+
+        $data['title'] = "Dashboard";
+        $data['title2'] = "Administrator";
         $data['index'] = $this->M_Transaksi->index();
+
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['jumlah_partner'] = $this->db->get_where('pengguna', array('id_akses' => 4))->num_rows();
@@ -48,7 +55,34 @@ class Dashboard extends CI_Controller
     }
     function selesai($id_transaksi)
     {
-        $data = array('status' => 'selesai');
+
+        $id_transaksi
+            = $this->input->post('id_transaksi');
+        $id_mobil = $this->input->post('id_mobil');
+        $x = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
+        $tarif = $x['tarif'];
+        $diskon = $x['diskon'];
+
+        $tanggal_pinjam =
+            date('Y-m-d', strtotime($this->input->post('tanggal_pinjam')));
+        $tanggal_kembali =
+            date('Y-m-d', strtotime($this->input->post('tanggal_kembali')));
+        $diff = strtotime($tanggal_pinjam) - strtotime($tanggal_kembali);
+        // 1 day = 24 hours 
+        // 24 * 60 * 60 = 86400 seconds
+        $berapa_hari = ceil(abs($diff / 86400));
+        $tanggal_transaksi = date('Y-m-d');
+        $dp = $this->input->post('dp');
+
+        $jl_tarif = $tarif - (($tarif * $diskon) / 100);
+        $denda = $this->input->post('denda');
+
+        $data = array(
+            'status' => 'selesai',
+            'dp' => $dp,
+            'denda' => $denda,
+            'bayar' => ($jl_tarif * $berapa_hari  + $denda) - $dp,
+        );
         $this->M_Transaksi->update('transaksi', $data, array('id_transaksi' => $id_transaksi));
         $this->_sendmail2($id_transaksi);
         $this->session->set_flashdata('success', 'Transaksi Selesai');
@@ -99,7 +133,7 @@ class Dashboard extends CI_Controller
 
         $this->load->library('email', $config);
         $this->email->from('rental_maribersaudara@gmail.com');
-        $this->email->to($user['email']);
+        $this->email->to($user['email_pengguna']);
         $this->email->subject('Pengajuan Partner | Rental Mari Bersaudara');
         $this->email->message('Selamat anda telah diterima menjadi martner dari Mari Bersaudara Rent, segera ajukan mobil yang ingin disewakan.');
 

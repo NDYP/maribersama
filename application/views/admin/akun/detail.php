@@ -14,7 +14,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
@@ -26,7 +26,7 @@
                 <!-- /.box -->
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#activity" data-toggle="tab">Profile</a></li>

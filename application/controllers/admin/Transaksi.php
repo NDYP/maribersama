@@ -7,14 +7,19 @@ class Transaksi extends CI_Controller
     {
         parent::__construct();
         login();
+        akses();
         $this->load->model('M_Akun');
         $this->load->model('M_Mobil');
         $this->load->model('M_Transaksi');
         $this->load->model('M_Customer');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
+        $this->load->model('M_Pengguna');
     }
     function index()
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -28,6 +33,8 @@ class Transaksi extends CI_Controller
     function katalog()
     {
         $data['title'] = "Katalog Rental";
+        $data['profil'] = $this->M_Profil->index();
+
         $data['index'] = $this->M_Mobil->katalog();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
@@ -52,6 +59,8 @@ class Transaksi extends CI_Controller
             'required' => 'Penyewa Tidak Boleh Kosong!'
         ]);
         if ($this->form_validation->run() == FALSE) {
+            $data['profil'] = $this->M_Profil->index();
+
             $data['title'] = "Checkout";
             $data['id_mobil'] = $this->uri->segment(4, 0);
 
@@ -124,6 +133,8 @@ class Transaksi extends CI_Controller
         $data['transaksi'] = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
         if ($data) {
             $data['title'] = "Edit Transaksi";
+            $data['profil'] = $this->M_Profil->index();
+
             $data['penyewa'] = $this->M_Customer->index();
             $data['mobil'] = $this->M_Mobil->index();
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
@@ -199,5 +210,21 @@ class Transaksi extends CI_Controller
         $this->M_Transaksi->hapus($id_transaksi);
         $this->session->set_flashdata('success', 'Berhasil Hapus Data');
         redirect('admin/transaksi/index', 'refresh');
+    }
+    public function cetak()
+    {
+        $data['profil'] = $this->M_Profil->index();
+        $bulan1 = $this->input->post('awal');
+        $bulan2 = $this->input->post('akhir');
+
+        $data['pemasukan_transaksi'] = $this->M_Transaksi->cetak($bulan1, $bulan2)->result_array();
+        $data['pemasukan_total'] = $this->M_Transaksi->total_keluar($bulan1, $bulan2)->result_array();
+        $data['pengeluaran_karyawan'] = $this->M_Pengguna->cetak($bulan1, $bulan2)->result_array();
+        $data['pengeluaran_karyawan_total'] = $this->M_Pengguna->total_keluar($bulan1, $bulan2)->result_array();
+        $data['pengeluaran_mobil'] = $this->M_Mobil->cetak($bulan1, $bulan2)->result_array();
+        $data['pengeluaran_mobil_total'] = $this->M_Mobil->total_keluar($bulan1, $bulan2)->result_array();
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan-Akhir-Bulan.pdf";
+        $this->pdf->load_view('admin/transaksi/laporan', $data);
     }
 }

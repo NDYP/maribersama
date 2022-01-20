@@ -195,9 +195,9 @@
             </div>
         </div>
 
-        <div class="row mb-none-30">
+        <div class="row mb-none-30"><?php foreach ($berita as $x) : ?>
             <div class="col-lg-4 col-sm-6">
-                <?php foreach ($berita as $x) : ?>
+
                 <div class="post-item shadow-none">
                     <div class="thumb">
                         <img style="width: 255px;height:268px;"
@@ -213,8 +213,9 @@
                         <a href="<?= base_url('berita/get/' . $x['id_berita']) ?>" class="border-btn">Baca</a>
                     </div>
                 </div>
-                <?php endforeach; ?>
+
             </div><!-- post-item end -->
+            <?php endforeach; ?>
         </div>
 
     </div>

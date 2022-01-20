@@ -20,11 +20,7 @@ th {
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <div class="box-header">
-                        <a href="<?= base_url('admin/pesan/tambah'); ?>"
-                            class="btn btn-social btn-flat bg-green btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i
-                                class="fa fa-plus-circle"></i> Tambah pesan</a>
-                    </div>
+
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

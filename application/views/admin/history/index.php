@@ -18,25 +18,9 @@
                 <div class="box">
                     <div class="box-header">
                         <!-- Date range -->
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>laporan:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input name="" type="text" class="form-control pull-right" id="reservation">
-                                </div>
-                                <!-- /.input group -->
-                            </div>
-                        </div>
-                        <!-- /.form group -->
-                        <div class="col-md-12">
-                            <a class="btn btn-xs bg-green" type="button"
-                                href="<?= base_url('admin/history/laporan'); ?>"><span class="fa fa-print"></span>
-                                Pdf</a>
-                        </div>
+                        <a class="btn btn-xs bg-green" type="button" data-toggle="modal"
+                            data-target="#modal-default"><span class="fa fa-print"></span>
+                            Laporan</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -117,5 +101,37 @@
         </div>
         <!-- /.row -->
     </section>
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <form name="myform" onsubmit="return val()" enctype="multipart/form-data" role="form"
+                action="<?= base_url('admin/history/cetak') ?>" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Cetak laporan transaksi</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="">Tanggal Mulai</label>
+                                <input type="text" name="mulai" id="datepicker" class="form-control input-sm" required>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="">Tanggal Berakhir</label>
+                                <input type="text" name="akhir" id="datepicker1" class="form-control input-sm" required>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Keluar</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </form>
+            <!-- /.modal-content -->
+        </div>
+    </div>
     <!-- /.content -->
 </div>

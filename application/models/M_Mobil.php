@@ -7,7 +7,7 @@ class M_Mobil extends CI_Model
     {
         $query = $this->db->select('*')
             ->from('mobil')
-            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna', 'left')
             ->order_by('id_mobil', 'DESC') //urut berdasarkan id
             ->get()
             ->result_array(); //ditampilkan dalam bentuk array
@@ -17,7 +17,7 @@ class M_Mobil extends CI_Model
     {
         $query = $this->db->select('*')
             ->from('mobil')
-            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna', 'left')
             ->where('mobil.status', 'tersedia')
             ->order_by('id_mobil', 'DESC') //urut berdasarkan id
             ->get()
@@ -49,7 +49,7 @@ class M_Mobil extends CI_Model
     {
         $query = $this->db->select('*')
             ->from('mobil')
-            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna', 'left')
             ->where('id_mobil', $id_mobil)
             ->get()
             ->row_array(); //ditampilkan dalam bentuk array
@@ -78,5 +78,27 @@ class M_Mobil extends CI_Model
     {
         $this->db->where('id_mobil', $id_mobil);
         $this->db->delete('mobil');
+    }
+    function cetak($bulan1, $bulan2)
+    {
+        $tanggal = date('Y-m-d');
+        $query = $this->db->select('*')
+            ->from('mobil')
+            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->where("'mobil.$tanggal' BETWEEN '$bulan1' AND '$bulan2'")
+            ->order_by('id_mobil', 'ASC') //urut berdasarkan id
+            ->get();
+        return $query;
+    }
+    function total_keluar($bulan1, $bulan2)
+    {
+        $tanggal = date('Y-m-d');
+        $query = $this->db->select('SUM(sewa) as x')
+            ->from('mobil')
+            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->where("'mobil.$tanggal' BETWEEN '$bulan1' AND '$bulan2'")
+            ->order_by('id_mobil', 'ASC') //urut berdasarkan id
+            ->get();
+        return $query;
     }
 }

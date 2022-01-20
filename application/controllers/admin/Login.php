@@ -8,6 +8,7 @@ class Login extends CI_Controller
         parent::__construct();
         $this->load->model('M_Admin');
         $this->load->model('M_Partner');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
     }
     function index()
@@ -19,6 +20,8 @@ class Login extends CI_Controller
             'required' => 'Kata Sandi Tidak Boleh Kosong!'
         ]);
         if ($this->form_validation->run() == FALSE) {
+            $data['profil'] = $this->M_Profil->index();
+
             $data['title'] = 'Login Page';
             $this->load->view('admin/login/login', $data);
         } else {

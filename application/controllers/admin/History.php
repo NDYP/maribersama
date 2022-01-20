@@ -11,10 +11,13 @@ class History extends CI_Controller
         $this->load->model('M_Mobil');
         $this->load->model('M_History');
         $this->load->model('M_Customer');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
     }
     function index()
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -28,6 +31,8 @@ class History extends CI_Controller
 
     public function lihat($id_transaksi)
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['transaksi'] = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
         if ($data) {
             $data['title'] = "Edit Transaksi";
@@ -106,5 +111,17 @@ class History extends CI_Controller
         $this->M_History->hapus($id_transaksi);
         $this->session->set_flashdata('success', 'Berhasil Hapus Data');
         redirect('admin/history/index', 'refresh');
+    }
+    public function cetak()
+    {
+        $data['profil'] = $this->M_Profil->index();
+        $bulan1 = $this->input->post('awal');
+        $bulan2 = $this->input->post('akhir');
+
+        $data['pemasukan_transaksi'] = $this->M_History->cetak($bulan1, $bulan2)->result_array();
+        $data['pemasukan_total'] = $this->M_History->total_keluar($bulan1, $bulan2)->result_array();
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan Akhir Bulan.pdf";
+        $this->pdf->load_view('admin/history/laporan', $data);
     }
 }

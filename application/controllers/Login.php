@@ -41,6 +41,7 @@ class Login extends CI_Controller
                 $all = [
                     //'id_admin' => $data['id_pengguna'],
                     'id_pengguna' => $data['id_pengguna'],
+                    'id_akses' => $data['id_akses'],
                     'nama_lengkap' => $data['nama_lengkap'],
                     'nik' => $data['nik'],
                     'email' => $data['email'],
@@ -100,6 +101,8 @@ class Login extends CI_Controller
             $data['index'] = $this->M_Profil->index();
             $data['karyawan'] = $this->M_Pengguna->indexkaryawan();
             $data['layanan'] = $this->M_Layanan->index();
+            $data['kontak'] = $this->M_Profil->index();
+
             $this->load->view('pengunjung/template/header', $data);
             $this->load->view('pengunjung/tentang/index', $data);
             $this->load->view('pengunjung/template/footer', $data);
@@ -150,10 +153,10 @@ class Login extends CI_Controller
                     );
                     $this->M_Customer->tambah('pengguna', $data);
                     $this->session->set_flashdata('success', 'Berhasil tambah data');
-                    redirect('customer/index', 'refresh');
+                    redirect('beranda/index', 'refresh');
                 } else {
                     $this->session->set_flashdata('info', 'Gagal tambah data');
-                    redirect('customer/index', 'refresh');
+                    redirect('beranda/index', 'refresh');
                 }
             } else {
                 $nik = $this->input->post('nik');
@@ -186,7 +189,7 @@ class Login extends CI_Controller
                 );
                 $this->M_Customer->tambah('pengguna', $data);
                 $this->session->set_flashdata('success', 'Berhasil tambah data');
-                redirect('customer/index', 'refresh');
+                redirect('beranda/index', 'refresh');
             }
         }
     }

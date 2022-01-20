@@ -6,11 +6,15 @@ class pesan extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
         login();
+        akses();
     }
     function index()
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['title'] = 'Kelola pesan';
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();

@@ -7,11 +7,15 @@ class Berita extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_Berita');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
         login();
+        akses();
     }
     function index()
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['title'] = 'Kelola Berita';
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
@@ -79,6 +83,8 @@ class Berita extends CI_Controller
     }
     function edit($id_berita)
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['title'] = 'Detail Berita';
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
 
@@ -120,9 +126,10 @@ class Berita extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Berita Baru';
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
-
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
+            $data['profil'] = $this->M_Profil->index();
 
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/berita/tambah', $data);

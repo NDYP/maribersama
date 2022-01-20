@@ -55,6 +55,10 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+    <!-- add icon link -->
+    <?php foreach ($profil as $x) : ?>
+    <link rel="icon" href="<?= base_url('assets/foto/profil/' . $x['logo']) ?>" type="image/x-icon">
+    <?php endforeach; ?>
 
     <!-- Google Font -->
     <link rel="stylesheet"
@@ -62,7 +66,7 @@
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 
-<body class="hold-transition skin-red layout-top-nav">
+<body class="hold-transition skin-green layout-top-nav">
     <div class="wrapper">
         <header class="main-header">
             <nav class="navbar navbar-static-top">
@@ -81,19 +85,22 @@
                             <?php if ($this->session->userdata('username_admin')) : ?>
                             <li class="<?= $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>"><a
                                     href="<?= base_url('admin/dashboard/index'); ?>">Dashboard <span
-                                        class="sr-only"></span></a></li>
+                                        class="fa fa-home"></span></a></li>
 
                             <li class="<?= $this->uri->segment(2) == 'transaksi' ? 'active' : ''; ?>"><a
-                                    href="<?= base_url('admin/transaksi/index'); ?>">Transaksi</a></li>
+                                    href="<?= base_url('admin/transaksi/index'); ?>">Transaksi <span
+                                        class="fa fa-book"></span></a> </li>
 
                             <li
                                 class="dropdown <?= $this->uri->segment(2) == 'partner' && $this->uri->segment(3) == 'pengajuan'
                                                         || $this->uri->segment(2) == 'mobil' && $this->uri->segment(3) == 'pengajuan' ? 'active' : ''; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pengajuan <span
-                                        class="caret"></span></a>
+                                        class="fa fa-table"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="<?= base_url('admin/partner/pengajuan'); ?>">Partner</a></li>
-                                    <li><a href="<?= base_url('admin/mobil/pengajuan'); ?>">Mobil</a></li>
+                                    <li><a href="<?= base_url('admin/partner/pengajuan'); ?>"><span
+                                                class="fa fa-user"></span> Partner </a></li>
+                                    <li><a href="<?= base_url('admin/mobil/pengajuan'); ?>"><span
+                                                class="fa fa-car"></span> Mobil</a></li>
                                 </ul>
                             </li>
                             <li
@@ -103,19 +110,24 @@
                                                         || $this->uri->segment(2) == 'karyawan' && $this->uri->segment(3) == 'index'
                                                         || $this->uri->segment(2) == 'admin' && $this->uri->segment(3) == 'index' ? 'active' : ''; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master <span
-                                        class="caret"></span></a>
+                                        class="fa fa-list"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="<?= base_url('admin/partner/index'); ?>">Partner</a></li>
-                                    <li><a href="<?= base_url('admin/mobil/index'); ?>">Mobil</a></li>
-                                    <li><a href="<?= base_url('admin/customer/index'); ?>">Customer</a></li>
-                                    <li><a href="<?= base_url('admin/karyawan/index'); ?>">Karyawan</a></li>
-                                    <li><a href="<?= base_url('admin/admin/index'); ?>">Admin</a></li>
+                                    <li><a href="<?= base_url('admin/partner/index'); ?>"><span
+                                                class="fa fa-users"></span> Partner</a></li>
+                                    <li><a href="<?= base_url('admin/mobil/index'); ?>"><span class="fa fa-car"></span>
+                                            Mobil</a></li>
+                                    <li><a href="<?= base_url('admin/customer/index'); ?>"><span
+                                                class="fa fa-users"></span> Customer</a></li>
+                                    <li><a href="<?= base_url('admin/karyawan/index'); ?>"><span
+                                                class="fa fa-users"></span> Karyawan</a></li>
+                                    <li><a href="<?= base_url('admin/admin/index'); ?>"><span
+                                                class="fa fa-users"></span> Admin</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown <?= $this->uri->segment(2) == 'profil'
                                                         || $this->uri->segment(2) == 'layanan' ? 'active' : ''; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setting <span
-                                        class="caret"></span></a>
+                                        class="fa fa-gear"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="<?= base_url('admin/profil/index'); ?>">Profil</a></li>
 
@@ -123,16 +135,20 @@
                                 </ul>
                             </li>
                             <li class="<?= $this->uri->segment(2) == 'galeri' ? 'active' : ''; ?>">
-                                <a href="<?= base_url('admin/galeri/index'); ?>">Galeri</a>
+                                <a href="<?= base_url('admin/galeri/index'); ?>">Galeri <span
+                                        class="fa fa-picture-o"></span> </a>
                             </li>
                             <li class="<?= $this->uri->segment(2) == 'berita' ? 'active' : ''; ?>">
-                                <a href="<?= base_url('admin/berita/index'); ?>">Berita</a>
+                                <a href="<?= base_url('admin/berita/index'); ?>">Berita <span
+                                        class="fa fa-newspaper-o"></span> </a>
                             </li>
                             <?php else : ?>
                             <li class="<?= $this->uri->segment(2) == 'pengajuan' ? 'active' : ''; ?>"><a
-                                    href="<?= base_url('admin/pengajuan/index'); ?>">Pengajuan</a></li>
+                                    href="<?= base_url('admin/pengajuan/index'); ?>"><span class="fa fa-table"></span>
+                                    Pengajuan</a></li>
                             <li class="<?= $this->uri->segment(2) == 'history' ? 'active' : ''; ?>"><a
-                                    href="<?= base_url('admin/history/index'); ?>">History</a></li>
+                                    href="<?= base_url('admin/history/index'); ?>"><span class="fa fa-book"></span>
+                                    History</a></li>
                             <?php endif; ?>
                         </ul>
                     </div>
@@ -225,16 +241,26 @@
                                 <!-- Menu Toggle Button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <!-- The user image in the navbar-->
+                                    <?php if ($this->session->userdata('foto') == NULL) : ?>
+                                    <img src="<?= base_url('assets/foto/profil.png'); ?>" class="user-image"
+                                        alt="User Image">
+                                    <?php else : ?>
                                     <img src="<?= base_url('assets/foto/pengguna/' . $this->session->userdata('foto')); ?>"
                                         class="user-image" alt="User Image">
+                                    <?php endif; ?>
                                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                     <span class="hidden-xs"><?= $this->session->userdata('nama_lengkap'); ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- The user image in the menu -->
                                     <li class="user-header">
+                                        <?php if ($this->session->userdata('foto') == NULL) : ?>
+                                        <img src="<?= base_url('assets/foto/profil.png'); ?>" class="img-circle"
+                                            alt="User Image">
+                                        <?php else : ?>
                                         <img src="<?= base_url('assets/foto/pengguna/' . $this->session->userdata('foto')); ?>"
                                             class="img-circle" alt="User Image">
+                                        <?php endif; ?>
                                         <p>
                                             <?= $this->session->userdata('nama_lengkap'); ?>
                                             <small>Member since <?= $this->session->userdata('daftar'); ?></small>

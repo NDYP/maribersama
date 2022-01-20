@@ -7,7 +7,7 @@ class Beranda extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_Akun');
-        $this->load->model('M_Mobil');
+        $this->load->model('M_Beranda');
         $this->load->model('M_Layanan');
         $this->load->model('M_Pengguna');
         $this->load->model('M_Berita');
@@ -39,10 +39,10 @@ class Beranda extends CI_Controller
         $data['jumlah_mobil'] = $this->db->get_where('mobil', array('status' => 'tersedia'))->num_rows();
         $data['jumlah_transaksi'] = $this->db->get_where('transaksi', array('status' => 'selesai'))->num_rows();
 
-        $data['layanan'] = $this->M_Layanan->index();
-        $data['mobil'] = $this->M_Mobil->index();
-        $data['berita'] = $this->M_Berita->index();
-        $data['karyawan'] = $this->M_Pengguna->indexkaryawan();
+        $data['layanan'] = $this->M_Beranda->layanan();
+        $data['mobil'] = $this->M_Beranda->mobil();
+        $data['berita'] = $this->M_Beranda->berita();
+        $data['karyawan'] = $this->M_Beranda->karyawan();
         $data['kontak'] = $this->M_Profil->index();
         $this->load->view('pengunjung/template/header', $data);
         $this->load->view('pengunjung/beranda/index', $data);

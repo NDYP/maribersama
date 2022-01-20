@@ -16,7 +16,8 @@
         <?= form_open_multipart('admin/karyawan/tambah') ?>
         <div class="box box-default">
             <div class="box-header with-border">
-                <a type="button" href="<?= base_url('admin/karyawan/index') ?>" class="btn bg-green btn-sm"><span
+                <a type="button" href="<?= base_url('admin/karyawan/index') ?>"
+                    class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><span
                         class="fa fa-arrow-left"></span> Kembali</a>
             </div>
             <!-- /.box-header -->
@@ -126,7 +127,9 @@
                 <!-- /.col -->
             </div>
             <div class="box-footer">
-                <button type="submit" class="btn bg-green btn-sm" title="simpan"><span class="fa fa-save"></span>
+                <button type="submit"
+                    class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                    title="simpan"><span class="fa fa-save"></span>
                     Simpan</button>
             </div>
             <!-- /.row -->

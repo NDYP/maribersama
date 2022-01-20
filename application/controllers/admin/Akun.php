@@ -10,10 +10,13 @@ class Akun extends CI_Controller
         $this->load->model('M_Akun');
         $this->load->model('M_Mobil');
         $this->load->model('M_Pengguna');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
     }
     function profil()
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = "Informasi Akun";

@@ -7,11 +7,15 @@ class Galeri extends CI_Controller
     {
         parent::__construct();
         login();
+        akses();
         $this->load->model('M_Galeri');
+        $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
     }
     function index()
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['title'] = 'Kelola Album';
@@ -24,6 +28,8 @@ class Galeri extends CI_Controller
     }
     function detail($id_album)
     {
+        $data['profil'] = $this->M_Profil->index();
+
         $data['title'] = 'Detail Album';
         $data['album'] = $this->M_Galeri->get($id_album);
         $data['galeri'] = $this->db->get_where('galeri', array('id_album' => $id_album))->result_array();
@@ -85,7 +91,7 @@ class Galeri extends CI_Controller
         $data = array(
             'status' => 'Aktif',
         );
-        $this->M_Galeri->update('galeri', $data, array('id_album' => $id_album));
+        $this->M_Galeri->update('album', $data, array('id_album' => $id_album));
         $this->session->set_flashdata('success', 'Galeri Aktif');
         redirect('admin/galeri/index', 'refresh');
     }
@@ -94,7 +100,7 @@ class Galeri extends CI_Controller
         $data = array(
             'status' => 'Nonaktif',
         );
-        $this->M_Galeri->update('galeri', $data, array('id_album' => $id_album));
+        $this->M_Galeri->update('album', $data, array('id_album' => $id_album));
         $this->session->set_flashdata('success', 'Galeri Nonaktif');
         redirect('admin/galeri/index', 'refresh');
     }
@@ -106,6 +112,7 @@ class Galeri extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Album Baru';
+            $data['profil'] = $this->M_Profil->index();
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -188,6 +195,8 @@ class Galeri extends CI_Controller
             'required' => 'Tidak Boleh Kosong!'
         ]);
         if ($this->form_validation->run() == FALSE) {
+            $data['profil'] = $this->M_Profil->index();
+
             $data['title'] = 'Galeri Baru';
             $data['album'] = $this->M_Galeri->index();
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();

@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-4">
                 <!-- Profile Image -->
-                <div class="box box-danger">
+                <div class="box box-primary">
                     <div class="box-body box-profile">
                         <img class="img center-block img-responsive img-rounded"
                             src="<?= base_url('assets/foto/pengguna/' . $index2['foto']) ?>" alt="User profile picture">
@@ -36,7 +36,8 @@
                         <div class="active tab-pane" id="activity">
                             <div class="box-header with-border">
                                 <a type="button" href="<?= base_url('admin/karyawan/index') ?>"
-                                    class="btn bg-green btn-xs"><span class="fa fa-arrow-left"></span> Kembali</a>
+                                    class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><span
+                                        class="fa fa-arrow-left"></span> Kembali</a>
                             </div>
                             <div class="box-body">
                                 <form class="form-horizontal" action="<?= base_url('admin/karyawan/ubah') ?>"
@@ -69,7 +70,7 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <input type="text" class="form-control" id="datepicker" name="tanggal_lahir"
-                                                value="<?= $index2['tanggal_lahir']; ?>">
+                                                value=" <?= date('d-m-Y', strtotime($index2['tanggal_lahir'])); ?>">
                                         </div>
                                     </div>
                                     <div class=" form-group">
@@ -140,8 +141,9 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn bg-green btn-xs" title="simpan"><span
-                                                    class="fa fa-save"></span> Simpan</button>
+                                            <button type="submit"
+                                                class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                                                title="simpan"><span class="fa fa-save"></span> Simpan</button>
                                         </div>
                                     </div>
                                 </form>
@@ -152,7 +154,8 @@
                                 <?= form_open_multipart('admin/karyawan/tambahberkas') ?>
                                 <div class="box-header with-border">
                                     <a type="button" href="<?= base_url('admin/karyawan/index') ?>"
-                                        class="btn bg-green btn-xs"><span class="fa fa-arrow-left"></span> Kembali</a>
+                                        class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><span
+                                            class="fa fa-arrow-left"></span> Kembali</a>
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
@@ -181,8 +184,9 @@
                                     <!-- /.col -->
                                 </div>
                                 <div class="box-footer">
-                                    <button type="submit" class="btn bg-green btn-xs" title="simpan"><span
-                                            class="fa fa-save"></span> Simpan</button>
+                                    <button type="submit"
+                                        class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                                        title="simpan"><span class="fa fa-save"></span> Simpan</button>
                                 </div>
                                 <!-- /.row -->
                                 <?= form_close(); ?>
@@ -209,9 +213,10 @@
                                             <td class="sorting_1"><?= $no++; ?></td>
                                             <td><?= $x['judul'] ?></td>
                                             <td><?= $x['berkas'] ?></td>
-                                            <td><?= $x['daftar'] ?></td>
+                                            <td> <?= date('d-m-Y', strtotime($x['daftar'])); ?></td>
                                             <td>
-                                                <a class="btn btn-xs bg-yellow" type="button"
+                                                <a class="btn bg-yellow-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                                                    type="button"
                                                     href="<?= base_url('admin/karyawan/hapusberkas/' . $x['id_berkas']); ?>"><span
                                                         class="fa fa-trash"></span> Hapus</a>
                                             </td>

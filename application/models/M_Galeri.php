@@ -16,7 +16,7 @@ class M_Galeri extends CI_Model
     public function pengunjung($limit, $start)
     {
         $query = $this->db->select('*')
-
+            ->where('album.status', 'Aktif')
             ->order_by('id_album', 'DESC')
             ->get('album', $limit, $start)
             ->result_array();
