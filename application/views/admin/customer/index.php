@@ -5,6 +5,7 @@
             <h1>
                 <h1>
                     <?= $title; ?>
+                    <small><?= $title2; ?></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="<?= base_url('admin/dashboard/index'); ?>"><i class="fa fa-dashboard"></i>

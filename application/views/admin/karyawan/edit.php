@@ -10,7 +10,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?= base_url('admin/dashboard/index'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="<?= base_url('admin/customer/index'); ?>">Customer</a></li>
+                <li><a href="<?= base_url('admin/karyawan/index'); ?>">karyawan</a></li>
                 <li class="active"><?= $title; ?></li>
             </ol>
         </section>
@@ -18,7 +18,7 @@
         <section class="content">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <a class="btn btn-xs bg-blue" href="<?= base_url('admin/customer/index') ?>"><span
+                    <a class="btn btn-xs bg-blue" href="<?= base_url('admin/karyawan/index') ?>"><span
                             class="fa fa-arrow-left"></span>
                         Kembali</a>
                 </div>
@@ -28,7 +28,9 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputName" class="control-label">NIK</label>
-                                    <input type="text" class="form-control" value="<?= set_value('nik'); ?>" name="nik">
+                                    <input type="hidden" class="form-control" placeholder="id_pengguna"
+                                        name="id_pengguna" value="<?= $karyawan['id_pengguna']; ?>">
+                                    <input type="text" class="form-control" value="<?= $karyawan['nik']; ?>" name="nik">
                                     <?= form_error('nik', '<small class="text-danger pl-1">', '</small>'); ?>
 
                                 </div>
@@ -38,15 +40,18 @@
                                     <label for="inputEmail" class="control-label">Jenis Kelamin</label>
                                     <div class="">
                                         <label>
-                                            <input type="radio" name="jenis_kelamin" value="Laki-Laki"
-                                                <?= set_select('jenis_kelamin', 'Laki-Laki'); ?> class="minimal-red"
-                                                checked>
+                                            <input type="radio" name="jenis_kelamin" value="Laki-laki"
+                                                class="minimal-red"
+                                                <?php if (
+                                                                                                                                $karyawan['jenis_kelamin'] === 'Laki-laki' || $karyawan['jenis_kelamin'] === 'Laki-Laki'
+                                                                                                                            ) echo 'checked'; ?>>
                                             Laki-laki
                                         </label>
                                         <label></label>
                                         <label>
                                             <input type="radio" name="jenis_kelamin" value="Perempuan"
-                                                <?= set_select('jenis_kelamin', 'Perempuan'); ?> class="minimal-red">
+                                                class="minimal-red"
+                                                <?php if ($karyawan['jenis_kelamin'] === 'Perempuan') echo 'checked'; ?>>
                                             Perempuan
                                         </label>
                                     </div>
@@ -56,8 +61,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Email</label>
-                                    <input type="text" class="form-control" name="email"
-                                        value="<?= set_value('email'); ?>">
+                                    <input type="text" class="form-control" placeholder="Jenis" name="email"
+                                        value="<?= $karyawan['email']; ?>">
                                     <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
                             </div>
@@ -66,8 +71,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Nama Lengkap</label>
-                                    <input type="text" class="form-control" name="nama_lengkap"
-                                        value="<?= set_value('nama_lengkap'); ?>">
+                                    <input type="text" class="form-control" placeholder="nama_lengkap"
+                                        name="nama_lengkap" value="<?= $karyawan['nama_lengkap']; ?>">
                                     <?= form_error('nama_lengkap', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
 
@@ -77,13 +82,13 @@
                                     <label for="inputEmail" class="control-label">Tanggal Lahir</label>
                                     <div class="row">
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" name="tempat_lahir"
-                                                value="<?= set_value('tempat_lahir'); ?>">
+                                            <input type="text" class="form-control" placeholder="Sewa/Bulan Ke Pemilik"
+                                                name="tempat_lahir" value="<?= $karyawan['tempat_lahir']; ?>">
                                             <?= form_error('tempat_lahir', '<small class="text-danger pl-1">', '</small>'); ?>
                                         </div>
                                         <div class="col-md-5">
                                             <input type="text" class="form-control" id="datepicker" name="tanggal_lahir"
-                                                value="">
+                                                value="<?= date('d-m-Y', strtotime($karyawan['tanggal_lahir'])); ?>">
                                             <?= form_error('tanggal_lahir', '<small class="text-danger pl-1">', '</small>'); ?>
                                         </div>
                                     </div>
@@ -92,8 +97,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Posisi Kerja</label>
-                                    <input type="text" class="form-control" name="jabatan"
-                                        value="<?= set_value('jabatan'); ?>">
+                                    <input type="text" class="form-control" placeholder="Taris Sewa/hari" name="jabatan"
+                                        value="<?= $karyawan['jabatan']; ?>">
                                     <?= form_error('jabatan', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
                             </div>
@@ -102,24 +107,24 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Alamat</label>
-                                    <input type="text" class="form-control" name="alamat"
-                                        value="<?= set_value('alamat'); ?>">
+                                    <input type="text" class="form-control" placeholder="Jumlah Kursi" name="alamat"
+                                        value="<?= $karyawan['alamat']; ?>">
                                     <?= form_error('alamat', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">No.hp/WA</label>
-                                    <input type="text" class="form-control" name="no_hp"
-                                        value="<?= set_value('no_hp'); ?>">
+                                    <input type="text" class="form-control" placeholder="Taris Sewa/hari" name="no_hp"
+                                        value="<?= $karyawan['no_hp']; ?>">
                                     <?= form_error('no_hp', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Salary</label>
-                                    <input type="text" class="form-control" name="salary"
-                                        value="<?= set_value('salary'); ?>">
+                                    <input type="text" class="form-control" placeholder="Jumlah Kursi" name="salary"
+                                        value="<?= $karyawan['salary']; ?>">
                                     <?= form_error('salary', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
                             </div>

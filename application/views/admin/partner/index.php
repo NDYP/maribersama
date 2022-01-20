@@ -5,6 +5,7 @@
             <h1>
                 <h1>
                     <?= $title; ?>
+                    <small><?= $title2; ?></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="<?= base_url('admin/dashboard/index'); ?>"><i class="fa fa-dashboard"></i>
@@ -19,7 +20,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <a class="btn bg-green-gradient btn-social btn-flat btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                            <a class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
                                 type="button" href="<?= base_url('admin/partner/tambah'); ?>"><span
                                     class="fa fa-plus"></span> Tambah</a>
                         </div>
@@ -62,8 +63,6 @@
                                                     <td><?= $x['email'] ?></td>
                                                     <td> <?= date('d-m-Y', strtotime($x['daftar'])); ?></td>
                                                     <td>
-
-
                                                         <div class="btn-group">
                                                             <button type="button"
                                                                 class="btn bg-green btn-social btn-flat btn-xs"
@@ -71,7 +70,6 @@
                                                                     class="fa fa-arrow-circle-down"></i>
                                                                 Pilih</button>
                                                             <ul class="dropdown-menu" role="menu">
-
                                                                 <li>
                                                                     <a href="<?= base_url('admin/partner/detail/' . $x['id_pengguna']); ?>"
                                                                         class="btn btn-social btn-flat btn-block btn-sm"><i

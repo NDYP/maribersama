@@ -30,9 +30,11 @@
                         <div class="col-md-12">
                             <center>
                                 <?php if ($partner['foto']) : ?>
-                                <img class="img center-block img-responsive profile-user-img"
-                                    src="<?= base_url('assets/foto/pengguna/' . $partner['foto']); ?>" alt=""
-                                    style="width: auto;max-height: 500px;max-width: 500px; vertical-align: left;">
+                                <a href="<?= base_url('admin/partner/downloadfoto/' . $partner['id_pengguna']); ?>">
+                                    <img class="img center-block img-responsive profile-user-img"
+                                        src="<?= base_url('assets/foto/pengguna/' . $partner['foto']); ?>" alt=""
+                                        style="width: auto;max-height: 500px;max-width: 500px; vertical-align: left;">
+                                </a>
                                 <?php else : ?>
                                 <img class="img center-block img-responsive profile-user-img"
                                     src="<?= base_url('assets/foto/profil.png') ?>" alt=""
@@ -45,7 +47,9 @@
                                     <tr>
                                         <th>NIK</th>
                                         <th> : </th>
-                                        <td><?= $partner['nik'] ?></td>
+                                        <td><a
+                                                href="<?= base_url('admin/partner/downloadktp/' . $partner['id_pengguna']); ?>"><?= $partner['nik'] ?></a>
+                                        </td>
                                         <td></td>
                                         <th>Jenis Kelamin</th>
                                         <th> : </th>

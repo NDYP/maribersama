@@ -19,7 +19,9 @@ class Partner extends CI_Controller
 
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
-        $data['title'] = "Index Partner";
+        $data['title'] = "Partner";
+
+        $data['title2'] = "Index Data";
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         $data['index'] = $this->M_Partner->index();
@@ -61,7 +63,8 @@ class Partner extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['profil'] = $this->M_Profil->index();
 
-            $data['title'] = "Tambah data partner";
+            $data['title'] = "Partner";
+            $data['title2'] = "Tambah Data";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();

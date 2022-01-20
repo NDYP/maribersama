@@ -22,7 +22,8 @@ class Admin extends CI_Controller
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
-        $data['title'] = "Index Admin";
+        $data['title'] = "Admin";
+        $data['title2'] = "Index Data";
         $data['index'] = $this->M_Admin->index();
         $data['karyawan'] = $this->M_Pengguna->indexkaryawan();
         $this->load->view('admin/template/header', $data);
