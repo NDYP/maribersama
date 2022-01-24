@@ -14,9 +14,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <form enctype="multipart/form-data" role="form" action="<?= base_url('admin/galeri/tambahgaleri'); ?>"
-                    method="post" class="form-horizontal">
-
+                <form enctype="multipart/form-data" role="form" action="" method="post" class="form-horizontal">
                     <!-- /.col (left) -->
                     <div class="col-md-12">
                         <!-- general form elements -->
@@ -35,7 +33,8 @@
                                             style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option name="id_album" value="" selected> --Pilih--</option>
                                             <?php foreach ($album as $x) : ?>
-                                            <option name="id_album" value="<?= $x['id_album']; ?>">
+                                            <option name="id_album"
+                                                value=<?= $x['id_album']; ?><?= set_select('id_album', $x['id_album']); ?>>
                                                 <?= $x['nama_album']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
@@ -46,7 +45,8 @@
                                 <div class="row">
                                     <div class="col-xs-8">
                                         <label for="">Judul</label>
-                                        <input name="judul" type="text" class="form-control input-sm">
+                                        <input name="judul" value="<?= set_value('judul'); ?>" type="text"
+                                            class="form-control input-sm">
                                         <?= form_error('judul', '<small class="text-danger pl-1">', '</small>'); ?>
                                     </div>
                                 </div>
@@ -55,6 +55,8 @@
                                     <div class="col-xs-4">
                                         <label for="">Foto</label>
                                         <input name="foto" type="file" class="form-control input-sm">
+                                        <?= form_error('foto', '<small class="text-danger pl-1">', '</small>'); ?>
+
                                     </div>
                                 </div>
                             </div>

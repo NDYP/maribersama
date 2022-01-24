@@ -16,10 +16,10 @@
                     <div class="box box">
                         <div class="box-header with-border">
                             <a href="<?= base_url('admin/galeri/index'); ?>"
-                                class="btn bg-green-gradient btn-social btn-flat btn btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                                class="btn bg-green-gradient btn-social btn-flat btn btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
                                 title="Kembali"><i class="fa fa-arrow-left"></i> Kembali</a>
                             <a href="<?= base_url('admin/galeri/tambahgaleri'); ?>"
-                                class="btn btn-social btn-flat bg-green-gradient btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i
+                                class="btn btn-social btn-flat bg-green-gradient btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i
                                     class="fa fa-plus-circle"></i> Tambah Galeri</a>
                         </div>
                         <div class="box-body">
@@ -32,7 +32,6 @@
                                             <th>Foto</th>
                                             <th>Judul</th>
                                             <th>Tanggal Upload</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,13 +43,14 @@
                                             <td><a href="<?= base_url('admin/galeri/hapusgaleri/' . $x['id_galeri']); ?>"
                                                     class="btn btn-social btn-flat btn-warning btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
                                                     title="Hapus"><i class="fa fa-trash-o"></i> Hapus</a></td>
-                                            <td style="text-align: center;">
-                                                <img src="<?= base_url('assets/foto/album/galeri/' . $x['foto']); ?>"
-                                                    alt="" style="width: auto; max-width: 60px; height: auto;">
+                                            <td style="text-align: left;">
+                                                <a href="<?= base_url('admin/galeri/download/' . $x['id_galeri']); ?>">
+                                                    <img src="<?= base_url('assets/foto/album/galeri/' . $x['foto']); ?>"
+                                                        alt="" style="width: auto; max-width: 100px; height: auto;">
+                                                </a>
                                             </td>
                                             <td><?= $x['judul']; ?></td>
                                             <td><?= $x['daftar']; ?></td>
-
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>

@@ -18,7 +18,8 @@ class Galeri extends CI_Controller
 
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
-        $data['title'] = 'Kelola Album';
+        $data['title'] = 'Album';
+        $data['title2'] = 'Index Data';
         $data['album'] = $this->M_Galeri->index();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
@@ -109,7 +110,11 @@ class Galeri extends CI_Controller
         $this->form_validation->set_rules('nama_album', 'nama_album', 'required|trim', [
             'required' => 'Tidak Boleh Kosong!'
         ]);
-
+        if (empty($_FILES['thumbnail']['name'])) {
+            $this->form_validation->set_rules('thumbnail', 'thumbnail', 'required', [
+                'required' => 'File Tidak Boleh Kosong!'
+            ]);
+        }
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Album Baru';
             $data['profil'] = $this->M_Profil->index();
@@ -194,6 +199,11 @@ class Galeri extends CI_Controller
         $this->form_validation->set_rules('id_album', 'id_album', 'required|trim', [
             'required' => 'Tidak Boleh Kosong!'
         ]);
+        if (empty($_FILES['foto']['name'])) {
+            $this->form_validation->set_rules('foto', 'foto', 'required', [
+                'required' => 'File Tidak Boleh Kosong!'
+            ]);
+        }
         if ($this->form_validation->run() == FALSE) {
             $data['profil'] = $this->M_Profil->index();
 
@@ -245,5 +255,21 @@ class Galeri extends CI_Controller
                 redirect($_SERVER['HTTP_REFERER']);
             }
         }
+    }
+    function download($id_galeri)
+    {
+        $data = $this->db->get_where('galeri', ['id_galeri' => $id_galeri])->row_array();
+        force_download(
+            'assets/foto/album/galeri/' . $data['foto'],
+            NULL
+        );
+    }
+    function thumbnail($id_album)
+    {
+        $data = $this->db->get_where('album', ['id_album' => $id_album])->row_array();
+        force_download(
+            'assets/foto/album/' . $data['thumbnail'],
+            NULL
+        );
     }
 }

@@ -24,7 +24,8 @@ class Transaksi extends CI_Controller
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
-        $data['title'] = "Index Transaksi Rental";
+        $data['title'] = "Transaksi";
+        $data['title2'] = "Index Data";
         $data['index'] = $this->M_Transaksi->index();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/transaksi/index', $data);
@@ -32,9 +33,9 @@ class Transaksi extends CI_Controller
     }
     function katalog()
     {
-        $data['title'] = "Katalog Rental";
+        $data['title'] = "Katalog";
+        $data['title2'] = "Index Data";
         $data['profil'] = $this->M_Profil->index();
-
         $data['index'] = $this->M_Mobil->katalog();
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
@@ -61,7 +62,8 @@ class Transaksi extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['profil'] = $this->M_Profil->index();
 
-            $data['title'] = "Checkout";
+            $data['title'] = "Transaksi";
+            $data['title2'] = "Checkout";
             $data['id_mobil'] = $this->uri->segment(4, 0);
 
             $data['mobil'] = $this->M_Mobil->index();
@@ -132,7 +134,8 @@ class Transaksi extends CI_Controller
     {
         $data['transaksi'] = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
         if ($data) {
-            $data['title'] = "Edit Transaksi";
+            $data['title'] = "Transaksi";
+            $data['title2'] = "Edit Data";
             $data['profil'] = $this->M_Profil->index();
 
             $data['penyewa'] = $this->M_Customer->index();

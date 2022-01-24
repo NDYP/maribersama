@@ -31,7 +31,8 @@
                                 <div class="row">
                                     <div class="col-xs-8">
                                         <label for="">Nama Album </label>
-                                        <input name="nama_album" type="text" class="form-control input-sm">
+                                        <input name="nama_album" value="<?= set_value('nama_album'); ?>" type="text"
+                                            class="form-control input-sm">
                                         <?= form_error('nama_album', '<small class="text-danger pl-1">', '</small>'); ?>
                                     </div>
                                 </div>
@@ -40,7 +41,10 @@
                                     <div class="col-xs-4">
                                         <label for="">Thumbnail</label>
                                         <input name="thumbnail" type="file" class="form-control input-sm">
+                                        <?= form_error('thumbnail', '<small class="text-danger pl-1">', '</small>'); ?>
+
                                     </div>
+
                                 </div>
                             </div>
                             <!-- /.box-body -->

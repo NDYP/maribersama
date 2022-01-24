@@ -15,8 +15,8 @@ class Berita extends CI_Controller
     function index()
     {
         $data['profil'] = $this->M_Profil->index();
-
-        $data['title'] = 'Kelola Berita';
+        $data['title'] = 'Berita';
+        $data['title2'] = 'Index Data';
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -85,7 +85,8 @@ class Berita extends CI_Controller
     {
         $data['profil'] = $this->M_Profil->index();
 
-        $data['title'] = 'Detail Berita';
+        $data['title'] = 'Berita';
+        $data['title2'] = 'Edit Data';
         $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
 
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
@@ -123,8 +124,14 @@ class Berita extends CI_Controller
         $this->form_validation->set_rules('isi', 'isi', 'required|trim', [
             'required' => 'Tidak Boleh Kosong!'
         ]);
+        if (empty($_FILES['foto']['name'])) {
+            $this->form_validation->set_rules('foto', 'foto', 'required', [
+                'required' => 'File Tidak Boleh Kosong!'
+            ]);
+        }
         if ($this->form_validation->run() == FALSE) {
-            $data['title'] = 'Berita Baru';
+            $data['title'] = 'Berita';
+            $data['title2'] = 'Add Data';
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();

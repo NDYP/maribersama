@@ -9,6 +9,7 @@ th {
         <section class="content-header">
             <h1>
                 <?= $title; ?>
+                <small><?= $title2 ?></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?= base_url('admin/beranda/index'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -74,8 +75,12 @@ th {
                                                         <?php endif; ?>
                                                     </td>
                                                     <td style="text-align: center;">
-                                                        <img src="<?= base_url('assets/foto/album/' . $x['thumbnail']); ?>"
-                                                            alt="" style="width: auto; max-width: 100px; height: auto;">
+                                                        <a
+                                                            href="<?= base_url('admin/galeri/thumbnail/' . $x['id_album']); ?>">
+                                                            <img src="<?= base_url('assets/foto/album/' . $x['thumbnail']); ?>"
+                                                                alt=""
+                                                                style="width: auto; max-width: 100px; height: auto;">
+                                                        </a>
                                                     </td>
                                                     <td><?= $x['nama_album']; ?></td>
                                                     <td style="text-align: center;"><?= $x['tanggal']; ?></td>

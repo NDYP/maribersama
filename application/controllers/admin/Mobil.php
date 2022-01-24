@@ -540,8 +540,8 @@ class Mobil extends CI_Controller
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
-
-        $data['title'] = "Pengajuan Mobil";
+        $data['title'] = "Mobil";
+        $data['title2'] = "Pengajuan Partner";
         $data['index'] = $this->M_Mobil->pengajuan();
         $data['pemilik'] = $this->M_Partner->index();
         $this->load->view('admin/template/header', $data);

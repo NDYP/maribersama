@@ -12,7 +12,7 @@
                     <li><a href="<?= base_url('admin/dashboard/index'); ?>"><i class="fa fa-dashboard"></i>
                             Dashboard</a>
                     </li>
-                    <li><a href="<?= base_url('admin/mobil/index'); ?>">Karyawan</a></li>
+                    <li><a href="<?= base_url('admin/mobil/index'); ?>"><?= $title; ?></a></li>
                 </ol>
         </section>
         <!-- Main content -->
@@ -21,7 +21,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <a class="btn bg-green-gradient btn-social btn-flat btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                            <a class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
                                 type="button" href="<?= base_url('admin/mobil/tambah'); ?>"><span
                                     class="fa fa-plus"></span>
                                 Tambah</a>
