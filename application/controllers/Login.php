@@ -22,6 +22,7 @@ class Login extends CI_Controller
             'required' => 'Kata Sandi Tidak Boleh Kosong!'
         ]);
         if ($this->form_validation->run() == FALSE) {
+
             $data['title'] = 'Login Page';
             $data['kontak'] = $this->M_Profil->index();
             $this->load->view('pengunjung/template/header', $data);

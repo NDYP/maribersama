@@ -45,7 +45,7 @@ class Transaksi extends CI_Controller
         $this->load->view('admin/transaksi/katalog', $data);
         $this->load->view('admin/template/footer', $data);
     }
-    function tambah()
+    function tambah($id_mobil)
     {
         $this->form_validation->set_rules('alamat', 'alamat', 'required|trim', [
             'required' => 'Alamat Tidak Boleh Kosong!'
@@ -64,7 +64,6 @@ class Transaksi extends CI_Controller
 
             $data['title'] = "Transaksi";
             $data['title2'] = "Checkout";
-            $data['id_mobil'] = $this->uri->segment(4, 0);
 
             $data['mobil'] = $this->M_Mobil->index();
             $data['penyewa'] = $this->M_Customer->index();

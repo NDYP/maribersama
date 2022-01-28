@@ -45,15 +45,12 @@
                                                         aria-sort="ascending"
                                                         aria-label="Rendering engine: activate to sort column descending"
                                                         style="width: 177.281px;">No</th>
-
+                                                    <th style="width: 224.844px;">ID Transaksi</th>
+                                                    <th style="width: 224.844px;">Pembayaran</th>
                                                     <th style="width: 224.844px;">Penyewa</th>
                                                     <th style="width: 224.844px;">Mobil</th>
-                                                    <th style="width: 224.844px;">Alamat</th>
                                                     <th style="width: 206.484px;">Pinjam - Kembali</th>
-
-                                                    <th style="width: 111.703px;">Tarif/hari - Diskon (%)</th>
-                                                    <th style="width: 111.703px;">DP</th>
-                                                    <th style="width: 111.703px;">Denda</th>
+                                                    <!-- <th style="width: 111.703px;">Tarif/hari - Diskon (%)</th> -->
                                                     <th style="width: 111.703px;">Bayar</th>
                                                     <th style="width: 5%" style="width: 111.703px;">Opsi</th>
                                                 </tr>
@@ -63,23 +60,18 @@
                                                 foreach ($index as $x) : ?>
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1"><?= $no++; ?></td>
+                                                    <td class="sorting_1"><?= $x['id_transaksi']; ?></td>
+                                                    <td class="sorting_1"><?= $x['bank'] . ' - va : ' . $x['va']; ?>
+                                                    </td>
 
-                                                    <td>NIK : <?= $x['nik'] ?> <br>
-                                                        Nama : <?= $x['nama_lengkap'] ?>
+                                                    <td><?= $x['nama_lengkap'] ?>
                                                     </td>
-                                                    <td><?= $x['tipe'] ?> <br>
-                                                        <?= $x['jenis'] ?>
+                                                    <td><?= $x['tipe'] ?>
                                                     </td>
-                                                    <td><?= $x['transaksi_alamat'] ?></td>
+                                                    <!-- <td><?= $x['transaksi_alamat'] ?></td> -->
                                                     <td><?= $x['tanggal_pinjam'] ?> - <?= $x['tanggal_kembali'] ?></td>
-                                                    <td><?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?> -
-                                                        <?= $x['diskon'] ?>%</td>
-                                                    <td><span
-                                                            class="badge bg-red"><?= "Rp." . number_format($x['dp'], 2, ',', '.') ?></span>
-                                                    </td>
-                                                    <td><span
-                                                            class="badge bg-red"><?= "Rp." . number_format($x['denda'], 2, ',', '.') ?></span>
-                                                    </td>
+                                                    <!-- <td><?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?> -
+                                                        <?= $x['diskon'] ?>%</td> -->
                                                     <td><span
                                                             class="badge bg-red"><?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?></span>
                                                     </td>

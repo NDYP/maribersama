@@ -51,22 +51,25 @@ class Katalog extends CI_Controller
         $this->load->view('pengunjung/katalog/index', $data);
         $this->load->view('pengunjung/template/footer', $data);
     }
-    function sewa()
+    function sewa($id_mobil)
     {
         $this->form_validation->set_rules('alamat', 'alamat', 'required|trim', [
-            'required' => 'Alamat Tidak Boleh Kosong!'
+            'required' => 'Tidak Boleh Kosong!'
         ]);
         $this->form_validation->set_rules('tanggal_pinjam', 'tanggal_pinjam', 'required|trim', [
-            'required' => 'Tanggal Sewa Tidak Boleh Kosong!',
+            'required' => 'Tidak Boleh Kosong!',
         ]);
         $this->form_validation->set_rules('tanggal_kembali', 'tanggal_kembali', 'required|trim', [
-            'required' => 'Tanggal Kembali Tidak Boleh Kosong!'
+            'required' => 'Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('opsi', 'tanggal_kembali', 'required|trim', [
+            'required' => 'Tidak Boleh Kosong!'
         ]);
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Checkout";
-            $data['id_mobil'] = $this->uri->segment(3, 0);
-            $data['mobil'] = $this->db->get_where('mobil', array('id_mobil' => $data['id_mobil']))->row_array();
+            // $data['id_mobil'] = $this->uri->segment(3, 0);
+            $data['mobil'] = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
             $data['kontak'] = $this->M_Profil->index();
             //$data['penyewa'] = $this->M_Customer->index();
             $this->load->view('pengunjung/template/header', $data);

@@ -1,5 +1,6 @@
 <!-- inner-apge-banner start -->
-<section class="inner-page-banner bg_img overlay-3" data-background="<?= base_url('assets/depan/') ?>assets/images/inner-page-bg.jpg">
+<section class="inner-page-banner bg_img overlay-3"
+    data-background="<?= base_url('assets/depan/') ?>assets/images/inner-page-bg.jpg">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -24,11 +25,11 @@
                         <h3 class="title">Masukkan Akun Anda </h3>
                         <form class="login-form" action="<?= base_url('login'); ?>" method="post">
                             <div class="frm-group">
-                                <input type="text" name="username" id="f-name" placeholder="Username" required>
+                                <input type="text" name="username" id="f-name" placeholder="Username">
                                 <?= form_error('username', '<small class="text-danger pl-1">', '</small>'); ?>
                             </div>
                             <div class="frm-group">
-                                <input type="password" name="password" id="pass" placeholder="Password" required>
+                                <input type="password" name="password" id="pass" placeholder="Password">
                                 <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
                             </div>
                             <div class="frm-group">

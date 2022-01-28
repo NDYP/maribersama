@@ -45,9 +45,9 @@ class Dashboard extends CI_Controller
         $this->load->view('admin/dashboard/index', $data);
         $this->load->view('admin/template/footer', $data);
     }
-    function terima($id_transaksi)
+    function approve($id_transaksi)
     {
-        $data = array('status' => 'disewa');
+        $data = array('status' => 'settlement');
         $this->M_Transaksi->update('transaksi', $data, array('id_transaksi' => $id_transaksi));
         $this->_sendmail1($id_transaksi);
         $this->session->set_flashdata('success', 'Segera Hubungi Customer');
