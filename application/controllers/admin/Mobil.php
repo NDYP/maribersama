@@ -141,6 +141,9 @@ class Mobil extends CI_Controller
         $this->form_validation->set_rules('tarif', 'tarif', 'required|trim', [
             'required' => 'Tarif Sewa Tidak Boleh Kosong!'
         ]);
+        $this->form_validation->set_rules('status', 'status', 'required|trim', [
+            'required' => 'Tarif Sewa Tidak Boleh Kosong!'
+        ]);
         if ($this->form_validation->run() == FALSE) {
             //$id_mobil = $this->uri->segment(4, 0);
             $data['title'] = "Mobil";
@@ -182,6 +185,7 @@ class Mobil extends CI_Controller
                     $sewa = $this->input->post('sewa');
                     $tarif = $this->input->post('tarif');
                     $diskon = $this->input->post('diskon');
+                    $status = $this->input->post('status');
 
                     $data = array(
                         'thumbnail' => $file,
@@ -195,6 +199,7 @@ class Mobil extends CI_Controller
                         'tarif' => $tarif,
                         'diskon' => $diskon,
                         'tarif' => $tarif,
+                        'status' => $status,
                     );
                     $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
                     $this->session->set_flashdata('success', 'Berhasil update data');
@@ -215,9 +220,8 @@ class Mobil extends CI_Controller
                 $sewa = $this->input->post('sewa');
 
                 $tarif = $this->input->post('tarif');
-
                 $diskon = $this->input->post('diskon');
-
+                $status = $this->input->post('status');
                 $data = array(
                     'id_pemilik' => $id_pemilik,
                     'tipe' => $tipe,
@@ -229,6 +233,7 @@ class Mobil extends CI_Controller
                     'tarif' => $tarif,
                     'diskon' => $diskon,
                     'tarif' => $tarif,
+                    'status' => $status,
 
                 );
                 $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
@@ -550,7 +555,7 @@ class Mobil extends CI_Controller
     }
     function aktif($id_mobil)
     {
-        $data = array('status' => 'tersedia');
+        $data = array('status' => 'Belum Publish');
         $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
         $this->_sendmail($id_mobil);
         $this->session->set_flashdata('success', 'Pengajuan mobil disetujui');
@@ -558,7 +563,7 @@ class Mobil extends CI_Controller
     }
     function tolak($id_mobil)
     {
-        $data = array('status' => 'ditolak');
+        $data = array('status' => 'Ditolak');
         $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
         $this->session->set_flashdata('success', 'Pengguna belum memenuhi kriteria');
         $this->_sendmail1($id_mobil);

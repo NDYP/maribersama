@@ -8,7 +8,6 @@ class Galeri extends CI_Controller
         parent::__construct();
         $this->load->model('M_Galeri');
         $this->load->model('M_Kontak');
-
         $this->load->model('M_Profil');
     }
     function index()

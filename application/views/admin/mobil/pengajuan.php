@@ -19,7 +19,6 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -40,8 +39,8 @@
                                                     <th style="width: 111.703px;">Transmisi
                                                         <br>Jumlah Kursi
                                                     </th>
-                                                    <th style="width: 111.703px;">Sewa <br> Diskon</th>
-
+                                                    <th style="width: 111.703px;">Sewa</th>
+                                                    <th>File (STNK)</th>
                                                     <th style="width: 111.703px;">Status</th>
                                                     <th style="width: 15%" style="width: 111.703px;">Opsi</th>
                                                 </tr>
@@ -65,15 +64,41 @@
                                                     </td>
                                                     <td><?= $x['transmisi'] ?><br>
                                                         <?= $x['jumlah_kursi'] ?></td>
-                                                    <td><?= $x['sewa'] ?> <br> <?= $x['diskon'] ?></td>
+                                                    <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?></td>
+                                                    <td>
+                                                        <?php if ($x['berkas'] == NULL) : ?>
+                                                        <span class="badge bg-red"><?= 'Belum Lengkap' ?></span>
+                                                        <?php else : ?>
+                                                        <span class="badge bg-red"><?= 'Lengkap' ?></span>
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <td><span class="badge bg-red"><?= $x['status'] ?></span></td>
                                                     <td>
-                                                        <a class="btn btn-xs bg-blue" type="button"
-                                                            href="<?= base_url('admin/mobil/aktif/' . $x['id_mobil']); ?>"><span
-                                                                class="fa fa-check"></span></a>
-                                                        <a class="btn btn-xs bg-yellow" type="button"
-                                                            href="<?= base_url('admin/mobil/tolak/' . $x['id_mobil']); ?>"><span
-                                                                class="fa fa-close"></span></a>
+                                                        <div class="btn-group">
+                                                            <button type="button"
+                                                                class="btn bg-green btn-social btn-flat btn-xs"
+                                                                data-toggle="dropdown"><i
+                                                                    class="fa fa-arrow-circle-down"></i>
+                                                                Pilih</button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li>
+                                                                    <a href="<?= base_url('admin/mobil/aktif/' . $x['id_mobil']); ?>"
+                                                                        class="btn btn-social btn-flat btn-block btn-sm"><i
+                                                                            class="fa fa-check"></i>Terima</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url('admin/mobil/tolak/' . $x['id_mobil']); ?>"
+                                                                        class="btn btn-social btn-flat btn-block btn-sm"><i
+                                                                            class="fa fa-close"></i>Tolak</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url('admin/mobil/lihat/' . $x['id_mobil']); ?>"
+                                                                        class="btn btn-social btn-flat btn-block btn-sm"><i
+                                                                            class="fa fa-edit"></i>Detail</a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <?php endforeach; ?>

@@ -34,7 +34,7 @@ class M_Transaksi extends CI_Model
             ->join('mobil', 'transaksi.id_mobil=mobil.id_mobil', 'left')
             ->join('pengguna', 'transaksi.id_penyewa=pengguna.id_pengguna', 'left')
             // ->where('transaksi.tanggal_transaksi', $date)
-            // ->where('transaksi.status', 'pengajuan')
+            ->where('transaksi.status', 'settlement')
             // ->or_where('transaksi.tanggal_kembali', $date)
             // ->where('transaksi.status', 'disewa')
             ->order_by('id_transaksi', 'DESC')

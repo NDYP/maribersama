@@ -39,6 +39,7 @@ class M_Mobil extends CI_Model
         $query = $this->db->select('*, mobil.id_mobil')
             ->from('mobil')
             ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->join('berkas', 'mobil.id_mobil=berkas.id_pemilik', 'left')
             ->where('mobil.status', 'pengajuan')
             ->order_by('mobil.id_mobil', 'DESC') //urut berdasarkan id
             ->get()

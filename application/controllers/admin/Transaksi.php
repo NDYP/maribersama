@@ -162,7 +162,6 @@ class Transaksi extends CI_Controller
 
         $id_penyewa = $this->input->post('id_penyewa');
         $alamat = $this->input->post('alamat');
-
         $opsi = $this->input->post('opsi');
         $tanggal_pinjam =
             date('Y-m-d', strtotime($this->input->post('tanggal_pinjam')));
@@ -176,9 +175,6 @@ class Transaksi extends CI_Controller
         $dp = $this->input->post('dp');
 
         $jl_tarif = $tarif - (($tarif * $diskon) / 100);
-
-
-
         //$denda = $this->input->post('denda');
         $tanggal_lewat = date('Y-m-d');
         $tanggal_kembali = date('Y-m-d', strtotime($this->input->post('tanggal_kembali')));
@@ -188,7 +184,6 @@ class Transaksi extends CI_Controller
         $jml_hari_lewat = ceil(abs($hari / 86400));
         $jl_denda = $tarif - (($tarif * $diskon) / 100);
         $denda = $jml_hari_lewat * $jl_denda;
-
 
         $data = array(
             'id_penyewa' => $id_penyewa,

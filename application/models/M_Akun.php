@@ -35,6 +35,7 @@ class M_Akun extends CI_Model
         $query = $this->db->select('*')
             ->from('mobil')
             ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->join('berkas', 'mobil.id_mobil=berkas.id_pemilik', 'left')
             ->where('mobil.id_pemilik', $this->session->userdata('id_pengguna'))
             ->order_by('id_mobil', 'DESC') //urut berdasarkan id
             ->get()

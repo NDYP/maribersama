@@ -37,7 +37,7 @@
                                 </a>
                                 <?php else : ?>
                                 <img class="img center-block img-responsive profile-user-img"
-                                    src="<?= base_url('assets/foto/mobil/profil.png') ?>" alt=""
+                                    src="<?= base_url('assets/foto/profil.png') ?>" alt=""
                                     style="width: auto;max-height: 500px;max-width: 500px; vertical-align: left;">
                                 <?php endif; ?>
                             </center>

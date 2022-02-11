@@ -6,7 +6,6 @@
                 <h1>
                     <?= $title; ?>
                     <small><?= $title2; ?></small>
-
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="<?= base_url('admin/dashboard/index'); ?>"><i class="fa fa-dashboard"></i>
@@ -46,17 +45,16 @@
                                                     <th style="width: 111.703px;">Transmisi
                                                         <br>Jumlah Kursi
                                                     </th>
-                                                    <th style="width: 111.703px;">Sewa <br> Diskon</th>
-
+                                                    <th style="width: 111.703px;">Sewa</th>
                                                     <th style="width: 111.703px;">Status</th>
                                                     <th style="width: 15%" style="width: 111.703px;">Opsi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $id_mobil = 1;
+                                                <?php $no = 1;
                                                 foreach ($index as $x) : ?>
                                                 <tr role="row" class="odd">
-                                                    <td class="sorting_1"><?= $id_mobil++; ?></td>
+                                                    <td class="sorting_1"><?= $no++; ?></td>
                                                     <td>
                                                         <img class="img center-block img-responsive img-thumnail"
                                                             src="<?= base_url('assets/foto/mobil/' . $x['thumbnail']); ?>"
@@ -70,8 +68,7 @@
                                                     </td>
                                                     <td><?= $x['transmisi'] ?><br>
                                                         <?= $x['jumlah_kursi'] ?></td>
-                                                    <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?> <br>
-                                                        <?= $x['diskon'] ?></td>
+                                                    <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?> </td>
                                                     <td><span class="badge bg-red"><?= $x['status'] ?></span></td>
                                                     <td>
                                                         <div class="btn-group">

@@ -34,6 +34,8 @@
                                         value="<?= $mobil['id_pemilik']; ?>">
                                     <input type="text" class="form-control" value="<?= $mobil['nama_lengkap']; ?>"
                                         disabled>
+                                    <?= form_error('id_pemilik', '<small class="text-danger pl-1">', '</small>'); ?>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -41,6 +43,8 @@
                                     <label for="inputEmail" class="control-label">Tipe</label>
                                     <input type="text" class="form-control" placeholder="Tipe" name="tipe"
                                         value="<?= $mobil['tipe']; ?>">
+                                    <?= form_error('tipe', '<small class="text-danger pl-1">', '</small>'); ?>
+
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -48,6 +52,8 @@
                                     <label for="inputEmail" class="control-label">Jenis</label>
                                     <input type="text" class="form-control" placeholder="Jenis" name="jenis"
                                         value="<?= $mobil['jenis']; ?>">
+                                    <?= form_error('jenis', '<small class="text-danger pl-1">', '</small>'); ?>
+
                                 </div>
                             </div>
                         </div>
@@ -57,14 +63,15 @@
                                     <label for="inputEmail" class="control-label">Warna</label>
                                     <input type="text" class="form-control" placeholder="Warna" name="warna"
                                         value="<?= $mobil['warna']; ?>">
+                                    <?= form_error('id_pemilik', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
-
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Jumlah Kursi</label>
                                     <input type="text" class="form-control" placeholder="Jumlah Kursi"
                                         name="jumlah_kursi" value="<?= $mobil['jumlah_kursi']; ?>">
+                                    <?= form_error('jumlah_kursi', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -76,11 +83,11 @@
                                             <?php if ($mobil['transmisi'] === 'Manual') echo 'selected="selected"'; ?>>
                                             Manual</option>
                                         <option value="Matic"
-                                            <?php if ($mobil['transmisi'] === 'MAtic') echo 'selected="selected"'; ?>>
+                                            <?php if ($mobil['transmisi'] === 'Matic') echo 'selected="selected"'; ?>>
                                             Matic</option>
                                     </select>
+                                    <?= form_error('transmisi', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
-
                             </div>
                             <!-- /.box-body -->
                         </div>
@@ -90,33 +97,54 @@
                                     <label for="inputEmail" class="control-label">Sewa</label>
                                     <input type="text" class="form-control" placeholder="Sewa/Bulan Ke Pemilik"
                                         name="sewa" value="<?= $mobil['sewa']; ?>">
+                                    <?= form_error('sewa', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
-
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Tarif</label>
                                     <input type="text" class="form-control" placeholder="Taris Sewa/hari" name="tarif"
                                         value="<?= $mobil['tarif']; ?>">
+                                    <?= form_error('tarif', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
-
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Diskon</label>
                                     <input type="text" class="form-control" placeholder="" name="diskon"
                                         value="<?= $mobil['diskon']; ?>">
+                                    <?= form_error('diskon', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Status</label>
+                                    <select name="status" class="form-control select2" style="width: 100%;">
+                                        <option value="">Pilih</option>
+                                        <option value="Diterima"
+                                            <?php if ($mobil['status'] === 'Diterima') echo 'selected="selected"'; ?>>
+                                            Diterima</option>
+                                        <option value="Tersedia"
+                                            <?php if ($mobil['status'] === 'Tersedia') echo 'selected="selected"'; ?>>
+                                            Tersedia</option>
+                                        <option value="Belum Publish"
+                                            <?php if ($mobil['status'] === 'Belum Publish') echo 'selected="selected"'; ?>>
+                                            Belum Publish</option>
+                                    </select>
+                                    <?= form_error('status', '<small class="text-danger pl-1">', '</small>'); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputExperience" class="control-label" name="gaji">Foto</label>
                                     <input accept=".jpg, .jpeg, .png" title="Hanya tipe Foto " type="file"
                                         name="thumbnail"></input>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="box-footer">

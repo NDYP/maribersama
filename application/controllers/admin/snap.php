@@ -182,7 +182,7 @@ class Snap extends CI_Controller
 			'id_transaksi' => $result['order_id'],
 			'payment_type' => $result['payment_type'],
 			'bayar' => $xx - $dp,
-			'status' => $result['transaction_status'],
+			'status' => $result['transaction_status'], //diubah jadi pending
 			'tanggal_transaksi' => $result['transaction_time'],
 		);
 		$this->M_Transaksi->tambah('transaksi', $data);

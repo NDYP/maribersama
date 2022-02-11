@@ -43,8 +43,6 @@ class pesan extends CI_Controller
         $this->session->set_flashdata('success', 'pesan Nonaktif');
         redirect('admin/pesan/index', 'refresh');
     }
-
-
     public function hapus($id_pesan)
     {
         $data =

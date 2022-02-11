@@ -30,7 +30,7 @@
                     <div class="content">
                         <div class="content-block">
                             <h3 class="car-name"><?= $mobil['tipe'] ?> - Diskon <?= $mobil['diskon'] ?>%</h3>
-                            <span class="price">Biaya sewa <?= $mobil['sewa'] ?> per hari</span>
+                            <span class="price">Tarif <?= $mobil['tarif'] ?> per hari</span>
                             <p>Lorem ipsum dolor sit amet, urna sit sociis lacus sem turpis magna, montes euismod eros
                                 nu dignsim etiam elementum sed tellus sed. Sollicitudin occaecati ut bibendum vitae
                                 vehicula adipiscing, partent justo labore, maecenas at aliquam eum. Eleifend suspendisse

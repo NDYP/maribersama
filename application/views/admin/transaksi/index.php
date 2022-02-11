@@ -46,7 +46,7 @@
                                                         aria-label="Rendering engine: activate to sort column descending"
                                                         style="width: 177.281px;">No</th>
                                                     <th style="width: 224.844px;">ID Transaksi</th>
-                                                    <th style="width: 224.844px;">Pembayaran</th>
+                                                    <th style="width: 224.844px;">Pembayaran DP</th>
                                                     <th style="width: 224.844px;">Penyewa</th>
                                                     <th style="width: 224.844px;">Mobil</th>
                                                     <th style="width: 206.484px;">Pinjam - Kembali</th>
@@ -77,12 +77,32 @@
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <a class="btn btn-xs bg-blue" type="button"
+                                                            <!-- <a class="btn btn-xs bg-blue" type="button"
                                                                 href="<?= base_url('admin/transaksi/edit/' . $x['id_transaksi']); ?>"><span
                                                                     class="fa fa-eye"></span></a>
                                                             <a class="btn btn-xs bg-yellow" type="button"
                                                                 href="<?= base_url('admin/transaksi/hapus/' . $x['id_transaksi']); ?>"><span
-                                                                    class="fa fa-trash"></span></a>
+                                                                    class="fa fa-trash"></span></a> -->
+                                                            <div class="btn-group">
+                                                                <button type="button"
+                                                                    class="btn bg-green btn-social btn-flat btn-xs"
+                                                                    data-toggle="dropdown"><i
+                                                                        class="fa fa-arrow-circle-down"></i>
+                                                                    Pilih</button>
+                                                                <ul class="dropdown-menu" role="menu">
+                                                                    <li>
+                                                                        <a href="<?= base_url('admin/transaksi/edit/' . $x['id_transaksi']); ?>"
+                                                                            class="btn btn-social btn-flat btn-block btn-sm"><i
+                                                                                class="fa fa-edit"></i>Edit</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="<?= base_url('admin/transaksi/hapus/' . $x['id_transaksi']); ?>"
+                                                                            class="btn btn-social btn-flat btn-block btn-sm"><i
+                                                                                class="fa fa-trash"></i>Hapus</a>
+                                                                    </li>
+
+                                                                </ul>
+                                                            </div>
                                                         </center>
                                                     </td>
                                                 </tr>

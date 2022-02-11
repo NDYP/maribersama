@@ -138,10 +138,12 @@
                                                         Pilih</button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li>
+
+                                                            <?php if ($x['status_transaksi'] == 'pending') : ?>
                                                             <a href="<?= base_url('admin/dashboard/approve/' . $x['id_transaksi']); ?>"
                                                                 class="btn btn-social btn-flat btn-block btn-sm"><i
                                                                     class="fa fa-check"></i>Approve</a>
-                                                            <?php if ($x['status'] == 'settlement') : ?>
+                                                            <?php elseif ($x['status_transaksi'] == 'settlement') : ?>
                                                             <a href="<?= base_url('admin/dashboard/selesai/' . $x['id_transaksi']); ?>"
                                                                 class="btn btn-social btn-flat btn-block btn-sm"><i
                                                                     class="fa fa-check"></i>Selesai</a>

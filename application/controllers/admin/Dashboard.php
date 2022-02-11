@@ -55,38 +55,45 @@ class Dashboard extends CI_Controller
     }
     function selesai($id_transaksi)
     {
+        $this->form_validation->set_rules('denda', 'denda', 'required|trim', [
+            'required' => 'Tidak Boleh Kosong!'
+        ]);
+        if ($this->form_validation->run() == FALSE) {
+            $data['profil'] = $this->M_Profil->index();
 
-        $id_transaksi
-            = $this->input->post('id_transaksi');
-        $id_mobil = $this->input->post('id_mobil');
-        $x = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
-        $tarif = $x['tarif'];
-        $diskon = $x['diskon'];
+            $data['title'] = "Transaksi";
+            $data['title2'] = "Selesai";
+            $data['transaksi'] = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
 
-        $tanggal_pinjam =
-            date('Y-m-d', strtotime($this->input->post('tanggal_pinjam')));
-        $tanggal_kembali =
-            date('Y-m-d', strtotime($this->input->post('tanggal_kembali')));
-        $diff = strtotime($tanggal_pinjam) - strtotime($tanggal_kembali);
-        // 1 day = 24 hours 
-        // 24 * 60 * 60 = 86400 seconds
-        $berapa_hari = ceil(abs($diff / 86400));
-        $tanggal_transaksi = date('Y-m-d');
-        $dp = $this->input->post('dp');
+            $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
+            $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
+            $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
+            $this->load->view('admin/template/header', $data);
+            $this->load->view('admin/dashboard/selesai', $data);
+            $this->load->view('admin/template/footer', $data);
+        } else {
+            $id_transaksi = $this->input->post('id_transaksi');
+            // $id_mobil = $this->input->post('id_mobil');
+            $y = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
+            $id_mobil = $y['id_mobil'];
+            $bayar = $y['bayar'];
+            $denda = $this->input->post('denda');
 
-        $jl_tarif = $tarif - (($tarif * $diskon) / 100);
-        $denda = $this->input->post('denda');
-
-        $data = array(
-            'status' => 'selesai',
-            'dp' => $dp,
-            'denda' => $denda,
-            'bayar' => ($jl_tarif * $berapa_hari  + $denda) - $dp,
-        );
-        $this->M_Transaksi->update('transaksi', $data, array('id_transaksi' => $id_transaksi));
-        $this->_sendmail2($id_transaksi);
-        $this->session->set_flashdata('success', 'Transaksi Selesai');
-        redirect($_SERVER['HTTP_REFERER']);
+            $data = array(
+                'status' => 'selesai',
+                'denda' => $denda,
+                'bayar' => ($bayar  + $denda),
+            );
+            // var_dump($id_mobil);
+            $status = array('status' => 'Tersedia');
+            $this->M_Transaksi->update('transaksi', $data, array('id_transaksi' => $id_transaksi));
+            $this->M_Transaksi->update('mobil', $status, array('id_mobil' => $id_mobil));
+            $this->_sendmail2($id_transaksi);
+            $this->session->set_flashdata('success', 'Transaksi Selesai');
+            redirect($_SERVER['HTTP_REFERER']);
+            // var_dump($bayar);
+        }
     }
     private function _sendmail1($id_transaksi)
     {
@@ -142,6 +149,26 @@ class Dashboard extends CI_Controller
         } else {
             echo $this->email->print_debugger();
             die;
+        }
+    }
+    public function lihat($id_transaksi)
+    {
+        $data['profil'] = $this->M_Profil->index();
+
+        $data['transaksi'] = $this->M_Transaksi->gettransaksi($id_transaksi);
+        if ($data) {
+            $data['title'] = "Penyewaan";
+            $data['title2'] = "Detail Data";
+            $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+            $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
+            $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
+            $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
+            $this->load->view('admin/template/header', $data);
+            $this->load->view('admin/dashboard/detail', $data);
+            $this->load->view('admin/template/footer', $data);
+        } else {
+            $this->session->set_flashdata('Info', 'Tidak Ada Data');
+            redirect('admin/dashboard/index', 'refresh');
         }
     }
 }

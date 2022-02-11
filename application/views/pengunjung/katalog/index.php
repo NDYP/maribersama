@@ -63,7 +63,7 @@
                                 <div class="content">
                                     <h4 class="title"><?= $x['tipe'] ?></h4>
                                     <span class="price">Sewa
-                                        <?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?>/hari</span>
+                                        <?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?>/hari</span>
                                     <span class="price"> - <?= $x['diskon'] ?>% (Diskon)</span>
                                     <p>Aliquam sollicitudin dolores tristiquvel ornare, vitae aenean.</p>
                                     <a href="

@@ -13,6 +13,7 @@ class History extends CI_Controller
         $this->load->model('M_Customer');
         $this->load->model('M_Profil');
         $this->load->model('M_Kontak');
+        $this->load->model('M_Transaksi');
     }
     function index()
     {
@@ -22,7 +23,8 @@ class History extends CI_Controller
         $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
-        $data['title'] = "History Penyewaan";
+        $data['title'] = "Penyewaan";
+        $data['title2'] = "Index Data";
         $data['index'] = $this->M_History->index();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/history/index', $data);
@@ -33,17 +35,16 @@ class History extends CI_Controller
     {
         $data['profil'] = $this->M_Profil->index();
 
-        $data['transaksi'] = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
+        $data['transaksi'] = $this->M_Transaksi->gettransaksi($id_transaksi);
         if ($data) {
-            $data['title'] = "Edit Transaksi";
-            $data['penyewa'] = $this->M_Customer->index();
-            $data['mobil'] = $this->M_Mobil->index();
+            $data['title'] = "Penyewaan";
+            $data['title2'] = "Detail Data";
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
             $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
             $this->load->view('admin/template/header', $data);
-            $this->load->view('admin/history/edit', $data);
+            $this->load->view('admin/history/detail', $data);
             $this->load->view('admin/template/footer', $data);
         } else {
             $this->session->set_flashdata('Info', 'Tidak Ada Data');
