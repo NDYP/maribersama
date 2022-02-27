@@ -31,13 +31,18 @@
                         <h3 class="mb-4 text-center">Masukkan Akun Terdaftar</h3>
                         <form class="signin-form" method="post" action="<?= base_url('admin/login'); ?>">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Username" name="username" required>
+                                <input type="text" class="form-control" placeholder="Username" name="username"
+                                    value="<?= set_value('username'); ?>">
+                                <?= form_error('username', '<small class="text-danger pl-1">', '</small>'); ?>
+
                             </div>
                             <div class="form-group">
                                 <input id="password-field" type="password" class="form-control" placeholder="Password"
-                                    name="password" required>
+                                    name="password">
                                 <span toggle="#password-field"
                                     class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
+
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
