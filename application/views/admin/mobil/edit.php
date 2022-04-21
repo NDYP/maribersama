@@ -92,14 +92,7 @@
                             <!-- /.box-body -->
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="inputEmail" class="control-label">Sewa</label>
-                                    <input type="text" class="form-control" placeholder="Sewa/Bulan Ke Pemilik"
-                                        name="sewa" value="<?= $mobil['sewa']; ?>">
-                                    <?= form_error('sewa', '<small class="text-danger pl-1">', '</small>'); ?>
-                                </div>
-                            </div>
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Tarif</label>
@@ -110,7 +103,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="inputEmail" class="control-label">Diskon</label>
+                                    <label for="inputEmail" class="control-label">Diskon (%)</label>
                                     <input type="text" class="form-control" placeholder="" name="diskon"
                                         value="<?= $mobil['diskon']; ?>">
                                     <?= form_error('diskon', '<small class="text-danger pl-1">', '</small>'); ?>
@@ -123,9 +116,7 @@
                                     <label for="inputEmail" class="control-label">Status</label>
                                     <select name="status" class="form-control select2" style="width: 100%;">
                                         <option value="">Pilih</option>
-                                        <option value="Diterima"
-                                            <?php if ($mobil['status'] === 'Diterima') echo 'selected="selected"'; ?>>
-                                            Diterima</option>
+
                                         <option value="Tersedia"
                                             <?php if ($mobil['status'] === 'Tersedia') echo 'selected="selected"'; ?>>
                                             Tersedia</option>

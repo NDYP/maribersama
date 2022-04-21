@@ -48,6 +48,11 @@ class Dashboard extends CI_Controller
     function approve($id_transaksi)
     {
         $data = array('status' => 'settlement');
+        $status = array('status' => 'Sedang disewa');
+        $mobil = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
+        // $mobil['id_mobil'];
+        // var_dump($mobil['id_mobil']);
+        $this->M_Transaksi->update('mobil', $status, array('id_mobil' => $mobil['id_mobil']));
         $this->M_Transaksi->update('transaksi', $data, array('id_transaksi' => $id_transaksi));
         $this->_sendmail1($id_transaksi);
         $this->session->set_flashdata('success', 'Segera Hubungi Customer');
@@ -78,21 +83,32 @@ class Dashboard extends CI_Controller
             $y = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
             $id_mobil = $y['id_mobil'];
             $bayar = $y['bayar'];
-            $denda = $this->input->post('denda');
+            $tanggal_pinjam = $y['tanggal_pinjam'];
+            $tanggal_kembali = $y['tanggal_kembali'];
+            $tanggal_pinjam =
+                date('Y-m-d', strtotime($tanggal_pinjam));
+            $tanggal_kembali =
+                date('Y-m-d', strtotime($tanggal_kembali));
+            $diff = strtotime($tanggal_pinjam) - strtotime($tanggal_kembali);
+            $berapa_hari = ceil(abs($diff / 86400));
 
+
+            $denda = $this->input->post('denda');
+            $kurang = ($bayar  + $denda) - 50000;
             $data = array(
                 'status' => 'selesai',
                 'denda' => $denda,
                 'bayar' => ($bayar  + $denda),
+                'sewa' => (($bayar  + $denda) - $kurang) * $berapa_hari
             );
-            // var_dump($id_mobil);
+
             $status = array('status' => 'Tersedia');
             $this->M_Transaksi->update('transaksi', $data, array('id_transaksi' => $id_transaksi));
             $this->M_Transaksi->update('mobil', $status, array('id_mobil' => $id_mobil));
             $this->_sendmail2($id_transaksi);
             $this->session->set_flashdata('success', 'Transaksi Selesai');
-            redirect($_SERVER['HTTP_REFERER']);
-            // var_dump($bayar);
+            redirect('admin/transaksi/index');
+            // var_dump($data);
         }
     }
     private function _sendmail1($id_transaksi)

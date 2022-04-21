@@ -65,13 +65,16 @@
                                     <span class="price">Sewa
                                         <?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?>/hari</span>
                                     <span class="price"> - <?= $x['diskon'] ?>% (Diskon)</span>
-                                    <p>Aliquam sollicitudin dolores tristiquvel ornare, vitae aenean.</p>
-                                    <a href="
-                                        <?php if ($this->session->userdata('id_pengguna')) : ?>
+                                    <p><?= $x['info'] ?></p>
+                                    <?php if ($x['status'] == 'Tersedia') : ?>
+                                    <a href="<?php if ($this->session->userdata('id_pengguna')) : ?>
                                             <?= base_url('katalog/sewa/' . $x['id_mobil']) ?>
                                             <?php else : ?>
                                                 <?= base_url('login') ?>
                                                 <?php endif; ?>" class="cmn-btn">Sewa</a>
+                                    <?php elseif ($x['status'] == 'Sedang disewa') : ?>
+                                    <a href="" class="cmn-btn"><?= $x['status'] ?></a>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="car-item-meta">
                                     <ul class="details-list">

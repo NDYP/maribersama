@@ -28,7 +28,8 @@ class M_Mobil extends CI_Model
     {
         $query = $this->db->select('*')
 
-            ->where('mobil.status', 'tersedia')
+            ->where('mobil.status', 'Tersedia')
+            ->or_where('mobil.status', 'Sedang disewa')
             ->order_by('id_mobil', 'DESC') //urut berdasarkan id
             ->get('mobil', $limit, $start)
             ->result_array(); //ditampilkan dalam bentuk array
@@ -95,8 +96,8 @@ class M_Mobil extends CI_Model
     {
         $tanggal = date('Y-m-d');
         $query = $this->db->select('SUM(sewa) as x')
-            ->from('mobil')
-            ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
+            ->from('transaksi')
+            // ->join('pengguna', 'mobil.id_pemilik=pengguna.id_pengguna')
             ->where("'mobil.$tanggal' BETWEEN '$bulan1' AND '$bulan2'")
             ->order_by('id_mobil', 'ASC') //urut berdasarkan id
             ->get();

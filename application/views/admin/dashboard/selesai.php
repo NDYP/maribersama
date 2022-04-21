@@ -17,7 +17,7 @@
         <section class="content">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <a href="<?= base_url('admin/beranda/index') ?>" class="btn btn-xs bg-blue"><span
+                    <a href="<?= $_SERVER['HTTP_REFERER']; ?>" class="btn btn-xs bg-blue"><span
                             class="fa fa-arrow-left"></span>
                         Kembali</a>
                 </div>

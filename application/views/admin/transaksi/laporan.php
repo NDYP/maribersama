@@ -52,7 +52,8 @@
     </p>
 
     <font font-size=10px face="Times New Roman"><b>Pemasukan transaksi</b>
-        <table class="table-responsive" style="width: 100%; page-break-after: always;" border="1" cellspacing="0">
+        <table style="font-size: 12px;" class="table-responsive" style="width: 100%; page-break-after: always;"
+            border="1" cellspacing="0">
             <tr>
                 <th>No.</th>
                 <th>Penyewa</th>
@@ -63,9 +64,10 @@
                 <th>Pinjam - Kembali</th>
 
                 <th>Tarif <br> dp <br> Denda <br> Bayar</th>
+                <th>Pemasukan</th>
             </tr>
             <?php $no = 0;
-            foreach ($pemasukan_transaksi as $row) : $no++ ?>
+            foreach ($pemasukan_transaksi as $x) : $no++ ?>
             <tr>
                 <td>
                     <center> <?= $no; ?> </center>
@@ -77,7 +79,8 @@
                 <td>
                     <?= $x['transaksi_alamat'] ?>
                 </td>
-                <td><?= $x['tanggal_pinjam'] ?> - <?= $x['tanggal_kembali'] ?></td>
+                <td><?= date('d-m-Y', strtotime($x['tanggal_pinjam'])); ?> <br> sampai <br>
+                    <?= date('d-m-Y', strtotime($x['tanggal_kembali'])); ?></td>
                 <td><?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?> -
                     <?= $x['diskon'] ?>%
                     <br>
@@ -86,10 +89,13 @@
                     <?= "Rp." . number_format($x['denda'], 2, ',', '.') ?>
                     <br><?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?>
                 </td>
+                <td>
+                    <?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?>
+                </td>
             </tr>
             <?php endforeach; ?>
             <tr>
-                <th align="center" colspan="5">Total Pemasukan</th>
+                <th align="center" colspan="6">Total Pemasukan</th>
                 <td> <b>
                         <?php $no = 0;
                         foreach ($pemasukan_total as $x) : $no++ ?>
@@ -102,7 +108,8 @@
     </font>
     <br>
     <font font-size=10px face="Times New Roman"><b>Pengeluaran gaji karyawan</b>
-        <table class="table-responsive" style="width: 100%; page-break-after: always;" border="1" cellspacing="0">
+        <table style="font-size: 12px;" class="table-responsive" style="width: 100%; page-break-after: always;"
+            border="1" cellspacing="0">
             <tr>
                 <th>No.</th>
                 <th>NIK</th>
@@ -115,7 +122,7 @@
                 <th>Gaji/Bulan</th>
             </tr>
             <?php $no = 0;
-            foreach ($pengeluaran_karyawan as $row) : $no++ ?>
+            foreach ($pengeluaran_karyawan as $x) : $no++ ?>
             <tr>
                 <td>
                     <center> <?= $no; ?> </center>
@@ -142,7 +149,7 @@
             </tr>
         </table>
     </font>
-    <br>
+    <!-- <br>
     <font font-size=10px face="Times New Roman"><b>Pengeluaran sewa mobil</b>
         <table class="table-responsive" style="width: 100%; page-break-after: always;" border="1" cellspacing="0">
             <tr>
@@ -184,7 +191,7 @@
                 <?php endforeach; ?></b></td>
             </tr>
         </table>
-    </font>
+    </font> -->
 
     <br>
     <br>

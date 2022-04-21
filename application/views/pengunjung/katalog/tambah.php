@@ -22,6 +22,7 @@
 <section class="reservation-section pt-120 pb-120">
     <div class="container">
         <div class="row">
+            <div class="col-lg-2"></div>
             <div class="col-lg-8">
                 <div class="reservation-details-area">
                     <div class="thumb">
@@ -31,17 +32,13 @@
                         <div class="content-block">
                             <h3 class="car-name"><?= $mobil['tipe'] ?> - Diskon <?= $mobil['diskon'] ?>%</h3>
                             <span class="price">Tarif <?= $mobil['tarif'] ?> per hari</span>
-                            <p>Lorem ipsum dolor sit amet, urna sit sociis lacus sem turpis magna, montes euismod eros
-                                nu dignsim etiam elementum sed tellus sed. Sollicitudin occaecati ut bibendum vitae
-                                vehicula adipiscing, partent justo labore, maecenas at aliquam eum. Eleifend suspendisse
-                                enim integer, ipsum mauris curabitur nulla ut sit, pede aenean, lacus sed. Dignissim
-                                wisi turpis pharetra sapien.</p>
+                            <p><?= $mobil['info'] ?></p>
                         </div>
 
                         <form class="reservation-form" id="payment-form" method="post"
                             action="<?= site_url() ?>admin/snap/finish">
                             <div class="content-block">
-                                <h3 class="title">personal information</h3>
+                                <h3 class="title">Form Penyewaan</h3>
                                 <div class="row">
                                     <div class="col-lg-6 form-group">
                                         <input id="alamat" name="alamat" value="<?= set_value('alamat') ?>" type="text"
@@ -84,11 +81,11 @@
                                 </div>
                             </div>
                             <div class="content-block">
-                                <h3 class="title">addisonal information</h3>
+                                <!-- <h3 class="title">addisonal information</h3> -->
                                 <div class="row">
-                                    <div class="col-lg-12 form-group">
+                                    <!-- <div class="col-lg-12 form-group">
                                         <textarea placeholder="Write addisonal information in here"></textarea>
-                                    </div>
+                                    </div> -->
                                     <div class="col-lg-12">
                                         <button id="pay-button" class="cmn-btn">Konfirmasi</button>
                                     </div>
@@ -156,42 +153,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <aside class="sidebar">
-                    <div class="widget widget-all-cars">
-                        <h4 class="widget-title">our all cars</h4>
-                        <ul class="cars-list">
-                            <li><a href="#0">mistubisshi</a></li>
-                            <li><a href="#0">forester subar</a></li>
-                            <li><a href="#0">subary liberty</a></li>
-                            <li><a href="#0">pajero range</a></li>
-                            <li><a href="#0">volkswagen</a></li>
-                        </ul>
-                    </div>
-                    <div class="widget widget-testimonial">
-                        <h4 class="widget-title">testimonial</h4>
-                        <div class="widget-body">
-                            <div class="testimonial-slider owl-carousel">
-                                <div class="testimonial-item">
-                                    <div class="testimonial-item--header">
-                                        <div class="thumb"><img
-                                                src="<?= base_url('assets/depan/') ?>assets/images/testimonial/1.jpg"
-                                                alt="image"></div>
-                                        <div class="content">
-                                            <h6 class="name">martin hook</h6>
-                                            <span class="designation">business man</span>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-item--body">
-                                        <p>Tristique consequat, lorem sed vivamus donec eget, nulla pharetra lacinia
-                                            wisi diamaliquam velit nec.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- widget end -->
-                </aside>
-            </div>
+            <div class="col-lg-2"></div>
         </div>
     </div>
 </section>

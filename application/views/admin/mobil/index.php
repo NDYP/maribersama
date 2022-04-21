@@ -45,7 +45,7 @@
                                                     <th style="width: 111.703px;">Transmisi
                                                         <br>Jumlah Kursi
                                                     </th>
-                                                    <th style="width: 111.703px;">Sewa</th>
+                                                    <!-- <th style="width: 111.703px;">Sewa</th> -->
                                                     <th style="width: 111.703px;">Status</th>
                                                     <th style="width: 15%" style="width: 111.703px;">Opsi</th>
                                                 </tr>
@@ -68,7 +68,7 @@
                                                     </td>
                                                     <td><?= $x['transmisi'] ?><br>
                                                         <?= $x['jumlah_kursi'] ?></td>
-                                                    <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?> </td>
+                                                    <!-- <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?> </td> -->
                                                     <td><span class="badge bg-red"><?= $x['status'] ?></span></td>
                                                     <td>
                                                         <div class="btn-group">

@@ -96,15 +96,7 @@
                             <!-- /.box-body -->
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="inputEmail" class="control-label">Sewa</label>
-                                    <input type="text" class="form-control" placeholder="Sewa/Bulan Ke Pemilik"
-                                        name="sewa" value="<?= set_value('sewa'); ?>">
-                                </div>
-                                <?= form_error('sewa', '<small class="text-danger pl-1">', '</small>'); ?>
 
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Tarif</label>
@@ -127,6 +119,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="inputExperience" class="control-label" name="">Foto</label>
+                                    <input accept=".jpg, .jpeg, .png" title="Hanya tipe Foto" type="file"
+                                        name="thumbnail"></input>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label>Info Tambahan</label>
                                     <textarea type="text" class="form-control" name="info" id="password">
 
@@ -134,15 +133,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="inputExperience" class="control-label" name="">Foto</label>
-                                    <input accept=".jpg, .jpeg, .png" title="Hanya tipe Foto" type="file"
-                                        name="thumbnail"></input>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="box-footer">
                         <button class="btn btn-xs bg-blue"><span class="fa fa-save"></span> Simpan</button>

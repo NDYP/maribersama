@@ -135,9 +135,7 @@ class Mobil extends CI_Controller
         $this->form_validation->set_rules('transmisi', 'transmisi', 'required|trim', [
             'required' => 'Jenis Transmisi Tidak Boleh Kosong!'
         ]);
-        $this->form_validation->set_rules('sewa', 'sewa', 'required|trim', [
-            'required' => 'Biaya Sewa Tidak Boleh Kosong!'
-        ]);
+
         $this->form_validation->set_rules('tarif', 'tarif', 'required|trim', [
             'required' => 'Tarif Sewa Tidak Boleh Kosong!'
         ]);
@@ -182,7 +180,6 @@ class Mobil extends CI_Controller
                     $jumlah_kursi = $this->input->post('jumlah_kursi');
                     $transmisi = $this->input->post('transmisi');
 
-                    $sewa = $this->input->post('sewa');
                     $tarif = $this->input->post('tarif');
                     $diskon = $this->input->post('diskon');
                     $status = $this->input->post('status');
@@ -195,7 +192,6 @@ class Mobil extends CI_Controller
                         'warna' => $warna,
                         'jumlah_kursi' => $jumlah_kursi,
                         'transmisi' => $transmisi,
-                        'sewa' => $sewa,
                         'tarif' => $tarif,
                         'diskon' => $diskon,
                         'tarif' => $tarif,
@@ -217,7 +213,6 @@ class Mobil extends CI_Controller
                 $warna = $this->input->post('warna');
                 $jumlah_kursi = $this->input->post('jumlah_kursi');
                 $transmisi = $this->input->post('transmisi');
-                $sewa = $this->input->post('sewa');
 
                 $tarif = $this->input->post('tarif');
                 $diskon = $this->input->post('diskon');
@@ -229,7 +224,6 @@ class Mobil extends CI_Controller
                     'warna' => $warna,
                     'jumlah_kursi' => $jumlah_kursi,
                     'transmisi' => $transmisi,
-                    'sewa' => $sewa,
                     'tarif' => $tarif,
                     'diskon' => $diskon,
                     'tarif' => $tarif,
@@ -281,9 +275,6 @@ class Mobil extends CI_Controller
         $this->form_validation->set_rules('transmisi', 'transmisi', 'required|trim', [
             'required' => 'Jenis Transmisi Tidak Boleh Kosong!'
         ]);
-        $this->form_validation->set_rules('sewa', 'sewa', 'required|trim', [
-            'required' => 'Biaya Sewa Tidak Boleh Kosong!'
-        ]);
         $this->form_validation->set_rules('tarif', 'tarif', 'required|trim', [
             'required' => 'Tarif Sewa Tidak Boleh Kosong!'
         ]);
@@ -326,7 +317,6 @@ class Mobil extends CI_Controller
                     $warna = $this->input->post('warna');
                     $jumlah_kursi = $this->input->post('jumlah_kursi');
                     $transmisi = $this->input->post('transmisi');
-                    $sewa = $this->input->post('sewa');
                     $tarif = $this->input->post('tarif');
                     $diskon = $this->input->post('tanggal_lahir');
 
@@ -340,7 +330,6 @@ class Mobil extends CI_Controller
                         'jumlah_kursi' => $jumlah_kursi,
                         'jenis' => $jenis,
                         'transmisi' => $transmisi,
-                        'sewa' => $sewa,
                         'tarif' => $tarif,
                         'diskon' => $diskon,
                         'status' => 'Tersedia',
@@ -361,7 +350,6 @@ class Mobil extends CI_Controller
                 $warna = $this->input->post('warna');
                 $jumlah_kursi = $this->input->post('jumlah_kursi');
                 $transmisi = $this->input->post('transmisi');
-                $sewa = $this->input->post('sewa');
                 $tarif = $this->input->post('tarif');
                 $diskon = $this->input->post('tanggal_lahir');
                 $status = $this->input->post('status');
@@ -374,7 +362,6 @@ class Mobil extends CI_Controller
                     'jumlah_kursi' => $jumlah_kursi,
                     'jenis' => $jenis,
                     'transmisi' => $transmisi,
-                    'sewa' => $sewa,
                     'tarif' => $tarif,
                     'diskon' => $diskon,
                     'status' => $status,

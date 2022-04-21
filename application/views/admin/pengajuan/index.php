@@ -38,7 +38,7 @@
                                                     <th>TipeJenis</th>
                                                     <th>Transmisi</th>
                                                     <th>Jumlah Kursi</th>
-                                                    <th>Sewa</th>
+
                                                     <th>File (STNK)</th>
                                                     <th>Status</th>
                                                     <th style="width: 15%" style="width: 111.703px;">Opsi</th>
@@ -58,8 +58,8 @@
                                                     <td><?= $x['transmisi'] ?><br>
                                                     <td><?= $x['jumlah_kursi'] ?></td>
                                                     </td>
-                                                    <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?>
-                                                    </td>
+                                                    <!-- <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?>
+                                                    </td> -->
                                                     <td>
                                                         <?php if ($x['berkas'] == NULL) : ?>
                                                         <span class="badge bg-red"><?= 'Belum Lengkap' ?></span>

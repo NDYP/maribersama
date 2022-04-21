@@ -70,7 +70,7 @@
                                         <th> : </th>
                                         <td><?= $mobil['transmisi'] ?></td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <th>Sewa</th>
                                         <th> : </th>
                                         <td><?= $mobil['sewa'] ?></td>
@@ -82,7 +82,7 @@
                                         <th>Diskon</th>
                                         <th> : </th>
                                         <td><?= $mobil['diskon'] ?></td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>

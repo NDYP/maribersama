@@ -211,17 +211,19 @@ class Transaksi extends CI_Controller
     public function cetak()
     {
         $data['profil'] = $this->M_Profil->index();
-        $bulan1 = $this->input->post('awal');
-        $bulan2 = $this->input->post('akhir');
-
+        $mulai = $this->input->post('mulai');
+        $bulan1 = date('Y-m-d H:i:s', strtotime($mulai));
+        $akhir = $this->input->post('akhir');
+        $bulan2 = date('Y-m-d H:i:s', strtotime($akhir));
         $data['pemasukan_transaksi'] = $this->M_Transaksi->cetak($bulan1, $bulan2)->result_array();
         $data['pemasukan_total'] = $this->M_Transaksi->total_keluar($bulan1, $bulan2)->result_array();
         $data['pengeluaran_karyawan'] = $this->M_Pengguna->cetak($bulan1, $bulan2)->result_array();
         $data['pengeluaran_karyawan_total'] = $this->M_Pengguna->total_keluar($bulan1, $bulan2)->result_array();
-        $data['pengeluaran_mobil'] = $this->M_Mobil->cetak($bulan1, $bulan2)->result_array();
-        $data['pengeluaran_mobil_total'] = $this->M_Mobil->total_keluar($bulan1, $bulan2)->result_array();
+        // $data['pengeluaran_mobil'] = $this->M_Mobil->cetak($bulan1, $bulan2)->result_array();
+        // $data['pengeluaran_mobil_total'] = $this->M_Mobil->total_keluar($bulan1, $bulan2)->result_array();
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->filename = "laporan-Akhir-Bulan.pdf";
         $this->pdf->load_view('admin/transaksi/laporan', $data);
+        // var_dump($data['pemasukan_transaksi']);
     }
 }

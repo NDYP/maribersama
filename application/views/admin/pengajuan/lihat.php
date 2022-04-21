@@ -71,13 +71,13 @@
                                         <td><?= $index2['transmisi'] ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Sewa</th>
-                                        <th> : </th>
-                                        <td><?= $index2['sewa'] ?></td>
-                                        <td></td>
                                         <th>Status</th>
                                         <th> : </th>
                                         <td><?= $index2['status'] ?></td>
+                                        <td></td>
+                                        <th></th>
+                                        <th> </th>
+                                        <td></td>
                                         <td></td>
                                         <th></th>
                                         <th></th>

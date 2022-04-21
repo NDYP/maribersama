@@ -85,9 +85,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Sewa</label>
-                                    <input type="text" class="form-control" placeholder="Sewa/Bulan Ke Pemilik"
-                                        name="sewa" value="<?= set_value('sewa'); ?>">
-                                    <?= form_error('sewa', '<small class="text-danger pl-1">', '</small>'); ?>
+                                    <input type="text" class="form-control" placeholder="Rp.50.0000/hari sewa" readonly>
                                 </div>
                             </div>
                             <div class="col-md-2">

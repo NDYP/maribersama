@@ -99,7 +99,7 @@ class Katalog extends CI_Controller
 
             $jl_tarif = $tarif - (($tarif * $diskon) / 100);
 
-            //$denda = $this->input->post('denda');
+
             $tanggal_lewat = date('Y-m-d');
             $tanggal_kembali =
                 date('Y-m-d', strtotime($this->input->post('tanggal_kembali')));

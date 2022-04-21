@@ -46,9 +46,6 @@ class Pengajuan extends CI_Controller
         $this->form_validation->set_rules('transmisi', 'transmisi', 'required|trim', [
             'required' => 'Tidak Boleh Kosong!'
         ]);
-        $this->form_validation->set_rules('sewa', 'sewa', 'required|trim', [
-            'required' => 'Tidak Boleh Kosong!'
-        ]);
         if (empty($_FILES['thumbnail']['name'])) {
             $this->form_validation->set_rules('thumbnail', 'thumbnail', 'required|trim', [
                 'required' => 'Tidak Boleh Kosong!'
@@ -91,9 +88,6 @@ class Pengajuan extends CI_Controller
                     $warna = $this->input->post('warna');
                     $jumlah_kursi = $this->input->post('jumlah_kursi');
                     $transmisi = $this->input->post('transmisi');
-                    $sewa = $this->input->post('sewa');
-                    // $tarif = $this->input->post('tarif');
-                    // $diskon = $this->input->post('tanggal_lahir');
 
                     $info = $this->input->post('info');
                     $daftar = date('Y-m-d');
@@ -105,9 +99,6 @@ class Pengajuan extends CI_Controller
                         'jumlah_kursi' => $jumlah_kursi,
                         'jenis' => $jenis,
                         'transmisi' => $transmisi,
-                        'sewa' => $sewa,
-                        // 'tarif' => $tarif,
-                        // 'diskon' => $diskon,
                         'status' => 'pengajuan',
                         'info' => $info,
                         'daftar' => $daftar,
@@ -155,61 +146,7 @@ class Pengajuan extends CI_Controller
         $this->session->set_flashdata('info', 'Berhasil Hapus Data');
         redirect('admin/pengajuan/index', 'refresh');
     }
-    // function ubah()
-    // {
-    //     $config['upload_path'] = './assets/foto/mobil/';
-    //     $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-    //     $config['file_name'] = $this->input->post('id_mobil');
-    //     if (!empty($_FILES['thumbnail']['name'])) {
-    //         if ($this->upload->do_upload('thumbnail')) {
-    //             $gbr = $this->upload->data();
-    //             $config['image_library'] = 'gd2';
-    //             $config['source_image'] = './assets/foto/mobil/' . $gbr['file_name'];
-    //             $config['maintain_ratio'] = FALSE;
-    //             $config['overwrite'] = TRUE;
-    //             $config['max_size']  = 1024;
-    //             $config['new_image'] = './assets/foto/mobil/' . $gbr['file_name'];
-    //             $this->load->library('image_lib', $config);
-    //             $this->image_lib->resize();
-    //             $file = $gbr['file_name'];
-    //             $id_pemilik = $this->input->post('id_pemilik');
-    //             $id_mobil = $this->input->post('id_mobil');
-    //             $tipe = $this->input->post('tipe');
-    //             $jenis = $this->input->post('jenis');
-    //             $warna = $this->input->post('warna');
-    //             $jumlah_kursi = $this->input->post('jumlah_kursi');
-    //             $transmisi = $this->input->post('transmisi');
 
-    //             $sewa = $this->input->post('sewa');
-    //             $tarif = $this->input->post('tarif');
-    //             $diskon = $this->input->post('diskon');
-
-    //             $data = array(
-    //                 'thumbnail' => $file,
-    //                 'id_pemilik' => $id_pemilik,
-    //                 'tipe' => $tipe,
-    //                 'jenis' => $jenis,
-    //                 'warna' => $warna,
-    //                 'jumlah_kursi' => $jumlah_kursi,
-    //                 'transmisi' => $transmisi,
-    //                 'sewa' => $sewa,
-    //                 'tarif' => $tarif,
-    //                 'diskon' => $diskon,
-    //                 'tarif' => $tarif,
-    //             );
-    //             $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
-    //             $this->session->set_flashdata('success', 'Berhasil update data');
-    //             redirect('admin/pengajuan/index', 'refresh');
-    //         } else {
-    //             $this->session->set_flashdata('info', 'Gagal update data');
-    //             redirect('admin/pengajuan/index', 'refresh');
-    //         }
-    //     } else {
-
-    //         $this->session->set_flashdata('success', 'Foto tidak boleh kosong');
-    //         redirect('admin/pengajuan/index', 'refresh');
-    //     }
-    // }
     function tambahberkas($id_mobil)
     {
         $this->form_validation->set_rules('judul', 'judul', 'required|trim', [

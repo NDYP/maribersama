@@ -52,13 +52,13 @@ class Pengajuan extends CI_Controller
     function req()
     {
         $config['upload_path']          = './assets/foto/ktp/';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
         $config['max_size']             = 3000;
         $config['file_name'] = $this->session->userdata('id_pengguna');
 
         $this->upload->initialize($config);
         if (!$this->upload->do_upload('ktp')) {
-            echo $this->upload->display_errors();
+            $this->session->set_flashdata('error', 'File terlalu besar');
         } else {
             $id_user = $this->session->userdata('id_pengguna');
             $gbr = $this->upload->data();
