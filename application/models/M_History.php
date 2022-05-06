@@ -21,7 +21,8 @@ class M_History extends CI_Model
             ->from('transaksi')
             ->join('mobil', 'transaksi.id_mobil=mobil.id_mobil', 'left')
             ->join('pengguna', 'transaksi.id_penyewa=pengguna.id_pengguna', 'left')
-            ->where("tanggal_transaksi BETWEEN '$bulan1' AND '$bulan2'")
+            ->where('tanggal_transaksi >=', $bulan1)
+            ->where('tanggal_transaksi <=', $bulan2)
             ->where('mobil.id_pemilik', $this->session->userdata('id_pengguna'))
             ->order_by('id_transaksi', 'ASC')
             ->get();
@@ -29,11 +30,12 @@ class M_History extends CI_Model
     }
     function total_keluar($bulan1, $bulan2)
     {
-        $query = $this->db->select('SUM(bayar) as x')
+        $query = $this->db->select('SUM(bayar) as x, SUM(sewa) as y, transaksi.dp')
             ->from('transaksi')
             ->join('mobil', 'transaksi.id_mobil=mobil.id_mobil', 'left')
             ->join('pengguna', 'transaksi.id_penyewa=pengguna.id_pengguna', 'left')
-            ->where("tanggal_transaksi BETWEEN '$bulan1' AND '$bulan2'")
+            ->where('tanggal_transaksi >=', $bulan1)
+            ->where('tanggal_transaksi <=', $bulan2)
             ->where('mobil.id_pemilik', $this->session->userdata('id_pengguna'))
             ->get();
         return $query;

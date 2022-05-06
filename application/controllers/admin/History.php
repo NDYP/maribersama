@@ -116,8 +116,11 @@ class History extends CI_Controller
     public function cetak()
     {
         $data['profil'] = $this->M_Profil->index();
-        $bulan1 = $this->input->post('awal');
-        $bulan2 = $this->input->post('akhir');
+
+        $mulai = $this->input->post('mulai');
+        $bulan1 = date('Y-m-d H:i:s', strtotime($mulai));
+        $akhir = $this->input->post('akhir');
+        $bulan2 = date('Y-m-d H:i:s', strtotime($akhir));
 
         $data['pemasukan_transaksi'] = $this->M_History->cetak($bulan1, $bulan2)->result_array();
         $data['pemasukan_total'] = $this->M_History->total_keluar($bulan1, $bulan2)->result_array();

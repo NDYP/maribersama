@@ -120,7 +120,7 @@ class Mobil extends CI_Controller
         $this->form_validation->set_rules('id_pemilik', 'id_pemilik', 'required|trim', [
             'required' => 'Pemilik Mobil Tidak Boleh Kosong!'
         ]);
-        $this->form_validation->set_rules('tipe', 'tipe', 'required|trim', [
+        $this->form_validation->set_rules('tahun', 'tahun', 'required|trim', [
             'required' => 'Tipe Mobil Tidak Boleh Kosong!',
         ]);
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim', [
@@ -138,6 +138,9 @@ class Mobil extends CI_Controller
 
         $this->form_validation->set_rules('tarif', 'tarif', 'required|trim', [
             'required' => 'Tarif Sewa Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('bagian_rental', 'bagian_rental', 'required|trim', [
+            'required' => 'Bagian rental Tidak Boleh Kosong!'
         ]);
         $this->form_validation->set_rules('status', 'status', 'required|trim', [
             'required' => 'Tarif Sewa Tidak Boleh Kosong!'
@@ -174,11 +177,12 @@ class Mobil extends CI_Controller
                     $file = $gbr['file_name'];
                     $id_pemilik = $this->input->post('id_pemilik');
                     $id_mobil = $this->input->post('id_mobil');
-                    $tipe = $this->input->post('tipe');
+                    $tahun = $this->input->post('tahun');
                     $jenis = $this->input->post('jenis');
                     $warna = $this->input->post('warna');
                     $jumlah_kursi = $this->input->post('jumlah_kursi');
                     $transmisi = $this->input->post('transmisi');
+                    $bagian_rental = $this->input->post('bagian_rental');
 
                     $tarif = $this->input->post('tarif');
                     $diskon = $this->input->post('diskon');
@@ -187,7 +191,7 @@ class Mobil extends CI_Controller
                     $data = array(
                         'thumbnail' => $file,
                         'id_pemilik' => $id_pemilik,
-                        'tipe' => $tipe,
+                        'tahun' => $tahun,
                         'jenis' => $jenis,
                         'warna' => $warna,
                         'jumlah_kursi' => $jumlah_kursi,
@@ -196,6 +200,7 @@ class Mobil extends CI_Controller
                         'diskon' => $diskon,
                         'tarif' => $tarif,
                         'status' => $status,
+                        'bagian_rental' => $bagian_rental,
                     );
                     $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
                     $this->session->set_flashdata('success', 'Berhasil update data');
@@ -207,7 +212,7 @@ class Mobil extends CI_Controller
             } else {
                 $id_pemilik = $this->input->post('id_pemilik');
                 $id_mobil = $this->input->post('id_mobil');
-                $tipe = $this->input->post('tipe');
+                $tahun = $this->input->post('tahun');
                 $jenis = $this->input->post('jenis');
 
                 $warna = $this->input->post('warna');
@@ -217,9 +222,10 @@ class Mobil extends CI_Controller
                 $tarif = $this->input->post('tarif');
                 $diskon = $this->input->post('diskon');
                 $status = $this->input->post('status');
+                $bagian_rental = $this->input->post('bagian_rental');
                 $data = array(
                     'id_pemilik' => $id_pemilik,
-                    'tipe' => $tipe,
+                    'tahun' => $tahun,
                     'jenis' => $jenis,
                     'warna' => $warna,
                     'jumlah_kursi' => $jumlah_kursi,
@@ -228,7 +234,7 @@ class Mobil extends CI_Controller
                     'diskon' => $diskon,
                     'tarif' => $tarif,
                     'status' => $status,
-
+                    'bagian_rental' => $bagian_rental,
                 );
                 $this->M_Mobil->update('mobil', $data, array('id_mobil' => $id_mobil));
                 $this->session->set_flashdata('success', 'Berhasil update data');
@@ -260,7 +266,7 @@ class Mobil extends CI_Controller
         $this->form_validation->set_rules('id_pemilik', 'id_pemilik', 'required|trim', [
             'required' => 'Pemilik Mobil Tidak Boleh Kosong!'
         ]);
-        $this->form_validation->set_rules('tipe', 'tipe', 'required|trim', [
+        $this->form_validation->set_rules('tahun', 'tahun', 'required|trim', [
             'required' => 'Tipe Mobil Tidak Boleh Kosong!',
         ]);
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim', [
@@ -277,6 +283,9 @@ class Mobil extends CI_Controller
         ]);
         $this->form_validation->set_rules('tarif', 'tarif', 'required|trim', [
             'required' => 'Tarif Sewa Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('bagian_rental', 'bagian_rental', 'required|trim', [
+            'required' => 'Bagian rental Tidak Boleh Kosong!'
         ]);
 
 
@@ -312,25 +321,27 @@ class Mobil extends CI_Controller
                     $file = $gbr['file_name'];
 
                     $id_pemilik = $this->input->post('id_pemilik');
-                    $tipe = $this->input->post('tipe');
+                    $tahun = $this->input->post('tahun');
                     $jenis = $this->input->post('jenis');
                     $warna = $this->input->post('warna');
                     $jumlah_kursi = $this->input->post('jumlah_kursi');
                     $transmisi = $this->input->post('transmisi');
                     $tarif = $this->input->post('tarif');
                     $diskon = $this->input->post('tanggal_lahir');
+                    $bagian_rental = $this->input->post('bagian_rental');
 
                     $info = $this->input->post('info');
                     $daftar = date('Y-m-d');
                     $data = array(
                         'thumbnail' => $file,
                         'id_pemilik' => $id_pemilik,
-                        'tipe' => $tipe,
+                        'tahun' => $tahun,
                         'warna' => $warna,
                         'jumlah_kursi' => $jumlah_kursi,
                         'jenis' => $jenis,
                         'transmisi' => $transmisi,
                         'tarif' => $tarif,
+                        'bagian_rental' => $bagian_rental,
                         'diskon' => $diskon,
                         'status' => 'Tersedia',
                         'info' => $info,
@@ -345,19 +356,20 @@ class Mobil extends CI_Controller
                 }
             } else {
                 $id_pemilik = $this->input->post('id_pemilik');
-                $tipe = $this->input->post('tipe');
+                $tahun = $this->input->post('tahun');
                 $jenis = $this->input->post('jenis');
                 $warna = $this->input->post('warna');
                 $jumlah_kursi = $this->input->post('jumlah_kursi');
                 $transmisi = $this->input->post('transmisi');
                 $tarif = $this->input->post('tarif');
+                $bagian_rental = $this->input->post('bagian_rental');
                 $diskon = $this->input->post('tanggal_lahir');
                 $status = $this->input->post('status');
                 $info = $this->input->post('info');
                 $daftar = date('Y-m-d');
                 $data = array(
                     'id_pemilik' => $id_pemilik,
-                    'tipe' => $tipe,
+                    'tahun' => $tahun,
                     'warna' => $warna,
                     'jumlah_kursi' => $jumlah_kursi,
                     'jenis' => $jenis,
@@ -367,6 +379,7 @@ class Mobil extends CI_Controller
                     'status' => $status,
                     'info' => $info,
                     'daftar' => $daftar,
+                    'bagian_rental' => $bagian_rental,
                 );
                 $this->M_Mobil->tambah('mobil', $data);
                 $this->session->set_flashdata('success', 'Berhasil tambah data');
@@ -461,7 +474,7 @@ class Mobil extends CI_Controller
                 $file = $gbr['file_name'];
                 $id_pemilik = $this->input->post('id_pemilik');
                 $id_mobil = $this->input->post('id_mobil');
-                $tipe = $this->input->post('tipe');
+                $tahun = $this->input->post('tahun');
                 $jenis = $this->input->post('jenis');
                 $warna = $this->input->post('warna');
                 $jumlah_kursi = $this->input->post('jumlah_kursi');
@@ -474,7 +487,7 @@ class Mobil extends CI_Controller
                 $data = array(
                     'thumbnail' => $file,
                     'id_pemilik' => $id_pemilik,
-                    'tipe' => $tipe,
+                    'tahun' => $tahun,
                     'jenis' => $jenis,
                     'warna' => $warna,
                     'jumlah_kursi' => $jumlah_kursi,
@@ -494,7 +507,7 @@ class Mobil extends CI_Controller
         } else {
             $id_pemilik = $this->input->post('id_pemilik');
             $id_mobil = $this->input->post('id_mobil');
-            $tipe = $this->input->post('tipe');
+            $tahun = $this->input->post('tahun');
             $jenis = $this->input->post('jenis');
 
             $warna = $this->input->post('warna');
@@ -508,7 +521,7 @@ class Mobil extends CI_Controller
 
             $data = array(
                 'id_pemilik' => $id_pemilik,
-                'tipe' => $tipe,
+                'tahun' => $tahun,
                 'jenis' => $jenis,
                 'warna' => $warna,
                 'jumlah_kursi' => $jumlah_kursi,

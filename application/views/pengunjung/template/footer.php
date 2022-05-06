@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-sm-4">
+                <!-- <div class="col-lg-2 col-sm-4">
                     <div class="footer-widget widget-menu">
                         <h4 class="widget-title">our cars</h4>
                         <ul>
@@ -32,7 +32,7 @@
                             <li><a href="#0">subaru liberty</a></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-2 col-sm-4">
                     <div class="footer-widget widget-menu">
                         <h4 class="widget-title">useful link</h4>

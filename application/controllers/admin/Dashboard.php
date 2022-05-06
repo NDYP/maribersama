@@ -82,6 +82,10 @@ class Dashboard extends CI_Controller
             // $id_mobil = $this->input->post('id_mobil');
             $y = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
             $id_mobil = $y['id_mobil'];
+
+            $x = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
+            $bagian_rental = $x['bagian_rental'];
+
             $bayar = $y['bayar'];
             $tanggal_pinjam = $y['tanggal_pinjam'];
             $tanggal_kembali = $y['tanggal_kembali'];
@@ -94,7 +98,7 @@ class Dashboard extends CI_Controller
 
 
             $denda = $this->input->post('denda');
-            $kurang = ($bayar  + $denda) - 50000;
+            $kurang = ($bayar  + $denda) - $bagian_rental;
             $data = array(
                 'status' => 'selesai',
                 'denda' => $denda,
@@ -108,7 +112,7 @@ class Dashboard extends CI_Controller
             $this->_sendmail2($id_transaksi);
             $this->session->set_flashdata('success', 'Transaksi Selesai');
             redirect('admin/transaksi/index');
-            // var_dump($data);
+            // var_dump($bagian_rental);
         }
     }
     private function _sendmail1($id_transaksi)

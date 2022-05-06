@@ -48,14 +48,15 @@
                                         <th>Pemilik</th>
                                         <th> : </th>
                                         <td><?= $mobil['nama_lengkap'] ?></td>
-                                        <td></td>
-                                        <th>Tipe</th>
-                                        <th> : </th>
-                                        <td><?= $mobil['tipe'] ?></td>
+
                                         <td></td>
                                         <th>Jenis</th>
                                         <th> : </th>
                                         <td><?= $mobil['jenis'] ?></td>
+                                        <td></td>
+                                        <th>Tahun</th>
+                                        <th> : </th>
+                                        <td><?= $mobil['tahun'] ?></td>
                                     </tr>
                                     <tr>
                                         <th>Warna</th>

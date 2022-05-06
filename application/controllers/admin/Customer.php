@@ -406,4 +406,14 @@ class Customer extends CI_Controller
         $data = $this->db->get_where('pengguna', ['id_pengguna' => $id_pengguna])->row_array();
         force_download('assets/foto/pengguna/' . $data['foto'], NULL);
     }
+    function downloadktp($id_pengguna)
+    {
+        //download foto
+        //$data = $this->db->get_where('mobil', ['id_mobil' => $id_mobil])->row_array();
+        // force_download('assets/foto/mobil/' . $data['thumbnail'], NULL);
+
+        //download ktp
+        $data = $this->db->get_where('pengguna', ['id_pengguna' => $id_pengguna])->row_array();
+        force_download('assets/foto/ktp/' . $data['ktp'], NULL);
+    }
 }

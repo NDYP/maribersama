@@ -216,6 +216,7 @@ class Transaksi extends CI_Controller
         $akhir = $this->input->post('akhir');
         $bulan2 = date('Y-m-d H:i:s', strtotime($akhir));
         $data['pemasukan_transaksi'] = $this->M_Transaksi->cetak($bulan1, $bulan2)->result_array();
+        $data['jumlah'] = $this->M_Transaksi->jumlah($bulan1, $bulan2)->result_array();
         $data['pemasukan_total'] = $this->M_Transaksi->total_keluar($bulan1, $bulan2)->result_array();
         $data['pengeluaran_karyawan'] = $this->M_Pengguna->cetak($bulan1, $bulan2)->result_array();
         $data['pengeluaran_karyawan_total'] = $this->M_Pengguna->total_keluar($bulan1, $bulan2)->result_array();

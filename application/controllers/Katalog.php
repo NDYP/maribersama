@@ -51,7 +51,7 @@ class Katalog extends CI_Controller
         $this->load->view('pengunjung/katalog/index', $data);
         $this->load->view('pengunjung/template/footer', $data);
     }
-    function sewa($id_mobil)
+    function cashless($id_mobil)
     {
         $this->form_validation->set_rules('alamat', 'alamat', 'required|trim', [
             'required' => 'Tidak Boleh Kosong!'
@@ -127,6 +127,88 @@ class Katalog extends CI_Controller
             $this->_sendmail();
             $this->session->set_flashdata('success', 'Tunggu konfirmasi pihak rental dan cek email');;
             redirect('katalog/index');
+        }
+    }
+    function cash($id_mobil)
+    {
+        $this->form_validation->set_rules('alamat', 'alamat', 'required|trim', [
+            'required' => 'Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('tanggal_pinjam', 'tanggal_pinjam', 'required|trim', [
+            'required' => 'Tidak Boleh Kosong!',
+        ]);
+        $this->form_validation->set_rules('tanggal_kembali', 'tanggal_kembali', 'required|trim', [
+            'required' => 'Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('opsi', 'tanggal_kembali', 'required|trim', [
+            'required' => 'Tidak Boleh Kosong!'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $data['title'] = "Checkout";
+            // $data['id_mobil'] = $this->uri->segment(3, 0);
+            $data['mobil'] = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
+            $data['kontak'] = $this->M_Profil->index();
+            //$data['penyewa'] = $this->M_Customer->index();
+            $this->load->view('pengunjung/template/header', $data);
+            $this->load->view('pengunjung/katalog/cashless', $data);
+            $this->load->view('pengunjung/template/footer', $data);
+        } else {
+            $id_mobil
+                = $this->input->post('id_mobil');
+            $x = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
+            $tarif = $x['tarif'];
+            $diskon = $x['diskon'];
+
+            $id_penyewa = $this->session->userdata('id_pengguna');
+            $alamat = $this->input->post('alamat');
+
+            $opsi = $this->input->post('opsi');
+            $tanggal_pinjam =
+                date('Y-m-d', strtotime($this->input->post('tanggal_pinjam')));
+            $tanggal_kembali =
+                date('Y-m-d', strtotime($this->input->post('tanggal_kembali')));
+            $diff = strtotime($tanggal_pinjam) - strtotime($tanggal_kembali);
+            // 1 day = 24 hours 
+            // 24 * 60 * 60 = 86400 seconds
+            $berapa_hari = ceil(abs($diff / 86400));
+            $tanggal_transaksi = date('Y-m-d');
+            $dp = $this->input->post('dp');
+
+            $jl_tarif = $tarif - (($tarif * $diskon) / 100);
+
+
+            $tanggal_lewat = date('Y-m-d');
+            $tanggal_kembali =
+                date('Y-m-d', strtotime($this->input->post('tanggal_kembali')));
+            $diff = strtotime($tanggal_lewat) - strtotime($tanggal_kembali);
+            // 1 day = 24 hours 
+            // 24 * 60 * 60 = 86400 seconds
+            $jml_hari_lewat = ceil(abs($diff / 86400));
+            $denda = $jml_hari_lewat * $jl_tarif;
+
+
+            $data = array(
+                'id_transaksi' => mt_rand(100000, 999999),
+                'id_penyewa' => $id_penyewa,
+                'id_mobil' => $id_mobil,
+                'alamat' => $alamat,
+                'status' => 'pending',
+                'opsi' => $opsi,
+                'tanggal_pinjam' => $tanggal_pinjam,
+                'tanggal_kembali' => $tanggal_kembali,
+                'tanggal_transaksi' => $tanggal_transaksi,
+                'dp' => $dp,
+                'denda' => $denda,
+                'bayar' => ($jl_tarif * $berapa_hari) - $dp,
+                'bank' => 'Cash',
+                'va' => 'Cash',
+            );
+            $this->M_Transaksi->tambah('transaksi', $data);
+            $this->_sendmail();
+            $this->session->set_flashdata('success', 'Tunggu konfirmasi pihak rental dan cek email');
+            redirect('katalog/index');
+            // var_dump($data);
         }
     }
     private function _sendmail()

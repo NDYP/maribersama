@@ -74,9 +74,9 @@
             <div class="col-lg-6">
                 <div class="section-header text-center">
                     <h2 class="section-title">Mobil Rental Terbaru</h2>
-                    <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, vehicula
+                    <!-- <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, vehicula
                         adipiscing quam. Nibh vestibulum tempor, magna maecenas, vehicula donec ut nonummy cras
-                        suscipit.</p>
+                        suscipit.</p> -->
                 </div>
             </div>
         </div>
@@ -89,9 +89,10 @@
                         data-background="<?= base_url('assets/foto/mobil/' . $x['thumbnail']); ?>"></div>
                     <div class="car-item-body">
                         <div class="content">
-                            <h4 class="title"><?= $x['tipe'] ?></h4>
-                            <span class="price">Sewa <?= $x['sewa'] ?> per hari</span>
-                            <p>Aliquam sollicitudin dolores tristiquvel ornare, vitae aenean.</p>
+                            <h4 class="title"><?= $x['jenis'] ?></h4>
+                            <span class="price"> <?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?>/hari</span>
+                            <span class="price"> - <?= $x['diskon'] ?>% (Diskon)</span>
+                            <p><?= $x['info']; ?></p>
                             <a href="
                                         <?php if ($this->session->userdata('id_pengguna')) : ?>
                                             <?= base_url('katalog/sewa/' . $x['id_mobil']) ?>
@@ -150,9 +151,9 @@
             <div class="col-lg-6">
                 <div class="section-header text-center">
                     <h2 class="section-title">Tim Mari Bersaudara</h2>
-                    <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, vehicula
+                    <!-- <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, vehicula
                         adipiscing quam. Nibh vestibulum tempor, magna maecenas, vehicula donec ut nonummy cras
-                        suscipit.</p>
+                        suscipit.</p> -->
                 </div>
             </div>
         </div>
@@ -188,9 +189,9 @@
             <div class="col-lg-6">
                 <div class="section-header text-center">
                     <h2 class="section-title">Berita Terbaru</h2>
-                    <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, vehicula
+                    <!-- <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, vehicula
                         adipiscing quam. Nibh vestibulum tempor, magna maecenas, vehicula donec ut nonummy cras
-                        suscipit.</p>
+                        suscipit.</p> -->
                 </div>
             </div>
         </div>

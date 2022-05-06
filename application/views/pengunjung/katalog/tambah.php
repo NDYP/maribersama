@@ -30,7 +30,7 @@
                     </div>
                     <div class="content">
                         <div class="content-block">
-                            <h3 class="car-name"><?= $mobil['tipe'] ?> - Diskon <?= $mobil['diskon'] ?>%</h3>
+                            <h3 class="car-name"><?= $mobil['jenis'] ?> - Diskon <?= $mobil['diskon'] ?>%</h3>
                             <span class="price">Tarif <?= $mobil['tarif'] ?> per hari</span>
                             <p><?= $mobil['info'] ?></p>
                         </div>

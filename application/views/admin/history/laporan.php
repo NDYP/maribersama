@@ -50,50 +50,52 @@
         <font face="Times New Roman" font size="">
             Laporan Akhir Bulan <?= bulan(); ?><br>
     </p>
-
     <font font-size=10px face="Times New Roman"><b>Transaksi</b>
-        <table class="table-responsive" style="width: 100%; page-break-after: always;" border="1" cellspacing="0">
+        <table style="font-size: 14px;" class="table-responsive" style="width: 100%; page-break-after: always;"
+            border="1" cellspacing="0">
             <tr>
                 <th>No.</th>
                 <th>Penyewa</th>
                 <th>Mobil</th>
-                <th>
-                    Alamat
-                </th>
+
                 <th>Pinjam - Kembali</th>
 
-                <th>Tarif <br> dp <br> Denda <br> Bayar</th>
+                <th>Rincian</th>
+                <th>Potongan jasa rental</th>
             </tr>
             <?php $no = 0;
-            foreach ($pemasukan_transaksi as $row) : $no++ ?>
+            foreach ($pemasukan_transaksi as $x) : $no++ ?>
             <tr>
                 <td>
                     <center> <?= $no; ?> </center>
                 </td>
                 <td>NIK : <?= $x['nik'] ?> <br>
                     Nama : <?= $x['nama_lengkap'] ?></td>
-                <td><?= $x['tipe'] ?> <br>
-                    <?= $x['jenis'] ?></td>
                 <td>
-                    <?= $x['transaksi_alamat'] ?>
+                    <?= $x['jenis'] ?> <?= $x['tahun'] ?></td>
+
+                <td><?= date('d-m-Y', strtotime($x['tanggal_pinjam'])); ?> <br> sampai <br>
+                    <?= date('d-m-Y', strtotime($x['tanggal_kembali'])); ?></td>
+                <td>Tarif : <?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?> -
+                    <?= $x['diskon'] ?>% (diskon)
+                    <br>
+                    DP : <?= "Rp." . number_format($x['dp'], 2, ',', '.') ?>
+                    <br>
+                    Denda : <?= "Rp." . number_format($x['denda'], 2, ',', '.') ?>
+                    <br>
+                    Total Bayar : <?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?>
                 </td>
-                <td><?= $x['tanggal_pinjam'] ?> - <?= $x['tanggal_kembali'] ?></td>
-                <td><?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?> -
-                    <?= $x['diskon'] ?>%
-                    <br>
-                    <?= "Rp." . number_format($x['dp'], 2, ',', '.') ?>
-                    <br>
-                    <?= "Rp." . number_format($x['denda'], 2, ',', '.') ?>
-                    <br><?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?>
+                <td>
+                    <?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?>
                 </td>
             </tr>
             <?php endforeach; ?>
             <tr>
-                <th align="center" colspan="5">Total Pemasukan</th>
-                <td> <b>
+                <th align="center" colspan="4">Total Pemasukan</th>
+                <td colspan="2"> <b>
                         <?php $no = 0;
                         foreach ($pemasukan_total as $x) : $no++ ?>
-                        <?= "Rp." . number_format($x['x'], 2, ',', '.') ?>
+                        <?= "Rp." . number_format($x['x'] - $x['y'] + $x['dp'], 2, ',', '.') ?>
                     </b></td>
                 <?php endforeach; ?>
 
@@ -120,11 +122,11 @@
             <td width="350">
                 <font face="Times New Roman" font size="">Bendahara <br>Rental Mari Bersaudara<br> <br>
                     <br><br><br>
-                    <p>Frakerson</p>
+                    <p>Meltha</p>
             </td>
             <td align="left">
                 <font face="Times New Roman" font size="">Owner <br>Rental Mari Bersaudara<br> <br> <br><br><br>
-                    <p>Ibnu Singgih Hengsuguswo, ST</p>
+                    <p>Meltha</p>
             </td>
         </tr>
     </table>

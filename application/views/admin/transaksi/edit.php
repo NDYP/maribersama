@@ -62,10 +62,10 @@
                                         <?php foreach ($mobil as $x) : ?>
                                         <?php if ($transaksi['id_mobil'] == $x['id_mobil']) : ?>
                                         <option value="<?= $x['id_mobil']; ?>" name="id_mobil" selected>
-                                            Tipe : <?= $x['tipe']; ?> - Jenis : <?= $x['jenis']; ?></option>
+                                            <?= $x['jenis']; ?> (<?= $x['tahun']; ?>)</option>
                                         <?php else : ?>
                                         <option value="<?= $x['id_mobil']; ?>" name="id_mobil">
-                                            Tipe : <?= $x['tipe']; ?> - Jenis : <?= $x['jenis']; ?></option>
+                                            <?= $x['jenis']; ?> (<?= $x['tahun']; ?>)</option>
                                         <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>

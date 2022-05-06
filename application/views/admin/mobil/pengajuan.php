@@ -59,8 +59,8 @@
                                                     <td><?= $x['nama_lengkap'] ?>
                                                         <br>NIK : <?= $x['nik'] ?>
                                                     </td>
-                                                    <td><?= $x['tipe'] ?> <br>
-                                                        <?= $x['jenis'] ?>
+                                                    <td><?= $x['jenis'] ?>
+                                                        (<?= $x['tahun'] ?>)
                                                     </td>
                                                     <td><?= $x['transmisi'] ?><br>
                                                         <?= $x['jumlah_kursi'] ?></td>

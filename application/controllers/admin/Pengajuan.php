@@ -31,8 +31,9 @@ class Pengajuan extends CI_Controller
     function tambah()
     {
 
-        $this->form_validation->set_rules('tipe', 'tipe', 'required|trim', [
+        $this->form_validation->set_rules('tahun', 'tahun', 'required|trim|numeric', [
             'required' => 'Tidak Boleh Kosong!',
+            'numeric' => 'Angka!',
         ]);
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim', [
             'required' => 'Tidak Boleh Kosong!'
@@ -83,7 +84,7 @@ class Pengajuan extends CI_Controller
                     $file = $gbr['file_name'];
 
                     $id_pemilik = $this->session->userdata('id_pengguna');
-                    $tipe = $this->input->post('tipe');
+                    $tahun = $this->input->post('tahun');
                     $jenis = $this->input->post('jenis');
                     $warna = $this->input->post('warna');
                     $jumlah_kursi = $this->input->post('jumlah_kursi');
@@ -94,7 +95,7 @@ class Pengajuan extends CI_Controller
                     $data = array(
                         'thumbnail' => $file,
                         'id_pemilik' => $id_pemilik,
-                        'tipe' => $tipe,
+                        'tahun' => $tahun,
                         'warna' => $warna,
                         'jumlah_kursi' => $jumlah_kursi,
                         'jenis' => $jenis,

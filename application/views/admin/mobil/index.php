@@ -41,7 +41,7 @@
                                                         style="width: 177.281px;">No.</th>
                                                     <th style="width: 224.844px;">Foto</th>
                                                     <th style="width: 224.844px;">Pemilik</th>
-                                                    <th style="width: 206.484px;">Tipe <br> Jenis</th>
+                                                    <th style="width: 206.484px;">Jenis (Tahun)</th>
                                                     <th style="width: 111.703px;">Transmisi
                                                         <br>Jumlah Kursi
                                                     </th>
@@ -63,8 +63,8 @@
                                                     <td><?= $x['nama_lengkap'] ?>
                                                         <br>NIK : <?= $x['nik'] ?>
                                                     </td>
-                                                    <td><?= $x['tipe'] ?> <br>
-                                                        <?= $x['jenis'] ?>
+                                                    <td><?= $x['jenis'] ?>
+                                                        (<?= $x['tahun'] ?>)
                                                     </td>
                                                     <td><?= $x['transmisi'] ?><br>
                                                         <?= $x['jumlah_kursi'] ?></td>

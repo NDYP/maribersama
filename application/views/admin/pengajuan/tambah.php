@@ -25,20 +25,21 @@
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="inputEmail" class="control-label">Tipe</label>
-                                    <input type="text" class="form-control" placeholder="Tipe" name="tipe"
-                                        value="<?= set_value('tipe'); ?>">
-                                    <?= form_error('tipe', '<small class="text-danger pl-1">', '</small>'); ?>
-                                </div>
-                            </div>
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Jenis</label>
                                     <input type="text" class="form-control" placeholder="Jenis" name="jenis"
                                         value="<?= set_value('jenis'); ?>">
                                     <?= form_error('jenis', '<small class="text-danger pl-1">', '</small>'); ?>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Tahun Produksi</label>
+                                    <input type="text" class="form-control" placeholder="Tahun Produksi" name="tahun"
+                                        value="<?= set_value('tahun'); ?>">
+                                    <?= form_error('tahun', '<small class="text-danger pl-1">', '</small>'); ?>
                                 </div>
                             </div>
                             <div class="col-md-4">

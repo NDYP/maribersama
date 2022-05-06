@@ -50,7 +50,9 @@
                                     <tr>
                                         <th>NIK</th>
                                         <th> : </th>
-                                        <td><?= $customer['nik'] ?></td>
+                                        <td><a
+                                                href="<?= base_url('admin/customer/downloadktp/' . $customer['id_pengguna']); ?>"><?= $customer['nik'] ?></a>
+                                        </td>
                                         <td></td>
                                         <th>Jenis Kelamin</th>
                                         <th> : </th>

@@ -49,9 +49,9 @@
                                         <th> : </th>
                                         <td><?= $index2['nama_lengkap'] ?></td>
                                         <td></td>
-                                        <th>Tipe</th>
+                                        <th>Tahun Produksi</th>
                                         <th> : </th>
-                                        <td><?= $index2['tipe'] ?></td>
+                                        <td><?= $index2['tahun'] ?></td>
                                         <td></td>
                                         <th>Jenis</th>
                                         <th> : </th>

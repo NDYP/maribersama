@@ -186,7 +186,7 @@ class Snap extends CI_Controller
 			'tanggal_transaksi' => $result['transaction_time'],
 		);
 		$this->M_Transaksi->tambah('transaksi', $data);
-		$this->session->set_flashdata('success', 'Transaksi Baru Ditambahkan');
+		$this->session->set_flashdata('success', 'Tunggu konfirmasi pihak rental dan cek email');
 		redirect('admin/transaksi/index');
 		// echo json_encode($data);
 	}

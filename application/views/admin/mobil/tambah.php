@@ -40,21 +40,22 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="inputEmail" class="control-label">Tipe</label>
-                                    <input type="text" class="form-control" placeholder="Tipe" name="tipe"
-                                        value="<?= set_value('tipe'); ?>">
-                                    <?= form_error('tipe', '<small class="text-danger pl-1">', '</small>'); ?>
 
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Jenis</label>
                                     <input type="text" class="form-control" placeholder="Jenis" name="jenis"
                                         value="<?= set_value('jenis'); ?>">
                                     <?= form_error('jenis', '<small class="text-danger pl-1">', '</small>'); ?>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Tahun Produksi</label>
+                                    <input type="text" class="form-control" placeholder="Tahun" name="tahun"
+                                        value="<?= set_value('tahun'); ?>">
+                                    <?= form_error('tahun', '<small class="text-danger pl-1">', '</small>'); ?>
 
                                 </div>
                             </div>
@@ -100,7 +101,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputEmail" class="control-label">Tarif</label>
-                                    <input type="text" class="form-control" placeholder="Taris Sewa/hari" name="tarif"
+                                    <input type="text" class="form-control" placeholder="Harga Sewa/hari" name="tarif"
                                         value="<?= set_value('tarif'); ?>">
                                 </div>
                                 <?= form_error('tarif', '<small class="text-danger pl-1">', '</small>'); ?>
@@ -114,6 +115,14 @@
                                 </div>
                                 <?= form_error('diskon', '<small class="text-danger pl-1">', '</small>'); ?>
 
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="control-label">Bagian Rental/Hari</label>
+                                    <input type="text" class="form-control" placeholder="" name="bagian_rental"
+                                        value="<?= set_value('bagian_rental'); ?>">
+                                    <?= form_error('bagian_rental', '<small class="text-danger pl-1">', '</small>'); ?>
+                                </div>
                             </div>
                         </div>
                         <div class="row">

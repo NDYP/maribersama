@@ -77,6 +77,18 @@ class M_Transaksi extends CI_Model
             ->get();
         return $query;
     }
+    function jumlah($bulan1, $bulan2)
+    {
+        $query = $this->db->select('COUNT(transaksi.id_mobil) as jumlah, mobil.jenis, mobil.tahun')
+            ->from('transaksi')
+            ->join('mobil', 'transaksi.id_mobil=mobil.id_mobil', 'left')
+            ->join('pengguna', 'transaksi.id_penyewa=pengguna.id_pengguna', 'left')
+            ->where('tanggal_transaksi >=', $bulan1)
+            ->where('tanggal_transaksi <=', $bulan2)
+            ->order_by('COUNT(transaksi.id_mobil)', 'DESC')
+            ->get();
+        return $query;
+    }
     function total_keluar($bulan1, $bulan2)
     {
         // $x = date('Y-m-d', strtotime('tanggal_transaksi'));

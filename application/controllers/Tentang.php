@@ -57,40 +57,58 @@ class Tentang extends CI_Controller
         $this->form_validation->set_rules('password', 'password', 'required|trim', [
             'required' => 'Tidak Boleh Kosong!'
         ]);
+        if (empty($_FILES['ktp']['name'])) {
+            $this->form_validation->set_rules('ktp', 'ktp', 'required|trim', [
+                'required' => 'Tidak Boleh Kosong!'
+            ]);
+        }
         if ($this->form_validation->run() == FALSE) {
             $this->index();
         } else {
-            $nik = $this->input->post('nik');
-            $nama_lengkap = $this->input->post('nama_lengkap');
-            $email = $this->input->post('email');
-            $alamat = $this->input->post('alamat');
-            $no_hp = $this->input->post('no_hp');
-            $jabatan = $this->input->post('jabatan');
-            $jenis_kelamin = $this->input->post('jenis_kelamin');
-            $tanggal = date('Y-m-d');
-            $tempat_lahir = $this->input->post('tempat_lahir');
-            $x = $this->input->post('tanggal_lahir');
-            $tanggal_lahir = date('Y-m-d', strtotime($x));
-            $username = $this->input->post('username');
-            $password = $this->input->post('password');
-            $data = array(
-                'username' => $username,
-                'password' => $password,
-                'nik' => $nik,
-                'nama_lengkap' => $nama_lengkap,
-                'alamat' => $alamat,
-                'no_hp' => $no_hp,
-                'email' => $email,
-                'jabatan' => $jabatan,
-                'daftar' => $tanggal,
-                'jenis_kelamin' => $jenis_kelamin,
-                'tempat_lahir' => $tempat_lahir,
-                'tanggal_lahir' => $tanggal_lahir,
-                'id_akses' => 3
-            );
-            $this->M_Customer->tambah('pengguna', $data);
-            $this->session->set_flashdata('success', 'Silahkan Login');
-            redirect('login', 'refresh');
+            $config['upload_path']          = './assets/foto/ktp/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['max_size']             = 3000;
+            $config['file_name'] = $this->session->userdata('id_pengguna');
+
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('ktp')) {
+                echo $this->upload->display_errors();
+            } else {
+                $nik = $this->input->post('nik');
+                $nama_lengkap = $this->input->post('nama_lengkap');
+                $email = $this->input->post('email');
+                $alamat = $this->input->post('alamat');
+                $no_hp = $this->input->post('no_hp');
+                $jabatan = $this->input->post('jabatan');
+                $jenis_kelamin = $this->input->post('jenis_kelamin');
+                $tanggal = date('Y-m-d');
+                $tempat_lahir = $this->input->post('tempat_lahir');
+                $x = $this->input->post('tanggal_lahir');
+                $tanggal_lahir = date('Y-m-d', strtotime($x));
+                $username = $this->input->post('username');
+                $password = $this->input->post('password');
+                $gbr = $this->upload->data();
+                $file = $gbr['file_name'];
+                $data = array(
+                    'username' => $username,
+                    'password' => $password,
+                    'nik' => $nik,
+                    'nama_lengkap' => $nama_lengkap,
+                    'alamat' => $alamat,
+                    'no_hp' => $no_hp,
+                    'email' => $email,
+                    'jabatan' => $jabatan,
+                    'daftar' => $tanggal,
+                    'jenis_kelamin' => $jenis_kelamin,
+                    'tempat_lahir' => $tempat_lahir,
+                    'tanggal_lahir' => $tanggal_lahir,
+                    'id_akses' => 3,
+                    'ktp' => $file
+                );
+                $this->M_Customer->tambah('pengguna', $data);
+                $this->session->set_flashdata('success', 'Silahkan Login');
+                redirect('login', 'refresh');
+            }
         }
     }
     private function _sendmail()

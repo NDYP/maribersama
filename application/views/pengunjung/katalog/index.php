@@ -20,36 +20,14 @@
 <!-- car-search-section start -->
 <section class="car-search-section pt-120 pb-120">
     <div class="container">
-        <!--  <div class="row">
-            <div class="col-lg-12">
-                <div class="car-search-filter-area">
-                    <div class="car-search-filter-form-area">
-                        <form class="car-search-filter-form">
-                            <div class="row justify-content-between">
-                                <div class="col-lg-4 col-md-5 col-sm-6">
-                                    <div class="cart-sort-field">
-                                        <span class="caption">Sort by : </span>
-                                        <select>
-                                            <option>Pajero Range</option>
-                                            <option>Toyota Axio</option>
-                                            <option>Lancer</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7 col-md-7 col-sm-6 d-flex">
-                                    <input type="text" name="car_search" id="car_search" placeholder="Search what you want........">
-                                    <button class="search-submit-btn">Search</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="view-style-toggle-area">
-                        <button class="view-btn list-btn active"><i class="fa fa-bars"></i></button>
-                        <button class="view-btn grid-btn"><i class="fa fa-th-large"></i></button>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Katalog</h2>
                 </div>
             </div>
-        </div> -->
+        </div>
+
         <div class="row mt-70">
             <div class="col-lg-12">
                 <div class="car-search-result-area list--view row mb-none-30">
@@ -61,17 +39,14 @@
                                 data-background="<?= base_url('assets/foto/mobil/' . $x['thumbnail']); ?>"></div>
                             <div class="car-item-body">
                                 <div class="content">
-                                    <h4 class="title"><?= $x['tipe'] ?></h4>
+                                    <h4 class="title"><?= $x['jenis'] ?></h4>
                                     <span class="price">Sewa
                                         <?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?>/hari</span>
                                     <span class="price"> - <?= $x['diskon'] ?>% (Diskon)</span>
                                     <p><?= $x['info'] ?></p>
                                     <?php if ($x['status'] == 'Tersedia') : ?>
-                                    <a href="<?php if ($this->session->userdata('id_pengguna')) : ?>
-                                            <?= base_url('katalog/sewa/' . $x['id_mobil']) ?>
-                                            <?php else : ?>
-                                                <?= base_url('login') ?>
-                                                <?php endif; ?>" class="cmn-btn">Sewa</a>
+                                    <button href="" class="cmn-btn" data-no="<?= $x['id_mobil']; ?>" data-toggle="modal"
+                                        data-target="#modal-no<?= $x['id_mobil']; ?>">Sewa</button>
                                     <?php elseif ($x['status'] == 'Sedang disewa') : ?>
                                     <a href="" class="cmn-btn"><?= $x['status'] ?></a>
                                     <?php endif; ?>
@@ -79,7 +54,6 @@
                                 <div class="car-item-meta">
                                     <ul class="details-list">
                                         <li><i class="fa fa-car"></i>model <?= $x['jenis'] ?></li>
-
                                         <li><i class="fa fa-car"></i><?= $x['jumlah_kursi'] ?> kursi</li>
                                         <li><i class="fa fa-tachometer"></i><?= $x['warna']; ?></li>
                                         <li><i class="fa fa-sliders"></i><?= $x['transmisi'] ?></li>
@@ -107,4 +81,25 @@
         </div>
     </div>
 </section>
+<?php $no = 1;
+foreach ($index as $x) : ?>
+<div class="modal" id="modal-no<?= $x['id_mobil']; ?>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <a href="<?= base_url('katalog/cash/' . $x['id_mobil']) ?>" class="cmn-btn">
+                <center>DP
+                    Cash/Tunai</center>
+            </a>
+            <br>
+            <a href="<?= base_url('katalog/cashless/' . $x['id_mobil']) ?>" class="cmn-btn">
+                <center>
+                    DP Transfer
+                </center>
+            </a>
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+
 <!-- car-search-section end -->

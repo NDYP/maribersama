@@ -42,8 +42,8 @@
                                 <th style="width: 111.703px;">DP</th>
                                 <th style="width: 111.703px;">Denda</th>
                                 <th style="width: 111.703px;">Bayar</th>
-                                <th style="width: 5%" style="width: 111.703px;">Opsi
-                                </th>
+                                <!-- <th style="width: 5%" style="width: 111.703px;">Opsi
+                                </th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -53,12 +53,11 @@
                                 <td class="sorting_1"><?= $no++; ?></td>
 
 
-                                <td>Tipe : <?= $x['tipe'] ?> <br>
-                                    Jenis : <?= $x['jenis'] ?>
+                                <td><?= $x['jenis'] ?>
                                 </td>
                                 <td><?= $x['transaksi_alamat'] ?></td>
-                                <td><?= $x['tanggal_pinjam'] ?> -
-                                    <?= $x['tanggal_kembali'] ?></td>
+                                <td><?= date('d/m/Y', strtotime($x['tanggal_pinjam'])); ?> -
+                                    <?= date('d/m/Y', strtotime($x['tanggal_kembali'])); ?></td>
                                 <td><?= $x['tarif'] ?> - <?= $x['diskon'] ?>%</td>
                                 <td><span class="badge bg-red"><?= $x['dp'] ?></span>
                                 </td>
@@ -66,14 +65,14 @@
                                 </td>
                                 <td><span class="badge bg-red"><?= $x['bayar'] ?></span>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <center>
 
                                         <a class="btn btn-xs bg-yellow" type="button"
                                             href="<?= base_url('akun/hapus/' . $x['id_transaksi']); ?>"><span
                                                 class="fa fa-trash"></span></a>
                                     </center>
-                                </td>
+                                </td> -->
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

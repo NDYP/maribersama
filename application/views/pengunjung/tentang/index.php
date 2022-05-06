@@ -96,6 +96,13 @@
                                 <?= form_error('alamat', '<small class="text-danger pl-1">', '</small>'); ?>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group col-xl-12">
+                                <text>KTP</text>
+                                <input name="ktp" class="form-control has-icon" type="file" placeholder="ktp" required>
+                                <?= form_error('ktp', '<small class="text-danger pl-1">', '</small>'); ?>
+                            </div>
+                        </div>
                         <button type="submit" class="cmn-btn">Daftar</button>
                     </form>
                 </div>
@@ -103,9 +110,9 @@
             <div class="col-lg-6">
                 <div class="feature-content">
                     <h2 class="title title--border">Layanan Unggulan</h2>
-                    <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, vehicula
+                    <!-- <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, vehicula
                         adipiscing quam. Nibh vestibulum tempor, magna maecenas, vehicula donec ut nonummy cras
-                        suscipit.</p>
+                        suscipit.</p> -->
                 </div>
                 <div class="row">
                     <?php $no = 1;
@@ -144,9 +151,9 @@
                 <div class="call-cation-content">
                     <h3 class="top-title">Hubungi Kami</h3>
                     <span class="call-number"><?= $x['no_hp']; ?></span>
-                    <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, ve adiping quam.
+                    <!-- <p>Pellentesque turpis et nonummy eu nulla. Quis gravida ultrices nam sed vel ut, ve adiping quam.
                         Nibh vestibulum tempor, magna maecenas, vehicula donec ut nonummy crascipit. Amet aliquam ut
-                        elit semper urna metus, pede.</p>
+                        elit semper urna metus, pede.</p> -->
                     <a href="<?= base_url('kontak'); ?>" class="cmn-btn">kontak</a>
                 </div>
             </div>
@@ -203,8 +210,8 @@
             <div class="col-lg-6">
                 <div class="section-header text-center">
                     <h2 class="section-title">Tim Mari Bersaudara</h2>
-                    <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis
-                        in tellu.</p>
+                    <!-- <p> Augue urna molestie mi adipiscing vulputate pede sedmassa Praesquam massa, sodales velit turpis
+                        in tellu.</p> -->
                 </div>
             </div>
         </div>

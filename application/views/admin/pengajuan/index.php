@@ -34,8 +34,8 @@
                                             <thead>
                                                 <tr role="row">
                                                     <th>No</th>
-                                                    <th>Tipe</th>
-                                                    <th>TipeJenis</th>
+
+                                                    <th>Jenis (Tahun)</th>
                                                     <th>Transmisi</th>
                                                     <th>Jumlah Kursi</th>
 
@@ -49,11 +49,9 @@
                                                 foreach ($index as $x) : ?>
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1"><?= $no++; ?></td>
+
                                                     <td>
-                                                        <?= $x['tipe'] ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $x['jenis'] ?>
+                                                        <?= $x['jenis'] ?> (<?= $x['tahun'] ?>)
                                                     </td>
                                                     <td><?= $x['transmisi'] ?><br>
                                                     <td><?= $x['jumlah_kursi'] ?></td>

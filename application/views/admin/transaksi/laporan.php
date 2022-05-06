@@ -51,19 +51,18 @@
             Laporan Akhir Bulan <?= bulan(); ?> Pemasukan & Pengeluaran <br>
     </p>
 
-    <font font-size=10px face="Times New Roman"><b>Pemasukan transaksi</b>
-        <table style="font-size: 12px;" class="table-responsive" style="width: 100%; page-break-after: always;"
+
+    <font font-size=10px face="Times New Roman"><b>Total Pemasukan</b>
+        <table style="font-size: 14px;" class="table-responsive" style="width: 100%; page-break-after: always;"
             border="1" cellspacing="0">
             <tr>
                 <th>No.</th>
                 <th>Penyewa</th>
                 <th>Mobil</th>
-                <th>
-                    Alamat
-                </th>
+
                 <th>Pinjam - Kembali</th>
 
-                <th>Tarif <br> dp <br> Denda <br> Bayar</th>
+                <th>Rincian</th>
                 <th>Pemasukan</th>
             </tr>
             <?php $no = 0;
@@ -74,20 +73,19 @@
                 </td>
                 <td>NIK : <?= $x['nik'] ?> <br>
                     Nama : <?= $x['nama_lengkap'] ?></td>
-                <td><?= $x['tipe'] ?> <br>
-                    <?= $x['jenis'] ?></td>
                 <td>
-                    <?= $x['transaksi_alamat'] ?>
-                </td>
+                    <?= $x['jenis'] ?> (<?= $x['tahun'] ?>)</td>
+
                 <td><?= date('d-m-Y', strtotime($x['tanggal_pinjam'])); ?> <br> sampai <br>
                     <?= date('d-m-Y', strtotime($x['tanggal_kembali'])); ?></td>
-                <td><?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?> -
-                    <?= $x['diskon'] ?>%
+                <td>Tarif : <?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?> -
+                    <?= $x['diskon'] ?>% (diskon)
                     <br>
-                    <?= "Rp." . number_format($x['dp'], 2, ',', '.') ?>
+                    DP : <?= "Rp." . number_format($x['dp'], 2, ',', '.') ?>
                     <br>
-                    <?= "Rp." . number_format($x['denda'], 2, ',', '.') ?>
-                    <br><?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?>
+                    Denda : <?= "Rp." . number_format($x['denda'], 2, ',', '.') ?>
+                    <br>
+                    Total Bayar : <?= "Rp." . number_format($x['bayar'], 2, ',', '.') ?>
                 </td>
                 <td>
                     <?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?>
@@ -95,8 +93,8 @@
             </tr>
             <?php endforeach; ?>
             <tr>
-                <th align="center" colspan="6">Total Pemasukan</th>
-                <td> <b>
+                <th align="center" colspan="4">Total pemasukan</th>
+                <td colspan="2"> <b>
                         <?php $no = 0;
                         foreach ($pemasukan_total as $x) : $no++ ?>
                         <?= "Rp." . number_format($x['x'], 2, ',', '.') ?>
@@ -107,8 +105,38 @@
         </table>
     </font>
     <br>
+    <font font-size=10px face="Times New Roman"><b>Penyewaan terbanyak terendah</b>
+        <table style="font-size: 14px;" class="table-responsive" style="width: 100%; page-break-after: always;"
+            border="1" cellspacing="0">
+            <tr>
+                <th>No.</th>
+
+                <th>Mobil</th>
+
+
+                <th>Jumlah Penyewaan</th>
+            </tr>
+            <?php $no = 0;
+            foreach ($jumlah as $x) : $no++ ?>
+            <tr>
+                <td>
+                    <center> <?= $no; ?> </center>
+                </td>
+
+                <td>
+                    <?= $x['jenis'] ?> (<?= $x['tahun'] ?>)</td>
+                <td>
+                    <center>
+                        <?= $x['jumlah']; ?></center>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+
+        </table>
+    </font>
+    <br>
     <font font-size=10px face="Times New Roman"><b>Pengeluaran gaji karyawan</b>
-        <table style="font-size: 12px;" class="table-responsive" style="width: 100%; page-break-after: always;"
+        <table style="font-size: 14px;" class="table-responsive" style="width: 100%; page-break-after: always;"
             border="1" cellspacing="0">
             <tr>
                 <th>No.</th>
@@ -149,49 +177,7 @@
             </tr>
         </table>
     </font>
-    <!-- <br>
-    <font font-size=10px face="Times New Roman"><b>Pengeluaran sewa mobil</b>
-        <table class="table-responsive" style="width: 100%; page-break-after: always;" border="1" cellspacing="0">
-            <tr>
-                <th>No.</th>
-                <th>Pemilik</th>
-                <th>Tipe</th>
-                <th>
-                    Jenis
-                </th>
-                <th>Transmisi</th>
-                <th>
-                    Sewa/Bulan
-                </th>
-            </tr>
-            <?php $no = 0;
-            foreach ($pengeluaran_mobil as $row) : $no++ ?>
-            <tr>
-                <td>
-                    <center><?= $no; ?></center>
-                </td>
-                <td>NIK : <?= $row['nik'] ?> <br>
-                    Nama Lengkap : <?= $row['nama_lengkap'] ?>
-                </td>
-                <td><?= $row['tipe'] ?></td>
-                <td>
-                    <?= $row['jenis'] ?>
-                </td>
-                <td><?= $row['transmisi'] ?></td>
 
-                <td><?= "Rp." . number_format($x['sewa'], 2, ',', '.') ?></td>
-            </tr>
-            <?php endforeach; ?>
-            <tr>
-                <th align="center" colspan="5">Total Biaya Sewa</th>
-                <td><b> <?php $no = 0;
-                        foreach ($pengeluaran_mobil_total as $x) : $no++ ?>
-
-                        <?= "Rp." . number_format($x['x'], 2, ',', '.') ?></td>
-                <?php endforeach; ?></b></td>
-            </tr>
-        </table>
-    </font> -->
 
     <br>
     <br>
@@ -199,7 +185,7 @@
 
 
 
-    <table class="table-responsive" style="width: 100%; page-break-after: always;" border="" cellspacing="0">
+    <table class="table-responsive" style="width: 100%; page-break-after: none;" border="" cellspacing="0">
         <tr>
             <td></td>
             <td>
@@ -213,11 +199,11 @@
             <td width="350">
                 <font face="Times New Roman" font size="">Bendahara <br>Rental Mari Bersaudara<br> <br>
                     <br><br><br>
-                    <p>Frakerson</p>
+                    <p>Meltha</p>
             </td>
             <td align="left">
                 <font face="Times New Roman" font size="">Owner <br>Rental Mari Bersaudara<br> <br> <br><br><br>
-                    <p>Ibnu Singgih Hengsuguswo, ST</p>
+                    <p>Meltha</p>
             </td>
         </tr>
     </table>

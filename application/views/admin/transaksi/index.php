@@ -66,7 +66,7 @@
 
                                                     <td><?= $x['nama_lengkap'] ?>
                                                     </td>
-                                                    <td><?= $x['tipe'] ?>
+                                                    <td><?= $x['jenis'] ?> (<?= $x['tahun'] ?>)
                                                     </td>
                                                     <!-- <td><?= $x['transaksi_alamat'] ?></td> -->
                                                     <td><?= $x['tanggal_pinjam'] ?> - <?= $x['tanggal_kembali'] ?></td>
