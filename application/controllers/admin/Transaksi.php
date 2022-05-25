@@ -112,17 +112,21 @@ class Transaksi extends CI_Controller
 
 
             $data = array(
+                'id_transaksi' => mt_rand(100000, 999999),
                 'id_penyewa' => $id_penyewa,
                 'id_mobil' => $id_mobil,
                 'alamat' => $alamat,
-                'status' => 'pengajuan',
+                'status' => 'pending',
                 'opsi' => $opsi,
                 'tanggal_pinjam' => $tanggal_pinjam,
                 'tanggal_kembali' => $tanggal_kembali,
                 'tanggal_transaksi' => $tanggal_transaksi,
                 'dp' => $dp,
-                'denda' => $denda,
+                'denda' => 0,
                 'bayar' => ($jl_tarif * $berapa_hari) - $dp,
+
+                'bank' => 'Cash',
+                'va' => 'Cash',
             );
             $this->M_Transaksi->tambah('transaksi', $data);
             $this->session->set_flashdata('success', 'Transaksi Baru Ditambahkan');
@@ -212,14 +216,14 @@ class Transaksi extends CI_Controller
     {
         $data['profil'] = $this->M_Profil->index();
         $mulai = $this->input->post('mulai');
-        $bulan1 = date('Y-m-d H:i:s', strtotime($mulai));
+        $data['bulan1'] = date('Y-m-d H:i:s', strtotime($mulai));
         $akhir = $this->input->post('akhir');
-        $bulan2 = date('Y-m-d H:i:s', strtotime($akhir));
-        $data['pemasukan_transaksi'] = $this->M_Transaksi->cetak($bulan1, $bulan2)->result_array();
-        $data['jumlah'] = $this->M_Transaksi->jumlah($bulan1, $bulan2)->result_array();
-        $data['pemasukan_total'] = $this->M_Transaksi->total_keluar($bulan1, $bulan2)->result_array();
-        $data['pengeluaran_karyawan'] = $this->M_Pengguna->cetak($bulan1, $bulan2)->result_array();
-        $data['pengeluaran_karyawan_total'] = $this->M_Pengguna->total_keluar($bulan1, $bulan2)->result_array();
+        $data['bulan2'] = date('Y-m-d H:i:s', strtotime($akhir));
+        $data['pemasukan_transaksi'] = $this->M_Transaksi->cetak($data['bulan1'], $data['bulan2'])->result_array();
+        $data['jumlah'] = $this->M_Transaksi->jumlah($data['bulan1'], $data['bulan2'])->result_array();
+        $data['pemasukan_total'] = $this->M_Transaksi->total_keluar($data['bulan1'], $data['bulan2'])->result_array();
+        $data['pengeluaran_karyawan'] = $this->M_Pengguna->cetak($data['bulan1'], $data['bulan2'])->result_array();
+        $data['pengeluaran_karyawan_total'] = $this->M_Pengguna->total_keluar($data['bulan1'], $data['bulan2'])->result_array();
         // $data['pengeluaran_mobil'] = $this->M_Mobil->cetak($bulan1, $bulan2)->result_array();
         // $data['pengeluaran_mobil_total'] = $this->M_Mobil->total_keluar($bulan1, $bulan2)->result_array();
         $this->pdf->setPaper('A4', 'potrait');

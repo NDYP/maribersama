@@ -162,18 +162,12 @@ class Mobil extends CI_Controller
         } else {
             $config['upload_path'] = './assets/foto/mobil/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-            $config['file_name'] = $this->input->post('id_mobil');
+            $config['file_name'] = $this->input->post('id_pemilik');
+            $this->upload->initialize($config);
             if (!empty($_FILES['thumbnail']['name'])) {
                 if ($this->upload->do_upload('thumbnail')) {
                     $gbr = $this->upload->data();
-                    $config['image_library'] = 'gd2';
-                    $config['source_image'] = './assets/foto/mobil/' . $gbr['file_name'];
-                    $config['maintain_ratio'] = FALSE;
-                    $config['overwrite'] = TRUE;
-                    $config['max_size']  = 1024;
-                    $config['new_image'] = './assets/foto/mobil/' . $gbr['file_name'];
-                    $this->load->library('image_lib', $config);
-                    $this->image_lib->resize();
+
                     $file = $gbr['file_name'];
                     $id_pemilik = $this->input->post('id_pemilik');
                     $id_mobil = $this->input->post('id_mobil');
@@ -606,8 +600,8 @@ class Mobil extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.mailtrap.io',
             'smtp_port' => 2525,
-            'smtp_user' => '59b2958d9247bd',
-            'smtp_pass' => '20abef486bad12',
+            'smtp_user' => '43111cc6037b8d',
+            'smtp_pass' => '8b752bd5412080',
             'crlf' => "\r\n",
             'newline' => "\r\n"
         );

@@ -27,8 +27,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Denda</label>
-                                    <input name="denda" value="<?= set_value('denda'); ?>" type="text"
-                                        class="form-control" id="exampleInputEmail1" placeholder="isi ...">
+                                    <input name="denda" value="<?= $denda; ?>" type="text" class="form-control"
+                                        id="exampleInputEmail1" placeholder="isi ...">
                                     <?= form_error('denda', '<small class="text-danger pl-1">', '</small>'); ?>
 
                                     <input name="id_transaksi" value="<?= $transaksi['id_transaksi']; ?>" type="hidden"

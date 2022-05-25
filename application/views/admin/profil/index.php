@@ -3,15 +3,12 @@
     <section class="content-header">
         <h1>
             <?= $title; ?>
-
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?= base_url('admin/beranda'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="<?= base_url('admin/profil'); ?>"><?= $title; ?></a></li>
-
         </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -43,8 +40,9 @@
                                 <tbody>
 
                                     <tr>
-                                        <th style="background-color:orange;" colspan="3" class="subtitle_head">
-                                            <strong>Profil</strong></th>
+                                        <th style="background-color:green;" colspan="3" class="subtitle_head">
+                                            <center>PROFIL</center>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td width="300">Nama Rental</td>

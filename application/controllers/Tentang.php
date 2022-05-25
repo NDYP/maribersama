@@ -66,9 +66,8 @@ class Tentang extends CI_Controller
             $this->index();
         } else {
             $config['upload_path']          = './assets/foto/ktp/';
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 3000;
-            $config['file_name'] = $this->session->userdata('id_pengguna');
+            $config['allowed_types']        = 'gif|jpg|png|pdf';
+            $config['max_size']             = 5000;
 
             $this->upload->initialize($config);
             if (!$this->upload->do_upload('ktp')) {
@@ -120,16 +119,16 @@ class Tentang extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.mailtrap.io',
             'smtp_port' => 2525,
-            'smtp_user' => '59b2958d9247bd',
-            'smtp_pass' => '20abef486bad12',
+            'smtp_user' => '43111cc6037b8d',
+            'smtp_pass' => '8b752bd5412080',
             'crlf' => "\r\n",
             'newline' => "\r\n"
         );
         $this->load->library('email', $config);
-        $this->email->from('mari_bersaudara@gmail.com');
+        $this->email->from('rental_maribersaudara@gmail.com');
         $this->email->to($user['email']);
-        $this->email->subject('Aktivasi Akun | Rental Mari Bersaudara');
-        $this->email->message('Klik Link Berikut : <a href="' . base_url('admin/login/aktif?email=') . $this->input->post('email') . '">Link </a>');
+        $this->email->subject('Pengajuan Partner | Rental Mari Bersaudara');
+        $this->email->message('Pengajuan menjadi partner Mari Bersaudara ditolak.');
 
         if ($this->email->send()) {
             return true;

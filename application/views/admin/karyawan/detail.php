@@ -140,11 +140,51 @@
                             </table>
                         </div>
                     </div>
+                    <br>
+                    <h3 class="text-center"><u>Gaji</u></h3>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                                aria-describedby="example1_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th>No</th>
+                                        <th>Bulan</th>
+                                        <th>Gaji</th>
+                                        <th style="width: 15%" style="width: 111.703px;">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $no = 1;
+                                    foreach ($gaji as $x) : ?>
+                                    <tr role="row" class="odd">
+                                        <td class="sorting_1"><?= $no++; ?></td>
+                                        <td> <?= date('M Y', strtotime($x['bulan'])); ?></td>
+                                        <td><?= "Rp." . number_format($x['gaji'], 2, ',', '.') ?></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn bg-green btn-social btn-flat btn-xs"
+                                                    data-toggle="dropdown"><i class="fa fa-arrow-circle-down"></i>
+                                                    Pilih</button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li>
+                                                        <a href="<?= base_url('admin/karyawan/hapus_gaji/' . $x['id_karyawan_gaji']); ?>"
+                                                            class="btn btn-social btn-flat btn-block btn-sm tombol-hapus"><i
+                                                                class="fa fa-trash-o"></i> Hapus</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
-
         </section>
         <!-- /.content -->
         <!-- /.content -->

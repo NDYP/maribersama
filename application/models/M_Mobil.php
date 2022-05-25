@@ -30,10 +30,29 @@ class M_Mobil extends CI_Model
 
             ->where('mobil.status', 'Tersedia')
             ->or_where('mobil.status', 'Sedang disewa')
+            ->group_by('mobil.jumlah_kursi')
             ->order_by('id_mobil', 'DESC') //urut berdasarkan id
             ->get('mobil', $limit, $start)
             ->result_array(); //ditampilkan dalam bentuk array
         return $query;
+    }
+    public function jumlah_kursi($limit, $start, $jumlah_kursi)
+    {
+        $query = $this->db->select('*')
+
+            ->where('mobil.status', 'Tersedia')
+            ->where('mobil.jumlah_kursi', $jumlah_kursi)
+            ->or_where('mobil.status', 'Sedang disewa')
+            ->where('mobil.jumlah_kursi', $jumlah_kursi)
+            ->order_by('mobil.id_mobil', 'DESC') //urut berdasarkan id
+            ->get('mobil', $limit, $start)
+            ->result_array(); //ditampilkan dalam bentuk array
+        return $query;
+    }
+    public function get_count($jumlah_kursi)
+    {
+        $this->db->where('mobil.jumlah_kursi', $jumlah_kursi);
+        return $this->db->count_all_results('mobil');
     }
     public function pengajuan()
     {

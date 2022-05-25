@@ -162,6 +162,7 @@ class Karyawan extends CI_Controller
 
         $data['karyawan'] = $this->db->get_where('pengguna', array('id_pengguna' => $id_pengguna))->row_array();
         $data['berkas'] = $this->db->get_where('berkas', array('id_pemilik' => $id_pengguna))->result_array();
+        $data['gaji'] = $this->db->get_where('karyawan_gaji', array('id_pengguna' => $id_pengguna))->result_array();
         $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
         $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
         if ($data) {
@@ -338,6 +339,18 @@ class Karyawan extends CI_Controller
             redirect('admin/karyawan/index', 'refresh');
         }
     }
+    public function hapus_gaji($id_karyawan_gaji)
+    {
+        $data = $this->db->get_where('karyawan_gaji', array('id_karyawan_gaji' => $id_karyawan_gaji))->row_array();
+        if ($data) {
+            $this->M_Pengguna->hapusgaji($id_karyawan_gaji);
+            $this->session->set_flashdata('success', 'Berhasil Hapus Data');
+            redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            $this->session->set_flashdata('info', 'Gagal Hapus Data');
+            redirect('admin/karyawan/index', 'refresh');
+        }
+    }
     public function hapusberkas($id_berkas)
     {
         $data =
@@ -430,5 +443,73 @@ class Karyawan extends CI_Controller
         //download ktp
         $data = $this->db->get_where('pengguna', ['id_pengguna' => $id_pengguna])->row_array();
         force_download('assets/foto/ktp/' . $data['ktp'], NULL);
+    }
+    public function cetak()
+    {
+        $data['profil'] = $this->M_Profil->index();
+        $mulai = $this->input->post('mulai');
+        $data['bulan1'] = date('Y-m-d H:i:s', strtotime($mulai));
+        $akhir = $this->input->post('akhir');
+        $data['bulan2'] = date('Y-m-d H:i:s', strtotime($akhir));
+
+        $data['pengeluaran_karyawan'] = $this->M_Pengguna->cetak($data['bulan1'], $data['bulan2'])->result_array();
+        $data['pengeluaran_karyawan_total'] = $this->M_Pengguna->total_keluar($data['bulan1'], $data['bulan2'])->result_array();
+
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan-Akhir-Bulan.pdf";
+        $this->pdf->load_view('admin/karyawan/laporan', $data);
+        // var_dump($data['pengeluaran_karyawan']);
+    }
+    public function gaji()
+    {
+        $this->form_validation->set_rules('id_pengguna', 'id_pengguna', 'required|trim', [
+            'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('bulan', 'bulan', 'required|trim', [
+            'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('gaji', 'gaji', 'required|trim', [
+            'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $id_pengguna = $this->uri->segment(4, 0);
+            $data['index'] = $this->M_Pengguna->index();
+            $data['profil'] = $this->M_Profil->index();
+
+            $data['karyawan'] = $this->db->get_where('pengguna', array('id_pengguna' => $id_pengguna))->row_array();
+            $data['berkas'] = $this->db->get_where('berkas', array('id_pemilik' => $id_pengguna))->result_array();
+            $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
+            $data['pesan_index'] = $this->db->get_where('pesan', array('status' => 'unread'))->result_array();
+            if ($data) {
+                $data['title'] = "Karyawan";
+                $data['title2'] = "Tambah Gaji";
+                $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
+                $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
+                $this->load->view('admin/template/header', $data);
+                $this->load->view('admin/karyawan/gaji', $data);
+                $this->load->view('admin/template/footer', $data);
+            } else {
+                $this->session->set_flashdata('Info', 'Tidak Ada Data');
+                redirect('admin/album/index', 'refresh');
+            }
+        } else {
+
+
+
+            $id_pengguna = $this->input->post('id_pengguna');
+            $bulan = $this->input->post('bulan');
+            $x = date('Y-m-d', strtotime($bulan));
+            $gaji = $this->input->post('gaji');
+            $data = array(
+                'bulan' => $x,
+                'id_pengguna' => $id_pengguna,
+                'gaji' => $gaji,
+
+            );
+            $this->M_Pengguna->tambah('karyawan_gaji', $data);
+            $this->session->set_flashdata('success', 'Berhasil ubah data');
+            redirect('admin/karyawan/index', 'refresh');
+        }
     }
 }

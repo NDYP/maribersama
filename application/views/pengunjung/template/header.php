@@ -110,7 +110,8 @@
                                 <ul class="sub-menu">
                                     <li><a href="<?= base_url('akun/history') ?>">riwayat sewa</a></li>
                                     <?php if ($this->session->userdata('id_akses') == 3) : ?>
-                                    <li><a href="<?= base_url('pengajuan/index') ?>">pengajuan partner</a></li>
+                                    <li><a href="<?= base_url('pengajuan/req') ?>">pengajuan partner</a></li>
+                                    <!-- <li><a href="<?= base_url('pengajuan/index') ?>">pengajuan partner</a></li> -->
                                     <?php endif; ?>
                                     <li><a href="<?= base_url('login/logout') ?>">logout</a></li>
                                 </ul>

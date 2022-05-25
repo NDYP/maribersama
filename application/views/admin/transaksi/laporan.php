@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Laporan</title>
     <link rel="stylesheet" href="">
-
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet"
         href="<?= base_url('assets'); ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -27,7 +26,6 @@
                 <span style="line-height: 1; font-weight: bold;">
                     <font style="line-height: 0.9;" face="Arial" font size="16">
                         Rental Mari Bersaudara</font>
-
                 </span>
                 <p style="line-height: 1; margin:2px;">
                     <font face="Arial" font size=10px>
@@ -36,9 +34,7 @@
                         <?= $x['alamat']; ?>
                         <br>
                         E-mail : <?= $x['email']; ?> - Kontak : <?= $x['no_hp']; ?>
-
                         <?php endforeach; ?>
-
                 </p>
             </td>
         </tr>
@@ -48,10 +44,9 @@
     <br>
     <p align="left">
         <font face="Times New Roman" font size="">
-            Laporan Akhir Bulan <?= bulan(); ?> Pemasukan & Pengeluaran <br>
+            Laporan Transaksi <?= date('d-m-Y', strtotime($bulan1)); ?> sampai
+            <?= date('d-m-Y', strtotime($bulan2)); ?> <br>
     </p>
-
-
     <font font-size=10px face="Times New Roman"><b>Total Pemasukan</b>
         <table style="font-size: 14px;" class="table-responsive" style="width: 100%; page-break-after: always;"
             border="1" cellspacing="0">
@@ -59,9 +54,7 @@
                 <th>No.</th>
                 <th>Penyewa</th>
                 <th>Mobil</th>
-
                 <th>Pinjam - Kembali</th>
-
                 <th>Rincian</th>
                 <th>Pemasukan</th>
             </tr>
@@ -93,7 +86,7 @@
             </tr>
             <?php endforeach; ?>
             <tr>
-                <th align="center" colspan="4">Total pemasukan</th>
+                <th align="center" colspan="4">Sisa Pembayaran</th>
                 <td colspan="2"> <b>
                         <?php $no = 0;
                         foreach ($pemasukan_total as $x) : $no++ ?>
@@ -110,10 +103,7 @@
             border="1" cellspacing="0">
             <tr>
                 <th>No.</th>
-
                 <th>Mobil</th>
-
-
                 <th>Jumlah Penyewaan</th>
             </tr>
             <?php $no = 0;
@@ -135,56 +125,7 @@
         </table>
     </font>
     <br>
-    <font font-size=10px face="Times New Roman"><b>Pengeluaran gaji karyawan</b>
-        <table style="font-size: 14px;" class="table-responsive" style="width: 100%; page-break-after: always;"
-            border="1" cellspacing="0">
-            <tr>
-                <th>No.</th>
-                <th>NIK</th>
-                <th>Nama Lengkap</th>
-                <th>
-                    No. Hp
-                </th>
-                <th>Jabatan</th>
-
-                <th>Gaji/Bulan</th>
-            </tr>
-            <?php $no = 0;
-            foreach ($pengeluaran_karyawan as $x) : $no++ ?>
-            <tr>
-                <td>
-                    <center> <?= $no; ?> </center>
-                </td>
-                <td><?= $x['nik'] ?></td>
-                <td><?= $x['nama_lengkap'] ?></td>
-                <td>
-                    <?= $x['no_hp'] ?>
-                </td>
-                <td><?= $x['jabatan'] ?></td>
-                <td><?= "Rp." . number_format($x['salary'], 2, ',', '.') ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-            <tr>
-                <th align="center" colspan="5">Total Pengeluaran Gaji</th>
-                <td> <b>
-                        <?php $no = 0;
-                        foreach ($pengeluaran_karyawan_total as $x) : $no++ ?>
-                        <?= "Rp." . number_format($x['x'], 2, ',', '.') ?>
-                    </b></td>
-                <?php endforeach; ?>
-
-            </tr>
-        </table>
-    </font>
-
-
     <br>
-    <br>
-
-
-
-
     <table class="table-responsive" style="width: 100%; page-break-after: none;" border="" cellspacing="0">
         <tr>
             <td></td>
@@ -207,7 +148,6 @@
             </td>
         </tr>
     </table>
-
 </body>
 
 </html>

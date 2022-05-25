@@ -58,7 +58,7 @@
 
                                                     <td><?= $x['nama_lengkap'] ?>
                                                     </td>
-                                                    <td><?= $x['tipe'] ?>
+                                                    <td><?= $x['jenis'] ?> (<?= $x['tahun'] ?>)
                                                     </td>
                                                     <!-- <td><?= $x['transaksi_alamat'] ?></td> -->
                                                     <td><?= date('d-m-Y', strtotime($x['tanggal_pinjam'])); ?> -

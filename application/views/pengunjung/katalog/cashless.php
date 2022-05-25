@@ -31,7 +31,7 @@
                     <div class="content">
                         <div class="content-block">
                             <h3 class="car-name"><?= $mobil['jenis'] ?> - Diskon <?= $mobil['diskon'] ?>%</h3>
-                            <span class="price">Tarif <?= $mobil['tarif'] ?> per hari</span>
+                            <h3 class="price">Tarif <?= $mobil['tarif'] ?> per hari</h3>
                             <p><?= $mobil['info'] ?></p>
                         </div>
 

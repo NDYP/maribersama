@@ -23,7 +23,12 @@
                             <a class="btn btn-xs bg-green" type="button"
                                 href="<?= base_url('admin/karyawan/tambah'); ?>"><span class="fa fa-plus"></span>
                                 Tambah</a>
+                            <a class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                                type="button" data-toggle="modal" data-target="#modal-default"><span
+                                    class="fa fa-print"></span>
+                                Laporan</a>
                         </div>
+
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -71,6 +76,11 @@
                                                                 Pilih</button>
                                                             <ul class="dropdown-menu" role="menu">
                                                                 <li>
+                                                                    <a href="<?= base_url('admin/karyawan/gaji/' . $x['id_pengguna']); ?>"
+                                                                        class="btn btn-social btn-flat btn-block btn-sm"><i
+                                                                            class="fa fa-dollar"></i>Gaji</a>
+                                                                </li>
+                                                                <li>
                                                                     <a href="<?= base_url('admin/karyawan/tambahberkas/' . $x['id_pengguna']); ?>"
                                                                         class="btn btn-social btn-flat btn-block btn-sm"><i
                                                                             class="fa fa-plus"></i>Berkas</a>
@@ -111,5 +121,39 @@
             <!-- /.row -->
         </section>
         <!-- /.content -->
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <form name="myform" onsubmit="return val()" enctype="multipart/form-data" role="form"
+                    action="<?= base_url('admin/karyawan/cetak') ?>" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Cetak laporan income dan outcome</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label class="">Tanggal Mulai</label>
+                                    <input type="text" name="mulai" id="datepicker" class="form-control input-sm"
+                                        required>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="">Tanggal Berakhir</label>
+                                    <input type="text" name="akhir" id="datepicker1" class="form-control input-sm"
+                                        required>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Keluar</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- /.modal-content -->
+            </div>
+        </div>
     </div>
 </div>

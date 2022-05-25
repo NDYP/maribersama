@@ -58,12 +58,12 @@
                                             <option
                                                 value=<?= $x['id_mobil']; ?><?= set_select('id_mobil', $x['id_mobil']); ?>
                                                 name=" id_mobil" selected>
-                                                Tipe : <?= $x['tipe']; ?> - Jenis : <?= $x['jenis']; ?></option>
+                                                <?= $x['jenis']; ?> (<?= $x['tahun'] ?>)</option>
                                             <?php else : ?>
                                             <option
                                                 value=<?= $x['id_mobil']; ?><?= set_select('id_mobil', $x['id_mobil']); ?>
                                                 name="id_mobil">
-                                                Tipe : <?= $x['tipe']; ?> - Jenis : <?= $x['jenis']; ?></option>
+                                                <?= $x['jenis']; ?> (<?= $x['tahun'] ?>)</option>
                                             <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>

@@ -139,7 +139,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="inputExperience" class="control-label" name="gaji">Foto</label>
+                                    <label for="inputExperience" class="control-label">Foto</label>
                                     <input accept=".jpg, .jpeg, .png" title="Hanya tipe Foto " type="file"
                                         name="thumbnail"></input>
                                 </div>

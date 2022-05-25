@@ -61,8 +61,7 @@
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1"><?= $no++; ?></td>
                                                     <td class="sorting_1"><?= $x['id_transaksi']; ?></td>
-                                                    <td class="sorting_1"><?= $x['bank'] . ' - va : ' . $x['va']; ?>
-                                                    </td>
+                                                    <td class="sorting_1"><?= $x['va'] . ' ' . ($x['bank']); ?>
 
                                                     <td><?= $x['nama_lengkap'] ?>
                                                     </td>

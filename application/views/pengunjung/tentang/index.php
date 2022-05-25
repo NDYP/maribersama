@@ -22,8 +22,8 @@
             <div class="col-lg-6">
                 <div class="car-search-area car-search-area--style2">
                     <h3 class="title">Belum memiliki akun?</h3>
-                    <form role="form" action="<?= base_url('tentang/registrasi'); ?>" method="post"
-                        class="car-search-form">
+                    <form role="form" action="<?= base_url('tentang/registrasi'); ?>" method="POST"
+                        class="car-search-form" enctype="multipart/form-data">
                         <div class="row">
                             <div class="form-group col-xl-6">
                                 <i class="fa fa-user"></i>
@@ -99,7 +99,7 @@
                         <div class="row">
                             <div class="form-group col-xl-12">
                                 <text>KTP</text>
-                                <input name="ktp" class="form-control has-icon" type="file" placeholder="ktp" required>
+                                <?= form_upload('ktp') ?>
                                 <?= form_error('ktp', '<small class="text-danger pl-1">', '</small>'); ?>
                             </div>
                         </div>

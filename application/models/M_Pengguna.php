@@ -58,6 +58,11 @@ class M_Pengguna extends CI_Model
         $this->db->where('id_pengguna', $id_pengguna);
         $this->db->delete('pengguna');
     }
+    public function hapusgaji($id_karyawan_gaji)
+    {
+        $this->db->where('id_karyawan_gaji', $id_karyawan_gaji);
+        $this->db->delete('karyawan_gaji');
+    }
     public function hapusberkas($id_berkas)
     {
         $this->db->where('id_berkas', $id_berkas);
@@ -68,20 +73,22 @@ class M_Pengguna extends CI_Model
         $tanggal = date('Y-m-d');
         $query = $this->db->select('*')
             ->from('pengguna')
+            ->join('karyawan_gaji', 'pengguna.id_pengguna=karyawan_gaji.id_pengguna', 'left')
             ->where('id_akses', 5)
-            ->where("'$tanggal' BETWEEN '$bulan1' AND '$bulan2'")
-            ->order_by('id_pengguna', 'ASC')
+            ->where("karyawan_gaji.bulan BETWEEN '$bulan1' AND '$bulan2'")
+            ->order_by('pengguna.id_pengguna', 'ASC')
             ->get();
         return $query;
     }
     function total_keluar($bulan1, $bulan2)
     {
         $tanggal = date('Y-m-d');
-        $query = $this->db->select('SUM(salary) as x')
+        $query = $this->db->select('SUM(gaji) as x')
             ->from('pengguna')
+            ->join('karyawan_gaji', 'pengguna.id_pengguna=karyawan_gaji.id_pengguna', 'left')
             ->where('id_akses', 5)
-            ->where("'$tanggal' BETWEEN '$bulan1' AND '$bulan2'")
-            ->order_by('id_pengguna', 'ASC')
+            ->where("karyawan_gaji.bulan BETWEEN '$bulan1' AND '$bulan2'")
+            ->order_by('pengguna.id_pengguna', 'ASC')
             ->get();
         return $query;
     }

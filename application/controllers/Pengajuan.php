@@ -44,6 +44,7 @@ class Pengajuan extends CI_Controller
                     'ktp' => $file
                 );
                 $this->M_Akun->update('pengguna', $data, array('id_pengguna' => $id_user));
+                $this->_sendmail1($id_user);
                 $this->session->set_flashdata('success', 'Tunggu konfirmasi dan cek email anda');
                 redirect('pengajuan/index');
             }
@@ -51,25 +52,41 @@ class Pengajuan extends CI_Controller
     }
     function req()
     {
-        $config['upload_path']          = './assets/foto/ktp/';
-        $config['allowed_types']        = 'gif|jpg|png|pdf';
-        $config['max_size']             = 3000;
-        $config['file_name'] = $this->session->userdata('id_pengguna');
+        $id_user = $this->session->userdata('id_pengguna');
+        $data = array(
+            'id_akses' => 6,
+        );
+        $this->M_Akun->update('pengguna', $data, array('id_pengguna' => $id_user));
+        $this->_sendmail1($id_user);
+        $this->session->set_flashdata('success', 'Tunggu konfirmasi dan cek email anda');
+        redirect('pengajuan/index');
+    }
+    private function _sendmail1($id_user)
+    {
+        $id_user = $this->session->userdata('id_pengguna');
+        $user = $this->db->get_where('pengguna', ['id_pengguna' => $id_user])->row_array();
 
-        $this->upload->initialize($config);
-        if (!$this->upload->do_upload('ktp')) {
-            $this->session->set_flashdata('error', 'File terlalu besar');
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.mailtrap.io',
+            'smtp_port' => 2525,
+            'smtp_user' => '43111cc6037b8d',
+            'smtp_pass' => '8b752bd5412080',
+            'crlf' => "\r\n",
+            'newline' => "\r\n"
+        );
+
+        $this->load->library('email', $config);
+        $this->email->from('rental_maribersaudara@gmail.com');
+        $this->email->to($user['email']);
+        $this->email->subject('Pengajuan Partner | Rental Mari Bersaudara');
+        $this->email->message('Pengajuan menjadi partner telah terkirim.');
+
+        if ($this->email->send()) {
+            return true;
         } else {
-            $id_user = $this->session->userdata('id_pengguna');
-            $gbr = $this->upload->data();
-            $file = $gbr['file_name'];
-            $data = array(
-                'id_akses' => 6,
-                'ktp' => $file
-            );
-            $this->M_Akun->update('pengguna', $data, array('id_pengguna' => $id_user));
-            $this->session->set_flashdata('success', 'Tunggu konfirmasi dan cek email anda');
-            redirect('pengajuan/index');
+            echo $this->email->print_debugger();
+            die;
         }
     }
 }

@@ -70,6 +70,16 @@ class Dashboard extends CI_Controller
             $data['title2'] = "Selesai";
             $data['transaksi'] = $this->db->get_where('transaksi', array('id_transaksi' => $id_transaksi))->row_array();
 
+            $tanggal_lewat = date('Y-m-d');
+            $tanggal_kembali = date('Y-m-d', strtotime($data['transaksi']['tanggal_kembali']));
+            $hari = strtotime($tanggal_lewat) - strtotime($tanggal_kembali);
+            $jml_hari_lewat = ceil(abs($hari / 86400));
+            $id_mobil = $data['transaksi']['id_mobil'];
+            $x = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
+            $tarif = $x['tarif'];
+            $data['denda'] = $jml_hari_lewat * $tarif;
+
+
             $data['pengajuan_partner'] = $this->db->get_where('pengguna', array('id_akses' => 6))->num_rows();
             $data['pengajuan_mobil'] = $this->db->get_where('mobil', array('status' => 'pengajuan'))->num_rows();
             $data['pesan'] = $this->db->get_where('pesan', array('status' => 'unread'))->num_rows();
@@ -84,6 +94,7 @@ class Dashboard extends CI_Controller
             $id_mobil = $y['id_mobil'];
 
             $x = $this->db->get_where('mobil', array('id_mobil' => $id_mobil))->row_array();
+            $tarif = $x['tarif'];
             $bagian_rental = $x['bagian_rental'];
 
             $bayar = $y['bayar'];
@@ -98,12 +109,12 @@ class Dashboard extends CI_Controller
 
 
             $denda = $this->input->post('denda');
-            $kurang = ($bayar  + $denda) - $bagian_rental;
+            // $kurang = ($bayar  + $denda) - $bagian_rental;
             $data = array(
                 'status' => 'selesai',
                 'denda' => $denda,
                 'bayar' => ($bayar  + $denda),
-                'sewa' => (($bayar  + $denda) - $kurang) * $berapa_hari
+                'sewa' => $bagian_rental * $berapa_hari
             );
 
             $status = array('status' => 'Tersedia');
@@ -124,8 +135,8 @@ class Dashboard extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.mailtrap.io',
             'smtp_port' => 2525,
-            'smtp_user' => '59b2958d9247bd',
-            'smtp_pass' => '20abef486bad12',
+            'smtp_user' => '43111cc6037b8d',
+            'smtp_pass' => '8b752bd5412080',
             'crlf' => "\r\n",
             'newline' => "\r\n"
         );
@@ -134,8 +145,7 @@ class Dashboard extends CI_Controller
         $this->email->from('rental_maribersaudara@gmail.com');
         $this->email->to($user['email']);
         $this->email->subject('Pengajuan Partner | Rental Mari Bersaudara');
-        $this->email->message('Selamat anda telah diterima menjadi martner dari Mari Bersaudara Rent, segera ajukan mobil yang ingin disewakan.');
-
+        $this->email->message('Penyewaan telah diterima.');
         if ($this->email->send()) {
             return true;
         } else {
@@ -162,7 +172,7 @@ class Dashboard extends CI_Controller
         $this->email->from('rental_maribersaudara@gmail.com');
         $this->email->to($user['email_pengguna']);
         $this->email->subject('Pengajuan Partner | Rental Mari Bersaudara');
-        $this->email->message('Selamat anda telah diterima menjadi martner dari Mari Bersaudara Rent, segera ajukan mobil yang ingin disewakan.');
+        $this->email->message('Penyewaan ditolak.');
 
         if ($this->email->send()) {
             return true;

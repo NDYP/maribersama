@@ -527,8 +527,8 @@ class Partner extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.mailtrap.io',
             'smtp_port' => 2525,
-            'smtp_user' => '59b2958d9247bd',
-            'smtp_pass' => '20abef486bad12',
+            'smtp_user' => '43111cc6037b8d',
+            'smtp_pass' => '8b752bd5412080',
             'crlf' => "\r\n",
             'newline' => "\r\n"
         );
@@ -555,8 +555,8 @@ class Partner extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.mailtrap.io',
             'smtp_port' => 2525,
-            'smtp_user' => '59b2958d9247bd',
-            'smtp_pass' => '20abef486bad12',
+            'smtp_user' => '43111cc6037b8d',
+            'smtp_pass' => '8b752bd5412080',
             'crlf' => "\r\n",
             'newline' => "\r\n"
         );

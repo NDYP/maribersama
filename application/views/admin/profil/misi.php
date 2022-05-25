@@ -13,7 +13,8 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <form enctype="multipart/form-data" role="form" action="<?= base_url('admin/profil/misi'); ?>" method="post" class="form-horizontal">
+            <form enctype="multipart/form-data" role="form" action="<?= base_url('admin/profil/misi'); ?>" method="post"
+                class="form-horizontal">
 
                 <!-- /.col (left) -->
                 <div class="col-md-12">
@@ -21,7 +22,9 @@
                     <!-- /.box -->
                     <div class="box ">
                         <div class="box-header with-border">
-                            <a href="<?= base_url('admin/profil'); ?>" class="btn bg-green-gradient btn-social btn-flat btn btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-left"></i> Kembali</a>
+                            <a href="<?= base_url('admin/profil'); ?>"
+                                class="btn bg-green-gradient btn-social btn-flat btn btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
+                                title="Kembali"><i class="fa fa-arrow-left"></i> Kembali</a>
                         </div>
                         <div class="box-body">
 
@@ -31,11 +34,13 @@
                             </div>
                             <br>
                             <div class="col-sm-12">
-                                <input type="hidden" name="id_profil" value="<?= $profil['id_profil']; ?>">
+                                <input type="hidden" name="id_profil" value="<?= $index['id_profil']; ?>">
                                 <div class="box-body pad">
                                     <form>
-                                        <textarea class="textarea" placeholder="" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" value="<?= $profil['misi']; ?>" name="misi">
-                                        <?= $profil['misi']; ?>
+                                        <textarea class="textarea" placeholder=""
+                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                                            value="<?= $index['misi']; ?>" name="misi">
+                                        <?= $index['misi']; ?>
                                         </textarea>
                                     </form>
                                 </div>
@@ -44,7 +49,8 @@
                         </div>
                         <div class="box-footer">
 
-                            <button type="submit" class="btn btn-social btn-flat btn-info btn-sm pull-left"><i class="fa fa-check"></i> Simpan</button>
+                            <button type="submit" class="btn btn-social btn-flat btn-info btn-sm pull-left"><i
+                                    class="fa fa-check"></i> Simpan</button>
                         </div>
                         <!-- /.box -->
                     </div>

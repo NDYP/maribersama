@@ -19,11 +19,11 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-                        <div class="box-header">
+                        <!-- <div class="box-header">
                             <a class="btn bg-green-gradient btn-social btn-flat btn-xs visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"
                                 type="button" data-toggle="modal" data-target="#modal-tambah"><span
                                     class="fa fa-plus"></span> Tambah</a>
-                        </div>
+                        </div> -->
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -79,11 +79,11 @@
                                                                         class="btn btn-social btn-flat btn-block btn-sm"><i
                                                                             class="fa fa-edit"></i>Edit</a>
                                                                 </li>
-                                                                <li>
+                                                                <!-- <li>
                                                                     <a href="<?= base_url('admin/admin/hapus/' . $x['id_admin']); ?>"
                                                                         class="btn btn-social btn-flat btn-block btn-sm tombol-hapus"><i
                                                                             class="fa fa-trash-o"></i> Hapus</a>
-                                                                </li>
+                                                                </li> -->
                                                             </ul>
                                                         </div>
                                                     </td>

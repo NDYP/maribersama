@@ -73,7 +73,7 @@ class Snap extends CI_Controller
 			'id' => 'a1',
 			'price' => $dp,
 			'quantity' => 1,
-			'name' => $x['tipe']
+			'name' => $x['jenis']
 		);
 
 		// Optional
@@ -137,6 +137,8 @@ class Snap extends CI_Controller
 		$snapToken = $this->midtrans->getSnapToken($transaction_data);
 		error_log($snapToken);
 		echo $snapToken;
+		// $this->_sendmail1($id_penyewa);
+		// $this->session->set_flashdata('success', 'Tunggu konfirmasi pihak rental dan cek email');
 	}
 
 	public function finish()
@@ -186,8 +188,37 @@ class Snap extends CI_Controller
 			'tanggal_transaksi' => $result['transaction_time'],
 		);
 		$this->M_Transaksi->tambah('transaksi', $data);
+		$this->_sendmail1($id_penyewa);
 		$this->session->set_flashdata('success', 'Tunggu konfirmasi pihak rental dan cek email');
 		redirect('admin/transaksi/index');
 		// echo json_encode($data);
+	}
+	private function _sendmail1($id_penyewa)
+	{
+		$id_penyewa = $this->session->userdata('id_pengguna');
+		$user = $this->db->get_where('pengguna', ['id_pengguna' => $id_penyewa])->row_array();
+
+		$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'smtp.mailtrap.io',
+			'smtp_port' => 2525,
+			'smtp_user' => '43111cc6037b8d',
+			'smtp_pass' => '8b752bd5412080',
+			'crlf' => "\r\n",
+			'newline' => "\r\n"
+		);
+
+		$this->load->library('email', $config);
+		$this->email->from('rental_maribersaudara@gmail.com');
+		$this->email->to($user['email']);
+		$this->email->subject('Pengajuan Partner | Rental Mari Bersaudara');
+		$this->email->message('Pengajuan penyewaan telah terkirim.');
+
+		if ($this->email->send()) {
+			return true;
+		} else {
+			echo $this->email->print_debugger();
+			die;
+		}
 	}
 }

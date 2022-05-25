@@ -39,24 +39,15 @@
                                 data-background="<?= base_url('assets/foto/mobil/' . $x['thumbnail']); ?>"></div>
                             <div class="car-item-body">
                                 <div class="content">
-                                    <h4 class="title"><?= $x['jenis'] ?></h4>
-                                    <span class="price">Sewa
-                                        <?= "Rp." . number_format($x['tarif'], 2, ',', '.') ?>/hari</span>
-                                    <span class="price"> - <?= $x['diskon'] ?>% (Diskon)</span>
-                                    <p><?= $x['info'] ?></p>
-                                    <?php if ($x['status'] == 'Tersedia') : ?>
-                                    <button href="" class="cmn-btn" data-no="<?= $x['id_mobil']; ?>" data-toggle="modal"
-                                        data-target="#modal-no<?= $x['id_mobil']; ?>">Sewa</button>
-                                    <?php elseif ($x['status'] == 'Sedang disewa') : ?>
-                                    <a href="" class="cmn-btn"><?= $x['status'] ?></a>
-                                    <?php endif; ?>
+                                    <h4 class="title">Jumlah Kursi : <?= $x['jumlah_kursi'] ?></h4>
+                                    <span class="price"></span>
+                                    <span class="price"></span>
+                                    <p></p>
                                 </div>
                                 <div class="car-item-meta">
                                     <ul class="details-list">
-                                        <li><i class="fa fa-car"></i>model <?= $x['jenis'] ?></li>
-                                        <li><i class="fa fa-car"></i><?= $x['jumlah_kursi'] ?> kursi</li>
-                                        <li><i class="fa fa-tachometer"></i><?= $x['warna']; ?></li>
-                                        <li><i class="fa fa-sliders"></i><?= $x['transmisi'] ?></li>
+                                        <a href="<?= base_url('katalog/jenis/' . $x['jumlah_kursi']) ?>"
+                                            class="cmn-btn">Lihat</a>
                                     </ul>
                                 </div>
                             </div>
@@ -87,16 +78,31 @@ foreach ($index as $x) : ?>
     aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
+            <?php if ($this->session->userdata('id_pengguna')) : ?>
             <a href="<?= base_url('katalog/cash/' . $x['id_mobil']) ?>" class="cmn-btn">
                 <center>DP
                     Cash/Tunai</center>
             </a>
+            <?php else : ?>
+            <a href="<?= base_url('login') ?>" class="cmn-btn">
+                <center>DP
+                    Cash/Tunai</center>
+                <?php endif; ?>
+            </a>
             <br>
+            <?php if ($this->session->userdata('id_pengguna')) : ?>
             <a href="<?= base_url('katalog/cashless/' . $x['id_mobil']) ?>" class="cmn-btn">
                 <center>
                     DP Transfer
                 </center>
             </a>
+            <?php else : ?>
+            <a href="<?= base_url('login') ?>" class="cmn-btn">
+                <center>DP
+                    Cash/Tunai</center>
+                <?php endif; ?>
+            </a>
+
         </div>
     </div>
 </div>
